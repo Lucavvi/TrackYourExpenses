@@ -3,6 +3,11 @@ package form;
 import processing.core.PApplet;
 import controlP5.*;
 
+/**
+ * Classe MVC
+ * @author Angelo Ripamonti, Luca Avveduto
+ * @version 1.0
+ */
 public class FormView {
     private PApplet processing;
     private ControlP5 cp5;

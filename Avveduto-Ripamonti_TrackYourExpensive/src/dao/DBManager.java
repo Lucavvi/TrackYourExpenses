@@ -1,9 +1,13 @@
-package DAO;
+package dao;
 
 import form.AccessException;
 import form.UsernameException;
 import java.sql.*;
-
+/**
+ * Classe
+ * @author Angelo Ripamonti, Luca Avveduto
+ * @version 1.0
+ */
 public class DBManager implements Actions{
     private final String USERNAME = "";
     private final String PASSWORD = "";

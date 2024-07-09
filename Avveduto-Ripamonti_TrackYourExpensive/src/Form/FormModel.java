@@ -1,7 +1,12 @@
 package form;
 
-import DAO.DBManager;
+import dao.DBManager;
 
+/**
+ * Classe MVC
+ * @author Angelo Ripamonti, Luca Avveduto
+ * @version 1.0
+ */
 public class FormModel {
     private String username;
     private String psw;
