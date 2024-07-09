@@ -1,0 +1,41 @@
+package DAO;
+
+import Form.AccessException;
+import Form.UsernameException;
+import java.sql.*;
+public class DBManager implements Actions{
+    private final String USERNAME = "";
+    private final String PASSWORD = "";
+    private final String URL = "";
+
+    @Override
+    public void access(String username, String psw) throws AccessException {
+        final String query = "SELECT USERNAME,PASSWORD FROM X WHERE USERNAME=? AND PASSWORD=?";
+        try(
+                Connection con = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+                PreparedStatement st = con.prepareStatement(query);
+        ) {
+            st.setString(1,username);
+            st.setString(2,psw);
+            ResultSet rs = st.executeQuery();
+        }catch (Exception e) {
+            throw new AccessException("Credentials are not correct");
+        }
+    }
+
+    @Override
+    public void register(String username, String psw) throws UsernameException {
+        final String query = "INSERT INTO X (USERNAME, PASSWORD) VALUES (?, ?)";
+        try(
+                Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+                PreparedStatement stmt = conn.prepareStatement(query);
+        ){
+            stmt.setString(1,username);
+            stmt.setString(2,psw);
+            stmt.executeUpdate();
+        }
+        catch(Exception e) {
+            throw new UsernameException("An account with that username already exists");
+        }
+    }
+}
