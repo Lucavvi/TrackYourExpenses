@@ -12,12 +12,12 @@ public interface Actions {
      * Method for logging into an account
      * @param username the account username
      * @param psw the account password
-     * @throws AccessException If the login is stopped abnormally
+     * @throws AccessException If the cretentials aren't correct
      */
     public void login(String username ,String psw) throws AccessException;
 
     /**
-     * Method for register an account
+     * Method for registering an account
      * @param username the account username
      * @param psw the account password
      * @throws UsernameException If the username already exist

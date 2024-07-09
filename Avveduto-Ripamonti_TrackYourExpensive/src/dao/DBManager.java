@@ -4,7 +4,7 @@ import form.AccessException;
 import form.UsernameException;
 import java.sql.*;
 /**
- * Classe
+ * Class to implements Actions' interface to database
  * @author Angelo Ripamonti, Luca Avveduto
  * @version 1.0
  */
@@ -13,6 +13,12 @@ public class DBManager implements Actions{
     private final String PASSWORD = "";
     private final String URL = "";
 
+    /**
+     * Method for logging into an account in the database
+     * @param username the account username
+     * @param psw the account password
+     * @throws AccessException If the cretentials aren't correct
+     */
     @Override
     public void login(String username, String psw) throws AccessException {
         final String query = "SELECT USERNAME,PASSWORD FROM X WHERE USERNAME=? AND PASSWORD=?";
@@ -28,6 +34,12 @@ public class DBManager implements Actions{
         }
     }
 
+    /**
+     * Method for registering an account within the database
+     * @param username the account username
+     * @param psw the account password
+     * @throws UsernameException If the username already exist
+     */
     @Override
     public void register(String username, String psw) throws UsernameException {
         final String query = "INSERT INTO X (USERNAME, PASSWORD) VALUES (?, ?)";
