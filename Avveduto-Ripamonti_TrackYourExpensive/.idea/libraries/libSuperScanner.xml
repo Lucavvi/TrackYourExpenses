@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="libSuperScanner">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/data/lib/libSuperScanner.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
