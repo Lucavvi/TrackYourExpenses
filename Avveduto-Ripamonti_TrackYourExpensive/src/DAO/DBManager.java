@@ -1,15 +1,16 @@
 package DAO;
 
-import Form.AccessException;
-import Form.UsernameException;
+import form.AccessException;
+import form.UsernameException;
 import java.sql.*;
+
 public class DBManager implements Actions{
     private final String USERNAME = "";
     private final String PASSWORD = "";
     private final String URL = "";
 
     @Override
-    public void access(String username, String psw) throws AccessException {
+    public void login(String username, String psw) throws AccessException {
         final String query = "SELECT USERNAME,PASSWORD FROM X WHERE USERNAME=? AND PASSWORD=?";
         try(
                 Connection con = DriverManager.getConnection(URL,USERNAME,PASSWORD);

@@ -19,9 +19,7 @@ public class Main extends PApplet {
     public void username(String txt) {
         System.out.println(txt);
     }
-
-
-        public static void main(String[] args) {
+    public static void main(String[] args) {
         PApplet.main("Main");
     }
 }
