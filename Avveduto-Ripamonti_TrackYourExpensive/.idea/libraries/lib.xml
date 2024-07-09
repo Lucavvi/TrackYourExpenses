@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/data/lib/controlP5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/data/lib/libSuperScanner.jar!/" />
+      <root url="jar://$PROJECT_DIR$/data/lib/jl1.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/data/lib/core.jar!/" />
+      <root url="jar://$PROJECT_DIR$/data/lib/minim.jar!/" />
+      <root url="jar://$PROJECT_DIR$/data/lib/mp3spi1.9.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/data/lib/tritonus_aos.jar!/" />
+      <root url="jar://$PROJECT_DIR$/data/lib/tritonus_share.jar!/" />
+      <root url="jar://$PROJECT_DIR$/data/lib/jsminim.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
