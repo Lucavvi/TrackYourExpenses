@@ -20,7 +20,7 @@ public class FormView {
     public FormView(PApplet processing, ControlP5 cp5){
         this.processing = processing;
         this.cp5 = cp5;
-        tf = cp5.addTextfield("username").setColorForeground(processing.color(255)).setFont(processing.createFont("arial",25)).setPosition(10,100).setSize(200,40).setFocus(true).setColor(processing.color(255)).setColorActive(processing.color(255)).setAutoClear(true).setColorBackground(0).hide();
+        tf = cp5.addTextfield("username").setColorForeground(processing.color(255)).setFont(processing.createFont("arial",25)).setPosition(processing.width/2-100,processing.height/2-40).setSize(200,40).setFocus(true).setColor(processing.color(255)).setColorActive(processing.color(255)).setAutoClear(true).setColorBackground(0).hide();
     }
 
     /**
