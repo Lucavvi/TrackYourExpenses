@@ -15,7 +15,7 @@ public class Main extends PApplet {
      * Window settings
      */
     public void settings(){
-        size(500,500);
+        size(1600,900);
     }
 
     /**
@@ -37,6 +37,10 @@ public class Main extends PApplet {
      */
     public void submit() {
         System.out.println(fw.usernameField.getText() + " "+fw.passwordField.getText());
+
+        //Cancello i valori all'interno dei due TextField
+        fw.usernameField.clear();
+        fw.passwordField.clear();
     }
 
     /**
