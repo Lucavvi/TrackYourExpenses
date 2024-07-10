@@ -1,4 +1,5 @@
 import controlP5.ControlP5;
+import dao.DBManager;
 import form.*;
 import processing.core.PApplet;
 
@@ -35,8 +36,8 @@ public class Main extends PApplet {
      * Username text field callback
      * @param txt - text field content
      */
-    public void username(String txt) {
-        System.out.println(txt);
+    public void submit() {
+        System.out.println(fw.tf.getText() + " "+fw.lf.getText());
     }
 
     /**
