@@ -33,11 +33,10 @@ public class Main extends PApplet {
     }
 
     /**
-     * Username text field callback
-     * @param txt - text field content
+     * submit button for the FormView callback
      */
     public void submit() {
-        System.out.println(fw.tf.getText() + " "+fw.lf.getText());
+        System.out.println(fw.usernameField.getText() + " "+fw.passwordField.getText());
     }
 
     /**
