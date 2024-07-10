@@ -35,7 +35,6 @@ public class Main extends PApplet {
      * Username text field callback
      * @param txt - text field content
      */
-    //CallBack ControlP5
     public void username(String txt) {
         System.out.println(txt);
     }

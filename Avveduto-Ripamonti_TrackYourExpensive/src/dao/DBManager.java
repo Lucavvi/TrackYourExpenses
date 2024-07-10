@@ -9,9 +9,9 @@ import java.sql.*;
  * @version 1.0
  */
 public class DBManager implements Actions{
-    private final String USERNAME = "";
-    private final String PASSWORD = "";
-    private final String URL = "";
+    private final String USERNAME = "user";
+    private final String PASSWORD = "password";
+    private final String URL = "jdbc:mysql://localhost/tracker";
 
     /**
      * Method for logging into an account in the database
@@ -21,7 +21,7 @@ public class DBManager implements Actions{
      */
     @Override
     public void login(String username, String psw) throws AccessException {
-        final String query = "SELECT USERNAME,PASSWORD FROM X WHERE USERNAME=? AND PASSWORD=?";
+        final String query = "SELECT USERNAME,PASSWORD FROM tracker.accounts WHERE USERNAME=? AND PASSWORD=?";
         try(
                 Connection con = DriverManager.getConnection(URL,USERNAME,PASSWORD);
                 PreparedStatement st = con.prepareStatement(query);
@@ -42,7 +42,7 @@ public class DBManager implements Actions{
      */
     @Override
     public void register(String username, String psw) throws UsernameException {
-        final String query = "INSERT INTO X (USERNAME, PASSWORD) VALUES (?, ?)";
+        final String query = "INSERT INTO tracker.accounts (USERNAME, PASSWORD) VALUES (?, ?)";
         try(
                 Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
                 PreparedStatement stmt = conn.prepareStatement(query);
