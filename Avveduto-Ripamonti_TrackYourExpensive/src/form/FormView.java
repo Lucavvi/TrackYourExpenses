@@ -44,6 +44,7 @@ class FormView {
     }
 
     void fail(){
+        processing.background(255);
         processing.rectMode(processing.CENTER);
         processing.fill(255,0,0,120);
         processing.rect(processing.width/2,processing.height/2,200,100);
