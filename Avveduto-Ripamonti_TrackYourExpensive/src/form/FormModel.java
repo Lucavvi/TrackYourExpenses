@@ -19,6 +19,7 @@ public class FormModel {
      */
     public FormModel() {
         manager = new DBManager();
+        check=false;
     }
 
     /**

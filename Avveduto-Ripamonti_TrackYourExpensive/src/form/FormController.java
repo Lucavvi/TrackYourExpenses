@@ -9,6 +9,7 @@ public class FormController {
 
     public FormController(PApplet processing, ControlP5 cp5) {
         view = new FormView(processing, cp5);
+        model = new FormModel();
     }
 
     public void draw(){
