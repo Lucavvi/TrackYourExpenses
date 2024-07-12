@@ -1,12 +1,6 @@
-import controlP5.ControlP5;
+import controlP5.ControlEvent;
 import expense.Categories;
-import expense.ExpenseController;
-import expense.ExpenseModel;
-import expense.ExpenseView;
-import filters.FilterView;
-import form.*;
 import processing.core.PApplet;
-import java.time.LocalDate;
 
 /**
  * Main Class
@@ -35,10 +29,12 @@ public class Main extends PApplet {
      * loop method
      */
     public void draw(){
+        model.v.showList();
         if(model.screen[0])
             model.form.draw();
-        else if(model.screen[1])
-            model.expense.showExpense(200,200);
+        else if(model.screen[1]) {
+            model.expense.showExpense(200, 200);
+        }
     }
 
     /**
@@ -52,6 +48,13 @@ public class Main extends PApplet {
      */
     public void register() {
         model.form.submitForm(true);
+    }
+
+    public void select(ControlEvent theEvent) {
+        if (theEvent.isFrom(model.v.getList())) {
+            int cat = (int) theEvent.getController().getValue();
+            model.v.callback(cat);
+        }
     }
 
     /**
