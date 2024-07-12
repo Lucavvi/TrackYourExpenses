@@ -35,6 +35,10 @@ class FormView {
      */
     void draw(){
         processing.background(255);
+        processing.fill(229,229,229);
+        processing.rectMode(processing.CENTER);
+        processing.rect(processing.width/2,processing.height/2,500,500,20);
+        processing.rectMode(processing.CORNER);
         processing.textSize(30);
         processing.fill(0,0,255);
         processing.text("Form:",usernameField.getPosition()[0],usernameField.getPosition()[1]-(usernameField.getHeight()/2)-50);

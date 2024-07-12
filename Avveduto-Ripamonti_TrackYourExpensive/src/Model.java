@@ -21,5 +21,6 @@ class Model {
         expense = new ExpenseController("c", LocalDate.now(), Categories.FOOD,10,"ciao",processing);
         screen = new boolean [10];
         for(int i = 0; i < 10; i++) screen[i] = false;
+        screen[0]=true;
     }
 }
