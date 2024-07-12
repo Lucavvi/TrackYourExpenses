@@ -26,8 +26,8 @@ public class FormController {
      * Draw the Form Page
      */
     public void draw(){
-        if(model.isCheck())
-            view.fail(model.getFailError());
+        if(model.check)
+            view.fail(model.failError);
         else
             view.draw();
     }
@@ -43,8 +43,8 @@ public class FormController {
             model.login(username,password);
         }
         else{
-            model.setCheck(true);
-            model.setFailError("Credenziali Errate!");
+            model.check = true;
+            model.failError = "Credenziali Errate!";
             view.hideField();
         }
         view.usernameField.clear();
@@ -63,8 +63,8 @@ public class FormController {
             if (password == null || username == null || username.isEmpty() || password.isEmpty()) {
                 model.register(username,password);
             } else {
-                model.setCheck(true);
-                model.setFailError("Credenziali non valide!");
+                model.check = true;
+                model.failError = "Credenziali non valide!";
                 view.hideField();
             }
             view.usernameField.clear();

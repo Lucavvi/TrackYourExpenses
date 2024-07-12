@@ -13,9 +13,7 @@ import java.time.LocalDate;
  * @version 1.0
  */
 public class Main extends PApplet {
-
-    private FormController form;
-    private ExpenseController expense;
+    private Model model;
 
     /**
      * Window settings
@@ -28,30 +26,28 @@ public class Main extends PApplet {
      * method for initializing all variables
      */
     public void setup(){
-        form=new FormController(this,new ControlP5(this));
-        expense = new ExpenseController(new ExpenseModel("c", LocalDate.now(), Categories.FOOD,10),new ExpenseView(this));
-        form=new FormController(this,new ControlP5(this));
+        model = new Model(this);
     }
 
     /**
      * loop method
      */
     public void draw(){
-        form.draw();
-        expense.showExpense(200,200);
+        model.form.draw();
+        model.expense.showExpense(200,200);
     }
 
     /**
      * submit button for the FormView callback
      */
     public void login() {
-        form.submitForm();
+        model.form.submitForm();
     }
     /**
      * submit button for the FormView callback
      */
     public void register() {
-        form.submitForm(true);
+        model.form.submitForm(true);
     }
 
     /**
