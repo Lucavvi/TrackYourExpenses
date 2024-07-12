@@ -29,7 +29,14 @@ public class FormModel {
      * @throws AccessException - if one or both the inputs are wrong
      */
     public void login(String user, String password) throws AccessException{
-        manager.login(user,password);
+        try {
+            manager.login(user, password);
+        }
+        catch(Exception e) {
+            throw new AccessException(e.getMessage());
+        }
+        username = user;
+        psw = password;
     }
 
     /**
@@ -39,7 +46,14 @@ public class FormModel {
      * @throws UsernameException - if the username already exists
      */
     public void register(String user, String password) throws UsernameException{
-        manager.register(user,password);
+        try {
+            manager.register(user, password);
+        }
+        catch(Exception e) {
+            throw new UsernameException(e.getMessage());
+        }
+        username = user;
+        psw = password;
     }
 
     /**

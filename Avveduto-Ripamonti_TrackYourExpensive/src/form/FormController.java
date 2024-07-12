@@ -23,7 +23,7 @@ public class FormController {
         String username = view.usernameField.getText();
         String password = view.passwordField.getText();
         if(password == null || username == null || username.isEmpty()  || password.isEmpty()){
-            //controllare che username e password corrispondano ad una voce del db
+            model.login(username,password);
         }
         else{
             model.setCheck(true);
@@ -39,7 +39,7 @@ public class FormController {
             String username = view.usernameField.getText();
             String password = view.passwordField.getText();
             if (password == null || username == null || username.isEmpty() || password.isEmpty()) {
-                //Controllare username che non esista, successivamente aggiungere al db
+                model.register(username,password);
             } else {
                 model.setCheck(true);
                 model.setFailError("Credenziali non valide!");

@@ -27,7 +27,7 @@ class FormView {
         usernameField = cp5.addTextfield("username").setColorForeground(processing.color(255)).setFont(processing.createFont("arial",25)).setPosition(processing.width/2-100,processing.height/2-40).setSize(200,40).setFocus(true).setColor(processing.color(255)).setColorActive(processing.color(255)).setColorBackground(0).setCaptionLabel("").hide();
         passwordField = cp5.addTextfield("password").setPasswordMode(true).setColorForeground(processing.color(255)).setFont(processing.createFont("arial",25)).setPosition(processing.width/2-100,processing.height/2+40).setSize(200,40).setFocus(true).setColor(processing.color(255)).setColorActive(processing.color(255)).setColorBackground(0).setCaptionLabel("").hide();
         registerButton = cp5.addButton("register").setLabel("Register").setPosition(processing.width/2-100, processing.height/2+110).setSize(80, 30).hide();
-        loginButton = cp5.addButton("login").setLabel("Login").setPosition(processing.width/2, processing.height/2+110).setSize(80, 30).hide();
+        loginButton = cp5.addButton("login").setLabel("Login").setPosition(processing.width/2+20, processing.height/2+110).setSize(80, 30).hide();
     }
 
     /**
