@@ -1,4 +1,5 @@
 import controlP5.ControlP5;
+import expense.ExpenseController;
 import form.*;
 import processing.core.PApplet;
 
@@ -10,7 +11,7 @@ import processing.core.PApplet;
 public class Main extends PApplet {
 
     private FormController form;
-
+    private ExpenseController expense;
 
     /**
      * Window settings
@@ -31,6 +32,7 @@ public class Main extends PApplet {
      */
     public void draw(){
         form.draw();
+
     }
 
     /**
