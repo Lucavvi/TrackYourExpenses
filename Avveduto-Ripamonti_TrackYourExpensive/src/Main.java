@@ -1,7 +1,12 @@
 import controlP5.ControlP5;
+import expense.Categories;
 import expense.ExpenseController;
+import expense.ExpenseModel;
+import expense.ExpenseView;
 import form.*;
 import processing.core.PApplet;
+
+import java.time.LocalDate;
 
 /**
  * Main Class
@@ -25,6 +30,8 @@ public class Main extends PApplet {
      */
     public void setup(){
         form=new FormController(this,new ControlP5(this));
+        expense = new ExpenseController(new ExpenseModel("c", LocalDate.now(), Categories.FOOD,10),new ExpenseView(this));
+        form=new FormController(this,new ControlP5(this));
     }
 
     /**
@@ -32,7 +39,7 @@ public class Main extends PApplet {
      */
     public void draw(){
         form.draw();
-
+        expense.showExpense(200,200);
     }
 
     /**

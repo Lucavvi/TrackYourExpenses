@@ -6,12 +6,14 @@ public class ExpenseModel {
     private String name;
     private LocalDate date;
     private Categories category;
+    private float amount;
     private static int cont = 0;
 
-    public ExpenseModel(String name, LocalDate date, Categories category) {
+    public ExpenseModel(String name, LocalDate date, Categories category, float amount) {
         this.name = name;
         this.date = date;
         this.category = category;
+        this.amount = amount;
         cont++;
     }
 
@@ -25,6 +27,10 @@ public class ExpenseModel {
 
     public Categories getCategory() {
         return category;
+    }
+
+    public float getAmount() {
+        return amount;
     }
 
     public static int getCont() {
