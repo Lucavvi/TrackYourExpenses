@@ -4,12 +4,28 @@ import java.time.format.DateTimeFormatter;
 import java.util.Currency;
 import java.util.Locale;
 
+/**
+ * MVC class Expense
+ * @author luke & Angelo
+ * @version 1.0
+ */
 public class ExpenseView {
     private PApplet parent;
 
+    /**
+     * @param parent - Main istance
+     * constructor
+     */
     public ExpenseView(PApplet parent) {
         this.parent = parent;
     }
+
+    /**
+     * View method, shows the expense
+     * @param model - data to display
+     * @param x - position on x axis
+     * @param y - position on y axis
+     */
     public void view(ExpenseModel model, int x, int y) {
         parent.strokeWeight(4);
         parent.fill(model.getCategory().getColor().getRGB(),180);
@@ -30,5 +46,7 @@ public class ExpenseView {
         parent.strokeWeight(2);
         parent.line(x+ 150,y,x + 150,y+100);
         parent.text(model.getDesc(),x + 170,y + 20);
+        parent.textSize(8);
+        parent.text(String.format("%03d",model.getCont()),x+280,y+90);
     }
 }

@@ -2,6 +2,11 @@ package expense;
 
 import java.time.LocalDate;
 
+/**
+ * MVC class expense
+ * @author luke & Angelo
+ * @version 1.0
+ */
 public class ExpenseModel {
     private String name;
     private LocalDate date;
@@ -10,6 +15,13 @@ public class ExpenseModel {
     private String desc;
     private static int cont = 0;
 
+    /**
+     * @param name
+     * @param date
+     * @param category
+     * @param amount
+     * @param desc
+     */
     public ExpenseModel(String name, LocalDate date, Categories category, float amount, String desc) {
         this.name = name;
         this.date = date;
@@ -39,7 +51,7 @@ public class ExpenseModel {
         return desc;
     }
 
-    public static int getCont() {
+    public int getCont() {
         return cont;
     }
 }
