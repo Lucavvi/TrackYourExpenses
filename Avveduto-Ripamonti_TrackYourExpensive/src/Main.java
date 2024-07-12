@@ -45,8 +45,14 @@ public class Main extends PApplet {
     /**
      * submit button for the FormView callback
      */
-    public void submit() {
+    public void login() {
         form.submitForm();
+    }
+    /**
+     * submit button for the FormView callback
+     */
+    public void register() {
+        form.submitForm(true);
     }
 
     /**

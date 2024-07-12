@@ -11,12 +11,15 @@ public class FormModel {
     private String username;
     private String psw;
     private DBManager manager;
+    private boolean check;
+    private String failError;
 
     /**
      * Constructor that initialize the connector to the DB
      */
     public FormModel() {
         manager = new DBManager();
+        check=false;
     }
 
     /**
@@ -26,7 +29,14 @@ public class FormModel {
      * @throws AccessException - if one or both the inputs are wrong
      */
     public void login(String user, String password) throws AccessException{
-        manager.login(user,password);
+        try {
+            manager.login(user, password);
+        }
+        catch(Exception e) {
+            throw new AccessException(e.getMessage());
+        }
+        username = user;
+        psw = password;
     }
 
     /**
@@ -36,7 +46,14 @@ public class FormModel {
      * @throws UsernameException - if the username already exists
      */
     public void register(String user, String password) throws UsernameException{
-        manager.register(user,password);
+        try {
+            manager.register(user, password);
+        }
+        catch(Exception e) {
+            throw new UsernameException(e.getMessage());
+        }
+        username = user;
+        psw = password;
     }
 
     /**
@@ -51,5 +68,21 @@ public class FormModel {
      */
     public String getPsw() {
         return psw;
+    }
+
+    public boolean isCheck() {
+        return check;
+    }
+
+    public void setCheck(boolean check) {
+        this.check = check;
+    }
+
+    public String getFailError() {
+        return failError;
+    }
+
+    public void setFailError(String failError) {
+        this.failError = failError;
     }
 }
