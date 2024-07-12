@@ -29,8 +29,9 @@ public class Main extends PApplet {
      */
     public void setup(){
         form=new FormController(this,new ControlP5(this));
-        expense = new ExpenseController(new ExpenseModel("c", LocalDate.now(), Categories.FOOD,10),new ExpenseView(this));
+        expense = new ExpenseController(new ExpenseModel("c", LocalDate.now(), Categories.FOOD,10,"aaaaaaaaaaaaaa"),new ExpenseView(this));
         form=new FormController(this,new ControlP5(this));
+        //Ogni 14 caratteri si mette \n per massimo 4 volte
     }
 
     /**
