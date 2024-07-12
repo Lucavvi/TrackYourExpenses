@@ -20,8 +20,10 @@ class FormView {
      * Constructor which initialize the attributes
      * @param processing - main instance
      * @param cp5 - callback instance
+     * @throws NullPointerException if processing or cp5 are null
      */
-    FormView(PApplet processing, ControlP5 cp5){
+    FormView(PApplet processing, ControlP5 cp5) throws NullPointerException{
+        if(processing == null || cp5 == null) throw new NullPointerException("L'implementazione di Processing o della libreria ControlP5 è fallita!");
         this.processing = processing;
         this.cp5 = cp5;
         usernameField = cp5.addTextfield("username").setColorForeground(processing.color(255)).setFont(processing.createFont("arial",25)).setPosition(processing.width/2-100,processing.height/2-40).setSize(200,40).setFocus(true).setColor(processing.color(255)).setColorActive(processing.color(255)).setColorBackground(0).setCaptionLabel("").hide();

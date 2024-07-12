@@ -8,9 +8,15 @@ import java.sql.*;
  * @version 1.0
  */
 public class DBManager implements Actions{
-    private final String USERNAME = "user";
-    private final String PASSWORD = "password";
-    private final String URL = "jdbc:mysql://localhost/tracker";
+    private final String USERNAME;
+    private final String PASSWORD;
+    private final String URL;
+
+    public DBManager(){
+        USERNAME = "user";
+        PASSWORD = "password";
+        URL = "jdbc:mysql://localhost/tracker";
+    }
 
     /**
      * Method for logging into an account in the database

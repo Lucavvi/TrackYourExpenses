@@ -16,8 +16,10 @@ public class FormController {
      * Constructor
      * @param processing - main instance
      * @param cp5 - callback
+     * @throws NullPointerException if processing or cp5 are null
      */
-    public FormController(PApplet processing, ControlP5 cp5) {
+    public FormController(PApplet processing, ControlP5 cp5) throws NullPointerException {
+        if(processing == null || cp5 == null) throw new NullPointerException("L'implementazione di Processing o della libreria ControlP5 è fallita!");
         view = new FormView(processing, cp5);
         model = new FormModel();
     }
@@ -35,8 +37,9 @@ public class FormController {
     /**
      * When login button is pressed, the callback recall this function
      * and the function verify the credentials to login
+     * @throws AccessException - if one or both the inputs are wrong
      */
-    public void submitForm(){
+    public void submitForm() throws AccessException{
         String username = view.usernameField.getText();
         String password = view.passwordField.getText();
         if(password == null || username == null || username.isEmpty()  || password.isEmpty()){
@@ -54,8 +57,10 @@ public class FormController {
     /**
      * When register button is pressed, the callback recall this function
      * and the function verify the credentials to register
+     * @param register - to indicate you want to sign up and not sign in
+     * @throws UsernameException - if the username already exists
      */
-    public void submitForm(boolean register){
+    public void submitForm(boolean register) throws UsernameException{
         if(!register) submitForm();
         else {
             String username = view.usernameField.getText();
