@@ -1,6 +1,5 @@
 package dao;
 import form.*;
-
 /**
  * Interface to manage account actions
  * @author Angelo Ripamonti, Luca Avveduto

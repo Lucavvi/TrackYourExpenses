@@ -1,5 +1,4 @@
 import controlP5.ControlP5;
-import dao.DBManager;
 import form.*;
 import processing.core.PApplet;
 
@@ -37,7 +36,6 @@ public class Main extends PApplet {
      */
     public void submit() {
         System.out.println(fw.usernameField.getText() + " "+fw.passwordField.getText());
-
         //Cancello i valori all'interno dei due TextField
         fw.usernameField.clear();
         fw.passwordField.clear();

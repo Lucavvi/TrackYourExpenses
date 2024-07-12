@@ -1,5 +1,4 @@
 package dao;
-
 import form.AccessException;
 import form.UsernameException;
 import java.sql.*;
