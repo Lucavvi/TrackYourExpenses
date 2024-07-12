@@ -7,7 +7,7 @@ import controlP5.*;
  * @author Angelo Ripamonti, Luca Avveduto
  * @version 1.0
  */
-public class FormView {
+class FormView {
     private PApplet processing;
     private ControlP5 cp5;
     public Textfield usernameField;
@@ -19,20 +19,18 @@ public class FormView {
      * @param processing - main instance
      * @param cp5 - callback instance
      */
-    public FormView(PApplet processing, ControlP5 cp5){
+    FormView(PApplet processing, ControlP5 cp5){
         this.processing = processing;
         this.cp5 = cp5;
-        usernameField = cp5.addTextfield("username").setColorForeground(processing.color(255)).setFont(processing.createFont("arial",25)).setPosition(10,processing.height/2-40).setSize(200,40).setFocus(true).setColor(processing.color(255)).setColorActive(processing.color(255)).setColorBackground(0).hide();
-        passwordField = cp5.addTextfield("password").setColorForeground(processing.color(255)).setFont(processing.createFont("arial",25)).setPosition(processing.width/2,processing.height/2+40).setSize(200,40).setFocus(true).setColor(processing.color(255)).setColorActive(processing.color(255)).setColorBackground(0).hide();
-        submitButton = cp5.addButton("submit").setLabel("Submit").setPosition(50, 150).setSize(80, 30).hide();
-
-
+        usernameField = cp5.addTextfield("username").setColorForeground(processing.color(255)).setFont(processing.createFont("arial",25)).setPosition(processing.width/2-100,processing.height/2-40).setSize(200,40).setFocus(true).setColor(processing.color(255)).setColorActive(processing.color(255)).setColorBackground(0).hide();
+        passwordField = cp5.addTextfield("password").setColorForeground(processing.color(255)).setFont(processing.createFont("arial",25)).setPosition(processing.width/2-100,processing.height/2+40).setSize(200,40).setFocus(true).setColor(processing.color(255)).setColorActive(processing.color(255)).setColorBackground(0).hide();
+        submitButton = cp5.addButton("submit").setLabel("Submit").setPosition(processing.width/2-40, processing.height/2+110).setSize(80, 30).hide();
     }
 
     /**
      * loop method for each text filed
      */
-    public void draw(){
+    void draw(){
         processing.background(255);
         usernameField.show();
         passwordField.show();
@@ -43,5 +41,17 @@ public class FormView {
         usernameField.hide();
         passwordField.hide();
         submitButton.hide();
+    }
+
+    void fail(){
+        processing.rectMode(processing.CENTER);
+        processing.fill(255,0,0,120);
+        processing.rect(processing.width/2,processing.height/2,200,100);
+        processing.textAlign(processing.CENTER,processing.CENTER);
+        processing.textSize(20);
+        processing.fill(0);
+        processing.text("Credenziali Errate!",processing.width/2,processing.height/2);
+        processing.rectMode(processing.CORNER);
+        processing.textAlign(processing.BASELINE,processing.BASELINE);
     }
 }

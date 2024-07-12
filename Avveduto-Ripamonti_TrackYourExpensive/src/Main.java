@@ -8,7 +8,9 @@ import processing.core.PApplet;
  * @version 1.0
  */
 public class Main extends PApplet {
-    private FormView fw;
+
+    private FormController form;
+
 
     /**
      * Window settings
@@ -21,24 +23,21 @@ public class Main extends PApplet {
      * method for initializing all variables
      */
     public void setup(){
-        fw=new FormView(this,new ControlP5(this));
+        form=new FormController(this,new ControlP5(this));
     }
 
     /**
      * loop method
      */
     public void draw(){
-        fw.draw();
+        form.draw();
     }
 
     /**
      * submit button for the FormView callback
      */
     public void submit() {
-        System.out.println(fw.usernameField.getText() + " "+fw.passwordField.getText());
-        //Cancello i valori all'interno dei due TextField
-        fw.usernameField.clear();
-        fw.passwordField.clear();
+        form.submitForm();
     }
 
     /**
