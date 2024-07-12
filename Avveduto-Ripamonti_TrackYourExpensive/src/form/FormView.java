@@ -48,6 +48,9 @@ class FormView {
         loginButton.show();
     }
 
+    /**
+     * Hide all field
+     */
     public void hideField(){
         usernameField.hide();
         passwordField.hide();
@@ -55,6 +58,10 @@ class FormView {
         loginButton.hide();
     }
 
+    /**
+     * Function for failure login/register
+     * @param failError the error to display
+     */
     void fail(String failError){
         processing.background(255);
         processing.rectMode(processing.CENTER);
