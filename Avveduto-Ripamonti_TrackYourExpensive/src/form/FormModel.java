@@ -7,17 +7,17 @@ import dao.DBManager;
  * @author Angelo Ripamonti, Luca Avveduto
  * @version 1.0
  */
-public class FormModel {
+class FormModel {
     private String username;
     private String psw;
     private DBManager manager;
-    private boolean check;
-    private String failError;
+    protected boolean check;
+    protected String failError;
 
     /**
      * Constructor that initialize the connector to the DB
      */
-    public FormModel() {
+    FormModel() {
         manager = new DBManager();
         check=false;
     }
@@ -28,7 +28,7 @@ public class FormModel {
      * @param password - password
      * @throws AccessException - if one or both the inputs are wrong
      */
-    public void login(String user, String password) throws AccessException{
+    void login(String user, String password) throws AccessException{
         try {
             manager.login(user, password);
         }
@@ -45,7 +45,7 @@ public class FormModel {
      * @param password - password
      * @throws UsernameException - if the username already exists
      */
-    public void register(String user, String password) throws UsernameException{
+    void register(String user, String password) throws UsernameException{
         try {
             manager.register(user, password);
         }
@@ -59,30 +59,14 @@ public class FormModel {
     /**
      * @return the username written in the text field
      */
-    public String getUsername() {
+    String getUsername() {
         return username;
     }
 
     /**
      * @return the password written in the text field
      */
-    public String getPsw() {
+    String getPsw() {
         return psw;
-    }
-
-    public boolean isCheck() {
-        return check;
-    }
-
-    public void setCheck(boolean check) {
-        this.check = check;
-    }
-
-    public String getFailError() {
-        return failError;
-    }
-
-    public void setFailError(String failError) {
-        this.failError = failError;
     }
 }
