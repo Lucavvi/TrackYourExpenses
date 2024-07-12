@@ -3,6 +3,7 @@ import expense.Categories;
 import expense.ExpenseController;
 import expense.ExpenseModel;
 import expense.ExpenseView;
+import filters.FilterView;
 import form.*;
 import processing.core.PApplet;
 import java.time.LocalDate;

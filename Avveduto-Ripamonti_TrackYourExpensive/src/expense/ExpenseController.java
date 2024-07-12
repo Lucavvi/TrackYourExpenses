@@ -34,4 +34,12 @@ public class ExpenseController {
     public void showExpense(int x, int y) {
         view.view(model,x,y);
     }
+
+    public ExpenseModel getModel() {
+        return model;
+    }
+
+    public ExpenseView getView() {
+        return view;
+    }
 }

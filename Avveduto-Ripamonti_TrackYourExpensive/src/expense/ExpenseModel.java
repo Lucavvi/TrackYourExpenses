@@ -7,7 +7,7 @@ import java.time.LocalDate;
  * @author luke & Angelo
  * @version 1.0
  */
-public class ExpenseModel {
+public class ExpenseModel implements Comparable{
     private String name;
     private LocalDate date;
     private Categories category;
@@ -72,5 +72,22 @@ public class ExpenseModel {
      */
     public int getCont() {
         return cont;
+    }
+
+    /**
+     * Comparable interface method
+     * @param o - Object to compare
+     * @return - conventional values
+     * @throws RuntimeException if o is not an ExpenseModel instance
+     */
+    @Override
+    public int compareTo(Object o) throws RuntimeException{
+        if(o instanceof ExpenseModel){
+            if(date.isBefore(((ExpenseModel) o).getDate())) return -1;
+            else if (date.equals(((ExpenseModel) o).getDate())) return 0;
+            else return 1;
+        }else {
+            throw new RuntimeException("Instance not valid");
+        }
     }
 }
