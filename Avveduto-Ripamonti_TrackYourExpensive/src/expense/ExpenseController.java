@@ -4,15 +4,33 @@ import processing.core.PApplet;
 
 import java.time.LocalDate;
 
+/**
+ * MVC class expense
+ * @author luke & Angelo
+ * @version 1.0
+ */
 public class ExpenseController {
     private ExpenseModel model;
     private ExpenseView view;
 
+    /**
+     * @param name - name of the expense
+     * @param date - date of the expense
+     * @param category - category of the expense
+     * @param amount - cost of the expese
+     * @param desc - description
+     * @param parent - main instance
+     */
     public ExpenseController(String name, LocalDate date, Categories category, float amount, String desc,PApplet parent) {
         model = new ExpenseModel(name,date,category,amount,desc);
         view = new ExpenseView(parent);
     }
 
+    /**
+     * Method for showing the expense
+     * @param x - position on x axis
+     * @param y - position on y axis
+     */
     public void showExpense(int x, int y) {
         view.view(model,x,y);
     }

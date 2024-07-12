@@ -16,11 +16,12 @@ public class ExpenseModel {
     private static int cont = 0;
 
     /**
-     * @param name
-     * @param date
-     * @param category
-     * @param amount
-     * @param desc
+     * @param name - name of the expense
+     * @param date - date of the expense
+     * @param category - category of the expense
+     * @param amount - cost of the expese
+     * @param desc - description
+     * constructor
      */
     public ExpenseModel(String name, LocalDate date, Categories category, float amount, String desc) {
         this.name = name;
@@ -31,26 +32,44 @@ public class ExpenseModel {
         cont++;
     }
 
+    /**
+     * @return the expense's name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @return the expense's date
+     */
     public LocalDate getDate() {
         return date;
     }
 
+    /**
+     * @return the expense's category
+     */
     public Categories getCategory() {
         return category;
     }
 
+    /**
+     * @return the expense's cost
+     */
     public float getAmount() {
         return amount;
     }
 
+    /**
+     * @return description
+     */
     public String getDesc() {
         return desc;
     }
 
+    /**
+     * @return the expense's number
+     */
     public int getCont() {
         return cont;
     }
