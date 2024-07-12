@@ -10,9 +10,11 @@ import controlP5.*;
 class FormView {
     private PApplet processing;
     private ControlP5 cp5;
-    public Textfield usernameField;
-    public Textfield passwordField;
-    private Button submitButton;
+    protected Textfield usernameField;
+    protected Textfield passwordField;
+    private Button registerButton;
+    private Button loginButton;
+
 
     /**
      * Constructor which initialize the attributes
@@ -24,7 +26,8 @@ class FormView {
         this.cp5 = cp5;
         usernameField = cp5.addTextfield("username").setColorForeground(processing.color(255)).setFont(processing.createFont("arial",25)).setPosition(processing.width/2-100,processing.height/2-40).setSize(200,40).setFocus(true).setColor(processing.color(255)).setColorActive(processing.color(255)).setColorBackground(0).setCaptionLabel("").hide();
         passwordField = cp5.addTextfield("password").setPasswordMode(true).setColorForeground(processing.color(255)).setFont(processing.createFont("arial",25)).setPosition(processing.width/2-100,processing.height/2+40).setSize(200,40).setFocus(true).setColor(processing.color(255)).setColorActive(processing.color(255)).setColorBackground(0).setCaptionLabel("").hide();
-        submitButton = cp5.addButton("submit").setLabel("Submit").setPosition(processing.width/2-40, processing.height/2+110).setSize(80, 30).hide();
+        registerButton = cp5.addButton("register").setLabel("Register").setPosition(processing.width/2-100, processing.height/2+110).setSize(80, 30).hide();
+        loginButton = cp5.addButton("login").setLabel("Login").setPosition(processing.width/2, processing.height/2+110).setSize(80, 30).hide();
     }
 
     /**
@@ -41,16 +44,18 @@ class FormView {
         usernameField.show();
         processing.text("Password:",passwordField.getPosition()[0],passwordField.getPosition()[1]-(passwordField.getHeight()/2));
         passwordField.show();
-        submitButton.show();
+        registerButton.show();
+        loginButton.show();
     }
 
     public void hideField(){
         usernameField.hide();
         passwordField.hide();
-        submitButton.hide();
+        registerButton.hide();
+        loginButton.hide();
     }
 
-    void fail(){
+    void fail(String failError){
         processing.background(255);
         processing.rectMode(processing.CENTER);
         processing.fill(255,0,0,120);
@@ -58,7 +63,7 @@ class FormView {
         processing.textAlign(processing.CENTER,processing.CENTER);
         processing.textSize(20);
         processing.fill(0);
-        processing.text("Credenziali Errate!",processing.width/2,processing.height/2);
+        processing.text(failError,processing.width/2,processing.height/2);
         processing.rectMode(processing.CORNER);
         processing.textAlign(processing.BASELINE,processing.BASELINE);
     }

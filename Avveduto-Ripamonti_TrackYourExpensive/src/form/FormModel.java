@@ -11,6 +11,8 @@ public class FormModel {
     private String username;
     private String psw;
     private DBManager manager;
+    private boolean check;
+    private String failError;
 
     /**
      * Constructor that initialize the connector to the DB
@@ -51,5 +53,21 @@ public class FormModel {
      */
     public String getPsw() {
         return psw;
+    }
+
+    public boolean isCheck() {
+        return check;
+    }
+
+    public void setCheck(boolean check) {
+        this.check = check;
+    }
+
+    public String getFailError() {
+        return failError;
+    }
+
+    public void setFailError(String failError) {
+        this.failError = failError;
     }
 }
