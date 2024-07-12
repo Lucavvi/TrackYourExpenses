@@ -27,6 +27,7 @@ public class Main extends PApplet {
      */
     public void setup(){
         model = new Model(this);
+        //Ogni 14 caratteri si mette \n per massimo 4 volte
     }
 
     /**
