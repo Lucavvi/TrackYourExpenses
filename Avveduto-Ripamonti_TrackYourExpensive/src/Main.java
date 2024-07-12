@@ -50,6 +50,10 @@ public class Main extends PApplet {
         model.form.submitForm(true);
     }
 
+    /**
+     * @param theEvent - from the dropdown list
+     * select callback.
+     */
     public void select(ControlEvent theEvent) {
         if (theEvent.isFrom(model.v.getList())) {
             int cat = (int) theEvent.getController().getValue();
