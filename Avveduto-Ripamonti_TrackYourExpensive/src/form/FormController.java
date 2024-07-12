@@ -24,16 +24,14 @@ public class FormController {
         String username = view.usernameField.getText();
         String password = view.passwordField.getText();
         if(password == null || username == null || username.isEmpty()  || password.isEmpty()){
-            //Salvare username e password
-
-            //Cancello i valori all'interno dei due TextField
-            view.usernameField.clear();
-            view.passwordField.clear();
+            //Salvare/Controllare/mandare a qualcun'altro username e password
         }
         else{
             check=true;
             view.fail();
             view.hideField();
         }
+        view.usernameField.clear();
+        view.passwordField.clear();
     }
 }
