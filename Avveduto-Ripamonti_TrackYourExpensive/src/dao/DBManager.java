@@ -83,7 +83,7 @@ public class DBManager implements Actions{
                 PreparedStatement stmt = conn.prepareStatement(command);
         ){
             Gson gson = new Gson();
-            String json = gson.toJson(updatedList);
+            String json = gson.toJson(updatedList); //CAMBIARE ATTRIBUTI PACKAGE EXPENSE, SE USIAMO CLASSI ESTERNE PROVARE A CREARNE DEI WRAPPER.
             stmt.setString(1,username);
             stmt.setString(2,json);
             stmt.executeUpdate();
