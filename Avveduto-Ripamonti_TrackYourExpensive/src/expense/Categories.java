@@ -12,6 +12,7 @@ public enum Categories {
     PLEASURE(Color.BLUE,"Pleasures"),
     ALL(new Color(0,0,0,0),"All");
 
+
     private Color color;
     private String name;
 
