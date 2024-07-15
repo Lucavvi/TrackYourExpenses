@@ -30,7 +30,7 @@ public class DBManager implements Actions{
      */
     @Override
     public void login(String user, String psw) throws AccessException {
-        final String query = "SELECT USERNAME,PASSWORD FROM tracker.accounts WHERE USERNAME=? AND PASSWORD=?";
+        final String query = "SELECT username,password FROM tracker.accounts WHERE username=? AND password=?";
         try(
                 Connection con = DriverManager.getConnection(URL,USERNAME,PASSWORD);
                 PreparedStatement st = con.prepareStatement(query);
@@ -51,7 +51,7 @@ public class DBManager implements Actions{
      */
     @Override
     public void register(String user, String psw) throws UsernameException {
-        final String query = "INSERT INTO tracker.accounts (USERNAME, PASSWORD, LIST) VALUES (?, ?, ?)";
+        final String query = "INSERT INTO tracker.accounts (username, password, expenseList) VALUES (?, ?, ?)";
         try(
                 Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
                 PreparedStatement stmt = conn.prepareStatement(query);
@@ -77,7 +77,7 @@ public class DBManager implements Actions{
      */
     @Override
     public void updateList(String username, ArrayList<ExpenseController> updatedList) throws RuntimeException{
-        final String command = "UPDATE tracker SET USERNAME=? WHERE LIST=?";
+        final String command = "UPDATE tracker SET username=? WHERE expenseList=?";
         try(
                 Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
                 PreparedStatement stmt = conn.prepareStatement(command);
