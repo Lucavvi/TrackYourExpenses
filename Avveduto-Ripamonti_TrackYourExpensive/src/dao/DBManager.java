@@ -77,7 +77,7 @@ public class DBManager implements Actions{
      */
     @Override
     public void updateList(String username, ArrayList<ExpenseController> updatedList) throws RuntimeException{
-        final String command = "UPDATE tracker SET username=? WHERE expenseList=?";
+        final String command = "UPDATE tracker SET expenseList=? WHERE userame=?";
         try(
                 Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
                 PreparedStatement stmt = conn.prepareStatement(command);
