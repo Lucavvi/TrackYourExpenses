@@ -19,6 +19,7 @@ public class FilterObj {
         select.addItem("FOOD", Categories.FOOD);
         select.addItem("SHOPPING", Categories.SHOPPING);
         select.addItem("PLEASURE", Categories.PLEASURE);
+        select.addItem("ALL", "");
     }
 
     public void callback(int cat) {
@@ -27,6 +28,7 @@ public class FilterObj {
             case 0 -> {target = Categories.FOOD;}
             case 1 -> {target = Categories.SHOPPING;}
             case 2 -> {target = Categories.PLEASURE;}
+            case 3 -> {target = Categories.ALL;}
         }
         System.out.println(target);
         //CategoryFilter.filter(null,target);

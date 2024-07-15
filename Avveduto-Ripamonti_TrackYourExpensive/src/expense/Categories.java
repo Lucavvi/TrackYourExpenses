@@ -9,6 +9,7 @@ import java.awt.*;
 public enum Categories {
     FOOD(Color.GREEN,"Food"),
     SHOPPING(Color.ORANGE,"Shopping"),
+    ALL(new Color(0,0,0,0),"All"),
     PLEASURE(Color.BLUE,"Pleasures");
 
     private Color color;
