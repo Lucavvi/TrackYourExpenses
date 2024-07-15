@@ -2,6 +2,7 @@ package expense;
 
 import processing.core.PApplet;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
@@ -9,7 +10,7 @@ import java.time.LocalDate;
  * @author luke & Angelo
  * @version 1.0
  */
-public class ExpenseController {
+public class ExpenseController implements Serializable {
     private ExpenseModel model;
     private ExpenseView view;
 

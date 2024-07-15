@@ -1,5 +1,7 @@
 package expense;
 import processing.core.PApplet;
+
+import java.io.Serializable;
 import java.time.format.DateTimeFormatter;
 import java.util.Currency;
 import java.util.Locale;
@@ -9,7 +11,7 @@ import java.util.Locale;
  * @author luke & Angelo
  * @version 1.0
  */
-public class ExpenseView {
+public class ExpenseView implements Serializable {
     private PApplet parent;
 
     /**

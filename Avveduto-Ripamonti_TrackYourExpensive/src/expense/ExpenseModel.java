@@ -1,5 +1,6 @@
 package expense;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
@@ -7,7 +8,7 @@ import java.time.LocalDate;
  * @author luke & Angelo
  * @version 1.0
  */
-public class ExpenseModel implements Comparable{
+public class ExpenseModel implements Comparable, Serializable {
     private String name;
     private LocalDate date;
     private Categories category;
