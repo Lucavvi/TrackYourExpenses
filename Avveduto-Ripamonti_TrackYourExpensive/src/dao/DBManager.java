@@ -56,7 +56,6 @@ public class DBManager implements Actions{
                 Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
                 PreparedStatement stmt = conn.prepareStatement(query);
         ){
-
             Gson gson = new Gson();
             String json = gson.toJson(new ArrayList<ExpenseController>());
 
@@ -83,7 +82,9 @@ public class DBManager implements Actions{
                 Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
                 PreparedStatement stmt = conn.prepareStatement(command);
         ){
-            stmt.setObject(1,updatedList);
+            Gson gson = new Gson();
+            String json = gson.toJson(updatedList);
+            stmt.setString(1,json);
             stmt.executeUpdate();
         }
         catch(Exception e) {
