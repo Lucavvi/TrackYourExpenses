@@ -20,18 +20,18 @@ public class DBManager implements Actions{
 
     /**
      * Method for logging into an account in the database
-     * @param username the account username
+     * @param user the account username
      * @param psw the account password
      * @throws AccessException If the cretentials aren't correct
      */
     @Override
-    public void login(String username, String psw) throws AccessException {
+    public void login(String user, String psw) throws AccessException {
         final String query = "SELECT USERNAME,PASSWORD FROM tracker.accounts WHERE USERNAME=? AND PASSWORD=?";
         try(
                 Connection con = DriverManager.getConnection(URL,USERNAME,PASSWORD);
                 PreparedStatement st = con.prepareStatement(query);
         ) {
-            st.setString(1,username);
+            st.setString(1,user);
             st.setString(2,psw);
             ResultSet rs = st.executeQuery();
         }catch (Exception e) {
@@ -41,18 +41,18 @@ public class DBManager implements Actions{
 
     /**
      * Method for registering an account within the database
-     * @param username the account username
+     * @param user the account username
      * @param psw the account password
      * @throws UsernameException If the username already exist
      */
     @Override
-    public void register(String username, String psw) throws UsernameException {
+    public void register(String user, String psw) throws UsernameException {
         final String query = "INSERT INTO tracker.accounts (USERNAME, PASSWORD) VALUES (?, ?)";
         try(
                 Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
                 PreparedStatement stmt = conn.prepareStatement(query);
         ){
-            stmt.setString(1,username);
+            stmt.setString(1,user);
             stmt.setString(2,psw);
             stmt.executeUpdate();
         }
