@@ -42,7 +42,7 @@ public class FormController {
     public void submitForm() throws AccessException{
         String username = view.usernameField.getText();
         String password = view.passwordField.getText();
-        if(password == null || username == null || username.isEmpty()  || password.isEmpty()){
+        if(password == null || username == null || !username.isEmpty()  || !password.isEmpty()){
             model.login(username,password);
         }
         else{
@@ -65,7 +65,7 @@ public class FormController {
         else {
             String username = view.usernameField.getText();
             String password = view.passwordField.getText();
-            if (password == null || username == null || username.isEmpty() || password.isEmpty()) {
+            if (password == null || username == null || !username.isEmpty() || !password.isEmpty()) {
                 model.register(username,password);
             } else {
                 model.check = true;
