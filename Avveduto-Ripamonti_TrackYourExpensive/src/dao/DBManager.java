@@ -84,7 +84,8 @@ public class DBManager implements Actions{
         ){
             Gson gson = new Gson();
             String json = gson.toJson(updatedList);
-            stmt.setString(1,json);
+            stmt.setString(1,username);
+            stmt.setString(2,json);
             stmt.executeUpdate();
         }
         catch(Exception e) {
