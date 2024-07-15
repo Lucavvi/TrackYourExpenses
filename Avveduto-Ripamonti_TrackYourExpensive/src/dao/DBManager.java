@@ -64,4 +64,25 @@ public class DBManager implements Actions{
             throw new UsernameException("An account with that username already exists");
         }
     }
+
+    /**
+     * Method to update the user's expenses list
+     * @param username - account's username
+     * @param updatedList - updated list
+     * @throws RuntimeException - because of connection problems
+     */
+    @Override
+    public void updateList(String username, ArrayList<ExpenseController> updatedList) throws RuntimeException{
+        final String command = "UPDATE tracker SET USERNAME=? WHERE LIST=?";
+        try(
+                Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+                PreparedStatement stmt = conn.prepareStatement(command);
+        ){
+            stmt.setObject(1,updatedList);
+            stmt.executeUpdate();
+        }
+        catch(Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
 }
