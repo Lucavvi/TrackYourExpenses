@@ -1,4 +1,6 @@
 import controlP5.ControlP5;
+import dao.Actions;
+import dao.DBManager;
 import expense.Categories;
 import expense.ExpenseController;
 import filters.FilterObj;
@@ -13,12 +15,14 @@ class Model {
     FormController form;
     ExpenseController expense;
     FilterObj v;
+    DBManager dao;
     boolean[] screen;
 
     public Model(PApplet processing) {
         cp5 = new ControlP5(processing);
         v = new FilterObj(cp5,processing);
-        form=new FormController(processing,cp5);
+        dao= new DBManager();
+        form=new FormController(processing,cp5,dao);
         expense = new ExpenseController("c", LocalDate.now(), Categories.FOOD,10,"ciao",processing);
         screen = new boolean [10];
         Arrays.fill(screen,false);

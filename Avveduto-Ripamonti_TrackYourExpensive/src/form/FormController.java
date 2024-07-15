@@ -1,6 +1,7 @@
 package form;
 
 import controlP5.ControlP5;
+import dao.DBManager;
 import processing.core.PApplet;
 
 /**
@@ -18,10 +19,10 @@ public class FormController {
      * @param cp5 - callback
      * @throws NullPointerException if processing or cp5 are null
      */
-    public FormController(PApplet processing, ControlP5 cp5) throws NullPointerException {
+    public FormController(PApplet processing, ControlP5 cp5, DBManager manager) throws NullPointerException {
         if(processing == null || cp5 == null) throw new NullPointerException("L'implementazione di Processing o della libreria ControlP5 è fallita!");
         view = new FormView(processing, cp5);
-        model = new FormModel();
+        model = new FormModel(manager);
     }
 
     /**

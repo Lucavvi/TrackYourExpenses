@@ -17,8 +17,8 @@ class FormModel {
     /**
      * Constructor that initialize the connector to the DB
      */
-    FormModel() {
-        manager = new DBManager();
+    FormModel(DBManager manager) {
+        this.manager = manager;
         check=false;
     }
 
