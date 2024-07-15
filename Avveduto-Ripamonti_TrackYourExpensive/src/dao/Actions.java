@@ -26,6 +26,12 @@ public interface Actions {
      * @throws UsernameException If the username already exist
      */
     public void register(String username , String psw) throws UsernameException;
+
+    /**
+     * Method to update the user's list
+     * @param username - username
+     * @param updatedList - updated list
+     */
     public void updateList(String username, ArrayList<ExpenseController> updatedList);
 
 }
