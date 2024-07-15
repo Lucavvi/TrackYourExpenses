@@ -6,6 +6,7 @@ import form.FormController;
 import processing.core.PApplet;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 
 class Model {
     ControlP5 cp5;
@@ -20,7 +21,7 @@ class Model {
         form=new FormController(processing,cp5);
         expense = new ExpenseController("c", LocalDate.now(), Categories.FOOD,10,"ciao",processing);
         screen = new boolean [10];
-        for(int i = 0; i < 10; i++) screen[i] = false;
+        Arrays.fill(screen,false);
         screen[0]=true;
     }
 }

@@ -1,7 +1,10 @@
 package dao;
+import expense.ExpenseController;
 import form.AccessException;
 import form.UsernameException;
 import java.sql.*;
+import java.util.ArrayList;
+
 /**
  * Class to implements Actions' interface to database
  * @author Angelo Ripamonti, Luca Avveduto
@@ -47,13 +50,14 @@ public class DBManager implements Actions{
      */
     @Override
     public void register(String user, String psw) throws UsernameException {
-        final String query = "INSERT INTO tracker.accounts (USERNAME, PASSWORD) VALUES (?, ?)";
+        final String query = "INSERT INTO tracker.accounts (USERNAME, PASSWORD, LIST) VALUES (?, ?, ?)";
         try(
                 Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
                 PreparedStatement stmt = conn.prepareStatement(query);
         ){
             stmt.setString(1,user);
             stmt.setString(2,psw);
+            stmt.setObject(3, new ArrayList<ExpenseController>());
             stmt.executeUpdate();
         }
         catch(Exception e) {

@@ -1,5 +1,9 @@
 package dao;
+import expense.ExpenseController;
 import form.*;
+
+import java.util.ArrayList;
+
 /**
  * Interface to manage account actions
  * @author Angelo Ripamonti, Luca Avveduto
@@ -21,6 +25,6 @@ public interface Actions {
      * @param psw the account password
      * @throws UsernameException If the username already exist
      */
-    public void register(String username ,String psw) throws UsernameException;
+    public void register(String username , String psw) throws UsernameException;
 
 }
