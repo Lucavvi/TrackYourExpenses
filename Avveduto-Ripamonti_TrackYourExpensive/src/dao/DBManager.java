@@ -1,4 +1,5 @@
 package dao;
+import com.google.gson.Gson;
 import expense.ExpenseController;
 import form.AccessException;
 import form.UsernameException;
@@ -55,9 +56,13 @@ public class DBManager implements Actions{
                 Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
                 PreparedStatement stmt = conn.prepareStatement(query);
         ){
+
+            Gson gson = new Gson();
+            String json = gson.toJson(new ArrayList<ExpenseController>());
+
             stmt.setString(1,user);
             stmt.setString(2,psw);
-            stmt.setObject(3, new ArrayList<ExpenseController>());
+            stmt.setString(3, json);
             stmt.executeUpdate();
         }
         catch(Exception e) {
