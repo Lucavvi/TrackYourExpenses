@@ -19,7 +19,7 @@ public class FilterObj {
         select.addItem("FOOD", Categories.FOOD);
         select.addItem("SHOPPING", Categories.SHOPPING);
         select.addItem("PLEASURE", Categories.PLEASURE);
-        select.addItem("ALL", "");
+        select.addItem("ALL", Categories.ALL);
     }
 
     public void callback(int cat) {
