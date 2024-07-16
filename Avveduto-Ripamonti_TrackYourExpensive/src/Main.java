@@ -33,7 +33,7 @@ public class Main extends PApplet {
         if(model.screen[0])
             model.form.draw();
         else if(model.screen[1]) {
-            model.expense.showExpense(200, 200);
+            model.expense.showExpense(this, 200, 200);
         }
     }
 

@@ -3,7 +3,6 @@ package expense;
 import processing.core.PApplet;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 
 /**
  * MVC class expense
@@ -32,8 +31,8 @@ public class ExpenseController implements Serializable {
      * @param x - position on x axis
      * @param y - position on y axis
      */
-    public void showExpense(int x, int y) {
-        view.view(model,x,y);
+    public void showExpense(PApplet parent,int x, int y) {
+        view.view(parent,model,x,y);
     }
 
     public ExpenseModel getModel() {

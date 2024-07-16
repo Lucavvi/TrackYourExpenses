@@ -31,5 +31,7 @@ public class LocalDate implements Serializable {
     public boolean isLeapYear() {
         return leapYear;
     }
-
+    public String toString(){
+        return day + "/" + month + "/" + year;
+    }
 }
