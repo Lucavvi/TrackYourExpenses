@@ -45,6 +45,7 @@ public class FormController {
         String password = view.passwordField.getText();
         if(password == null || username == null || !username.isEmpty()  || !password.isEmpty()){
             model.login(username,password);
+            view.hideField();
         }
         else{
             model.check = true;
@@ -68,6 +69,7 @@ public class FormController {
             String password = view.passwordField.getText();
             if (password == null || username == null || !username.isEmpty() || !password.isEmpty()) {
                 model.register(username,password);
+                view.hideField();
             } else {
                 model.check = true;
                 model.failError = "Credenziali non valide!";

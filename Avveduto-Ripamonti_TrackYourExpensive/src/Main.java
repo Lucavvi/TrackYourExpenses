@@ -29,10 +29,11 @@ public class Main extends PApplet {
      * loop method
      */
     public void draw(){
-        model.v.showList();
-        if(model.screen[0])
+        if(model.screen[0]) {
             model.form.draw();
+        }
         else if(model.screen[1]) {
+            model.v.showList();
             model.expense.showExpense(200, 200);
         }
     }
@@ -42,12 +43,16 @@ public class Main extends PApplet {
      */
     public void login() {
         model.form.submitForm();
+        model.screen[0] = false;
+        model.screen[1] = true;
     }
     /**
      * submit button for the FormView callback
      */
     public void register() {
         model.form.submitForm(true);
+        model.screen[0] = false;
+        model.screen[1] = true;
     }
 
     /**
