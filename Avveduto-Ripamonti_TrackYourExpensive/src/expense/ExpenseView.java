@@ -12,14 +12,14 @@ import java.util.Locale;
  * @version 1.0
  */
 public class ExpenseView implements Serializable {
-    private PApplet parent;
+    //private PApplet parent;
 
     /**
      * @param parent - Main istance
      * constructor
      */
     public ExpenseView(PApplet parent) {
-        this.parent = parent;
+        //this.parent = parent;
     }
 
     /**
@@ -28,7 +28,7 @@ public class ExpenseView implements Serializable {
      * @param x - position on x axis
      * @param y - position on y axis
      */
-    public void view(ExpenseModel model, int x, int y) {
+    public void view(PApplet parent,ExpenseModel model, int x, int y) {
         parent.strokeWeight(4);
         parent.fill(model.getCategory().getColor().getRGB(),180);
         parent.rect(x,y,300, 100);
@@ -37,8 +37,7 @@ public class ExpenseView implements Serializable {
         parent.text("\uD835\uDC0D\uD835\uDC1A\uD835\uDC26\uD835\uDC1E: " + model.getName(),x + 10,y + 20);
         parent.strokeWeight(1);
         parent.line(x,y+25,x + 150,y+25);
-        DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        String date = model.getDate().format(f);
+        String date = model.getDate().toString();
         parent.text("\uD835\uDC03\uD835\uDC1A\uD835\uDC2D\uD835\uDC1E: " + date,x + 10,y + 40);
         parent.line(x,y+45,x + 150,y+45);
         Locale l = Locale.getDefault();

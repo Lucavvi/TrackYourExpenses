@@ -34,7 +34,7 @@ public class Main extends PApplet {
         }
         else if(model.screen[1]) {
             model.v.showList();
-            model.expense.showExpense(200, 200);
+            model.expense.showExpense(this, 200, 200);
         }
     }
 

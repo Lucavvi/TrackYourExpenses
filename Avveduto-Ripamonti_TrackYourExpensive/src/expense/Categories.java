@@ -1,5 +1,4 @@
 package expense;
-import java.awt.*;
 import java.io.Serializable;
 
 /**
@@ -8,10 +7,10 @@ import java.io.Serializable;
  * @version 1.0
  */
 public enum Categories implements Serializable {
-    FOOD(Color.GREEN,"Food"),
-    SHOPPING(Color.ORANGE,"Shopping"),
-    PLEASURE(Color.BLUE,"Pleasures"),
-    ALL(new Color(0,0,0,0),"All");
+    FOOD(new Color(java.awt.Color.GREEN),"Food"),
+    SHOPPING(new Color(java.awt.Color.ORANGE),"Shopping"),
+    PLEASURE(new Color(java.awt.Color.BLUE),"Pleasures"),
+    ALL(new Color(new java.awt.Color (0,0,0,0)),"All");
 
 
     private Color color;

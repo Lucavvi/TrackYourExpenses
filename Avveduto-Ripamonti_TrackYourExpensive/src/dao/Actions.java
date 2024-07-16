@@ -34,4 +34,7 @@ public interface Actions {
      */
     public void updateList(String username, ArrayList<ExpenseController> updatedList);
 
-}
+    public ArrayList<ExpenseController> getAccountByUsername(String user);
+
+
+    }
