@@ -4,7 +4,9 @@ import expense.ExpenseController;
 import form.AccessException;
 import form.UsernameException;
 import java.sql.*;
-import java.util.ArrayList;
+import java.util.*;
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
 
 /**
  * Class to implements Actions' interface to database
@@ -87,6 +89,42 @@ public class DBManager implements Actions{
             stmt.setString(1,username);
             stmt.setString(2,json);
             stmt.executeUpdate();
+        }
+        catch(Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    /**
+     * Metodo per ottenere tutti gli studenti di anno
+     * @param user l'anno di nascita degli studenti desiderati
+     * @return la lista con tutti gli studenti nati in anno
+     */
+    @Override
+    public ArrayList<ExpenseController> getAccountByUsername(String user) {
+        final String command = "SELECT * FROM accounts WHERE  username=?";
+        try(
+                Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+                PreparedStatement stmt = conn.prepareStatement(command);
+        ){
+            stmt.setString(1,user);
+            ResultSet rs = stmt.executeQuery();
+
+            Gson gson = new Gson();
+
+            // Definisci il tipo per la conversione
+            Type listType = new TypeToken<ArrayList<ExpenseController>>() {}.getType();
+
+            // Converte il JSON in ArrayList
+            ArrayList<ExpenseController> res = gson.fromJson(rs.getString("expenseList"), listType);
+
+            for(ExpenseController e : res){
+                System.out.println(e);
+            }
+
+
+            rs.close();
+            return res;
         }
         catch(Exception e) {
             throw new RuntimeException(e.getMessage());
