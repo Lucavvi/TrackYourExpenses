@@ -1,6 +1,9 @@
 import controlP5.ControlEvent;
 import expense.Categories;
+import expense.ExpenseController;
+import expense.LocalDate;
 import processing.core.PApplet;
+import java.util.ArrayList;
 
 /**
  * Main Class
@@ -9,6 +12,7 @@ import processing.core.PApplet;
  */
 public class Main extends PApplet {
     private Model model;
+    ArrayList<ExpenseController> e;
 
     /**
      * Window settings
@@ -22,6 +26,8 @@ public class Main extends PApplet {
      */
     public void setup(){
         model = new Model(this);
+        e = new ArrayList<>();
+        for(int i=0;i<10;i++) e.add(new ExpenseController("c", new LocalDate(java.time.LocalDate.now()), Categories.FOOD,10,"ciao",this));
         //Ogni 14 caratteri si mette \n per massimo 4 volte
     }
 
@@ -29,12 +35,13 @@ public class Main extends PApplet {
      * loop method
      */
     public void draw(){
+        background(255);
         if(model.screen[0]) {
             model.form.draw();
         }
         else if(model.screen[1]) {
             model.v.showList();
-            model.expense.showExpense(this, 200, 200);
+            model.expense.renderList(this,e,50,50);
         }
     }
 

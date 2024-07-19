@@ -3,6 +3,7 @@ package expense;
 import processing.core.PApplet;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * MVC class expense
@@ -33,6 +34,22 @@ public class ExpenseController implements Serializable {
      */
     public void showExpense(PApplet parent,int x, int y) {
         view.view(parent,model,x,y);
+    }
+
+    public void renderList(PApplet parent,ArrayList<ExpenseController> list, int startX, int startY) {
+        int cont = 0;
+        int x = startX;
+        int y = startY;
+        for(ExpenseController e : list) {
+            e.showExpense(parent,x,y);
+            if(++cont <= 3) {
+                x += 350;
+            }else {
+                x = startX;
+                y += 200;
+                cont = 0;
+            }
+        }
     }
 
     public ExpenseModel getModel() {
