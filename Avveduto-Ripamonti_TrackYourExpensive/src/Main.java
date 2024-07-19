@@ -2,6 +2,7 @@ import controlP5.ControlEvent;
 import expense.Categories;
 import expense.ExpenseController;
 import expense.LocalDate;
+import filters.CategoryFilter;
 import processing.core.PApplet;
 import java.util.ArrayList;
 
@@ -25,9 +26,12 @@ public class Main extends PApplet {
      * method for initializing all variables
      */
     public void setup(){
+        windowTitle("Track Your Expenses");
         model = new Model(this);
         e = new ArrayList<>();
-        for(int i=0;i<10;i++) e.add(new ExpenseController("c", new LocalDate(java.time.LocalDate.now()), Categories.FOOD,10,"ciao",this));
+        e.add(new ExpenseController("aaaaaaaaaa", new LocalDate(java.time.LocalDate.now()), Categories.FOOD,10.6212121f,"ciao",this));
+        e.add(new ExpenseController("c", new LocalDate(java.time.LocalDate.now()), Categories.PLEASURE,10,"ciao come va ahahahahahahah",this));
+        model.listToShow = e;
         //Ogni 14 caratteri si mette \n per massimo 4 volte
     }
 
@@ -41,7 +45,7 @@ public class Main extends PApplet {
         }
         else if(model.screen[1]) {
             model.v.showList();
-            model.expense.renderList(this,e,50,50);
+            ExpenseController.renderList(this,model.listToShow,50,50);
         }
     }
 
@@ -69,7 +73,7 @@ public class Main extends PApplet {
     public void select(ControlEvent theEvent) {
         if (theEvent.isFrom(model.v.getList())) {
             int cat = (int) theEvent.getController().getValue();
-            model.v.callback(cat);
+            model.listToShow = CategoryFilter.filter(e,model.v.callback(cat));
         }
     }
 

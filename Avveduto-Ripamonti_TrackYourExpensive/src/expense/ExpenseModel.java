@@ -23,13 +23,21 @@ public class ExpenseModel implements Serializable {
      * @param desc - description
      * constructor
      */
-    public ExpenseModel(String name, LocalDate date, Categories category, float amount, String desc) {
-        this.name = name;
+    public ExpenseModel(String name, LocalDate date, Categories category, float amount, String desc) throws RuntimeException{
+        if(name.length() <= 10) this.name = name;
+        else throw new RuntimeException("Name too long");
         this.date = date;
         this.category = category;
         this.amount = amount;
-        this.desc = desc;
         cont++;
+        this.desc = "";
+        if(desc.length() > (14 * 4)) throw new RuntimeException("Description is too long");
+        for(int i = 0; i < desc.length(); i++) {
+            this.desc += desc.charAt(i);
+            if(i % 14 == 0 && i != 0) {
+                this.desc += "\n";
+            }
+        }
     }
 
     /**
@@ -73,6 +81,4 @@ public class ExpenseModel implements Serializable {
     public int getCont() {
         return cont;
     }
-
-
 }

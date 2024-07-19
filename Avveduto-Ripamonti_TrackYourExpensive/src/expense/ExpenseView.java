@@ -12,15 +12,6 @@ import java.util.Locale;
  * @version 1.0
  */
 public class ExpenseView implements Serializable {
-    //private PApplet parent;
-
-    /**
-     * @param parent - Main istance
-     * constructor
-     */
-    public ExpenseView(PApplet parent) {
-        //this.parent = parent;
-    }
 
     /**
      * View method, shows the expense
@@ -41,11 +32,11 @@ public class ExpenseView implements Serializable {
         parent.text("\uD835\uDC03\uD835\uDC1A\uD835\uDC2D\uD835\uDC1E: " + date,x + 10,y + 40);
         parent.line(x,y+45,x + 150,y+45);
         Locale l = Locale.getDefault();
-        parent.text("\uD835\uDC00\uD835\uDC26\uD835\uDC28\uD835\uDC2E\uD835\uDC27\uD835\uDC2D: " + Currency.getInstance(l).getSymbol() + model.getAmount(),x + 10,y + 60);
+        parent.text("\uD835\uDC00\uD835\uDC26\uD835\uDC28\uD835\uDC2E\uD835\uDC27\uD835\uDC2D: " + Currency.getInstance(l).getSymbol() + (Math.floor(model.getAmount()*100)/100),x + 10,y + 60);
         parent.line(x,y+65,x + 150,y+65);
         parent.text("\uD835\uDC02\uD835\uDC1A\uD835\uDC2D\uD835\uDC1E\uD835\uDC20\uD835\uDC28\uD835\uDC2B\uD835\uDC32: " + model.getCategory().getName(),x + 10,y + 80);
         parent.strokeWeight(2);
-        parent.line(x+ 150,y,x + 150,y+100);
+        parent.line(x+ 160,y,x + 160,y+100);
         parent.text(model.getDesc(),x + 170,y + 20);
         parent.textSize(8);
         parent.text(String.format("%03d",model.getCont()),x+280,y+90);

@@ -9,7 +9,7 @@ import java.io.Serializable;
 public enum Categories implements Serializable {
     FOOD(new Color(java.awt.Color.GREEN),"Food"),
     SHOPPING(new Color(java.awt.Color.ORANGE),"Shopping"),
-    PLEASURE(new Color(java.awt.Color.BLUE),"Pleasures"),
+    PLEASURE(new Color(java.awt.Color.BLUE),"Pleasure"),
     ALL(new Color(new java.awt.Color (0,0,0,0)),"All");
 
 

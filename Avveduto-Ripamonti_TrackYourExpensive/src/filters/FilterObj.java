@@ -13,8 +13,8 @@ public class FilterObj {
         this.parent = parent;
         select = cp5.addDropdownList("select")
                 .setLabel("Filter").setBarHeight(20)
-                .setItemHeight(20).setPosition(10,20)
-                .setSize(500,100).close()
+                .setItemHeight(20).setPosition(parent.width-parent.width/4,50)
+                .setSize(200,100).close()
                 .setBackgroundColor(parent.color(0)).hide();
         select.addItem("FOOD", Categories.FOOD);
         select.addItem("SHOPPING", Categories.SHOPPING);
@@ -22,7 +22,7 @@ public class FilterObj {
         select.addItem("ALL", Categories.ALL);
     }
 
-    public void callback(int cat) {
+    public Categories callback(int cat) {
         Categories target = null;
         switch (cat) {
             case 0 -> {target = Categories.FOOD;}
@@ -31,7 +31,7 @@ public class FilterObj {
             case 3 -> {target = Categories.ALL;}
         }
         System.out.println(target);
-        //CategoryFilter.filter(null,target);
+        return target;
     }
 
     public void showList() {select.show();}
