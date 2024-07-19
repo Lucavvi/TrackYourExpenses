@@ -111,10 +111,8 @@ public class DBManager implements Actions{
             ResultSet rs = stmt.executeQuery();
 
             Gson gson = new Gson();
-
             // Definisci il tipo per la conversione
-            Type listType = new TypeToken<ArrayList<ExpenseController>>() {}.getType();
-
+            Type listType = new TypeToken<ArrayList<ExpenseController>>() {}.getType()
             // Converte il JSON in ArrayList
             ArrayList<ExpenseController> res = gson.fromJson(rs.getString("expenseList"), listType);
 
