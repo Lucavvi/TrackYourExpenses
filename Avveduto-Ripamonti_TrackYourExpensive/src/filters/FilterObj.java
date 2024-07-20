@@ -7,15 +7,15 @@ public class FilterObj {
     private ControlP5 cp5;
     private PApplet parent;
     private DropdownList select;
-
+    
     public FilterObj(ControlP5 cp5, PApplet parent) {
         this.cp5 = cp5;
         this.parent = parent;
         select = cp5.addDropdownList("select")
                 .setLabel("Filter").setBarHeight(20)
-                .setItemHeight(20).setPosition(parent.width-parent.width/4,50)
+                .setItemHeight(20).setPosition(parent.width-parent.width/4,15)
                 .setSize(200,100).close()
-                .setBackgroundColor(parent.color(0)).hide();
+                .setColorBackground(0).hide();
         select.addItem("FOOD", Categories.FOOD);
         select.addItem("SHOPPING", Categories.SHOPPING);
         select.addItem("PLEASURE", Categories.PLEASURE);

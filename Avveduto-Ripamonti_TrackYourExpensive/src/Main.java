@@ -45,7 +45,11 @@ public class Main extends PApplet {
         }
         else if(model.screen[1]) {
             model.v.showList();
-            ExpenseController.renderList(this,model.listToShow,50,50);
+            fill(229,229,229);
+            stroke(229,229,229);
+            rect(0,0,width,50);
+            stroke(0);
+            ExpenseController.renderList(this,model.listToShow,50,80);
         }
     }
 
