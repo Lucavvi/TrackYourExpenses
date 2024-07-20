@@ -8,7 +8,7 @@ import java.util.Comparator;
  * A comparator for comparing two ExpenseController objects by their expense names.
  * The comparison is case-insensitive.
  *
- * @author Angelo Ripamonti
+ * @author Angelo Ripamonti & Luca Avveduto
  * @version 1.0
  */
 public class ExpenseNameComparator implements Comparator<ExpenseController> {
