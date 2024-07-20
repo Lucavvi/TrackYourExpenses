@@ -5,7 +5,7 @@ import java.util.Comparator;
 
 /**
  * Comparator by amount
- * @author luke
+ * @author luke & Angelo
  * @version 1.0
  */
 public class ExpenseAmountComparator implements Comparator<ExpenseController> {
