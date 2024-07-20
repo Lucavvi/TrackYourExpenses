@@ -107,7 +107,8 @@ public class LocalDate implements Serializable {
      * @param date the other LocalDate to compare to
      * @return true if this date is equal to the specified date, false otherwise
      */
-    public boolean isEqual(LocalDate date) {
+    public boolean equals(LocalDate date) {
         return this.year == date.year && this.month == date.month && this.day == date.day;
     }
+
 }
