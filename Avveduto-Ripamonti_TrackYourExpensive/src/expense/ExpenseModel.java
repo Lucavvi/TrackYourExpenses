@@ -3,10 +3,13 @@ package expense;
 import java.io.Serializable;
 
 /**
- * MVC class expense
- * @author luke & Angelo
+ * MVC class representing an expense model.
+ * This class stores the details of an expense, including its name, date, category, amount, and description.
+ *
+ * @author Angelo Ripamonti & Luca Avveduto
  * @version 1.0
  */
+
 public class ExpenseModel implements Serializable {
     private String name;
     private LocalDate date;
@@ -16,12 +19,14 @@ public class ExpenseModel implements Serializable {
     private static int cont = 0;
 
     /**
-     * @param name - name of the expense
-     * @param date - date of the expense
-     * @param category - category of the expense
-     * @param amount - cost of the expese
-     * @param desc - description
-     * constructor
+     * Constructs an ExpenseModel with the specified details.
+     *
+     * @param name the name of the expense
+     * @param date the date of the expense
+     * @param category the category of the expense
+     * @param amount the cost of the expense
+     * @param desc the description of the expense
+     * @throws RuntimeException if the name or description is too long
      */
     public ExpenseModel(String name, LocalDate date, Categories category, float amount, String desc) throws RuntimeException{
         if(name.length() <= 10) this.name = name;
@@ -41,42 +46,54 @@ public class ExpenseModel implements Serializable {
     }
 
     /**
-     * @return the expense's name
+     * Gets the name of the expense.
+     *
+     * @return the name of the expense
      */
     public String getName() {
         return name;
     }
 
     /**
-     * @return the expense's date
+     * Gets the date of the expense.
+     *
+     * @return the date of the expense
      */
     public LocalDate getDate() {
         return date;
     }
 
     /**
-     * @return the expense's category
+     * Gets the category of the expense.
+     *
+     * @return the category of the expense
      */
     public Categories getCategory() {
         return category;
     }
 
     /**
-     * @return the expense's cost
+     * Gets the amount of the expense.
+     *
+     * @return the amount of the expense
      */
     public float getAmount() {
         return amount;
     }
 
     /**
-     * @return description
+     * Gets the description of the expense.
+     *
+     * @return the description of the expense
      */
     public String getDesc() {
         return desc;
     }
 
     /**
-     * @return the expense's number
+     * Gets the total number of expense instances.
+     *
+     * @return the total number of expense instances
      */
     public int getCont() {
         return cont;

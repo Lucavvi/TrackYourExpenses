@@ -9,10 +9,14 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 
 /**
- * Class to implements Actions' interface to database
- * @author Angelo Ripamonti, Luca Avveduto
+ * Class to implement the Actions interface for database operations.
+ * This class provides methods to interact with a database for account management,
+ * including logging in, registering, and updating user expense lists.
+ *
+ * @author Angelo Ripamonti & Luca Avveduto
  * @version 1.0
  */
+
 public class DBManager implements Actions{
     private final String USERNAME;
     private final String PASSWORD;
@@ -25,10 +29,11 @@ public class DBManager implements Actions{
     }
 
     /**
-     * Method for logging into an account in the database
+     * Logs into an account in the database.
+     *
      * @param user the account username
      * @param psw the account password
-     * @throws AccessException If the cretentials aren't correct
+     * @throws AccessException if the credentials are incorrect
      */
     @Override
     public void login(String user, String psw) throws AccessException {
@@ -46,10 +51,11 @@ public class DBManager implements Actions{
     }
 
     /**
-     * Method for registering an account within the database
+     * Registers a new account in the database.
+     *
      * @param user the account username
      * @param psw the account password
-     * @throws UsernameException If the username already exist
+     * @throws UsernameException if the username already exists
      */
     @Override
     public void register(String user, String psw) throws UsernameException {
@@ -72,10 +78,11 @@ public class DBManager implements Actions{
     }
 
     /**
-     * Method to update the user's expenses list
-     * @param username - account's username
-     * @param updatedList - updated list
-     * @throws RuntimeException - because of connection problems
+     * Updates the user's list of expenses in the database.
+     *
+     * @param username the account username
+     * @param updatedList the updated list of expenses
+     * @throws RuntimeException if there are connection problems
      */
     @Override
     public void updateList(String username, ArrayList<ExpenseController> updatedList) throws RuntimeException{
@@ -96,9 +103,11 @@ public class DBManager implements Actions{
     }
 
     /**
-     * Metodo per ottenere tutti gli studenti di anno
-     * @param user l'anno di nascita degli studenti desiderati
-     * @return la lista con tutti gli studenti nati in anno
+     * Retrieves the account details for a given username from the database.
+     *
+     * @param user the account username
+     * @return the list of expenses associated with the account
+     * @throws RuntimeException if there are connection problems
      */
     @Override
     public ArrayList<ExpenseController> getAccountByUsername(String user) {

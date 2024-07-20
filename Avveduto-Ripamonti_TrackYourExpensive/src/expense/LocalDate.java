@@ -6,7 +6,7 @@ import java.io.Serializable;
  * This class represents a local date with day, month, year, and leap year information.
  * It provides methods to check if this date is before, after, or equal to another date.
  *
- * @author Angelo Ripamonti, Luca Avveduta
+ * @author Angelo Ripamonti & Luca Avveduta
  * @version 1.0
  */
 public class LocalDate implements Serializable {

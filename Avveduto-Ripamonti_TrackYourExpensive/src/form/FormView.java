@@ -3,8 +3,11 @@ import processing.core.PApplet;
 import controlP5.*;
 
 /**
- * MVC Class
- * @author Angelo Ripamonti, Luca Avveduto
+ * View class for managing the form page in the MVC pattern.
+ * This class handles the display and layout of the user interface elements
+ * for login and registration forms.
+ *
+ * @author Angelo Ripamonti & Luca Avveduto
  * @version 1.0
  */
 class FormView {
@@ -17,10 +20,12 @@ class FormView {
 
 
     /**
-     * Constructor which initialize the attributes
-     * @param processing - main instance
-     * @param cp5 - callback instance
-     * @throws NullPointerException if processing or cp5 are null
+     * Constructs a FormView with the specified PApplet and ControlP5 instances.
+     * Initializes the UI components such as text fields and buttons.
+     *
+     * @param processing the main instance of PApplet used for rendering
+     * @param cp5 the ControlP5 instance used for UI components
+     * @throws NullPointerException if processing or cp5 is null
      */
     FormView(PApplet processing, ControlP5 cp5) throws NullPointerException{
         if(processing == null || cp5 == null) throw new NullPointerException("L'implementazione di Processing o della libreria ControlP5 è fallita!");
@@ -33,7 +38,8 @@ class FormView {
     }
 
     /**
-     * loop method for each text filed
+     * Draws the form page on the screen, including the background, text fields, and buttons.
+     * Displays the form with the appropriate labels and positions.
      */
     void draw(){
         processing.background(255);
@@ -55,7 +61,7 @@ class FormView {
     }
 
     /**
-     * Hide all field
+     * Hides all UI components of the form, including text fields and buttons.
      */
     public void hideField(){
         usernameField.hide();
@@ -65,8 +71,9 @@ class FormView {
     }
 
     /**
-     * Function for failure login/register
-     * @param failError the error to display
+     * Displays an error message for failed login or registration attempts.
+     *
+     * @param failError the error message to display
      */
     void fail(String failError){
         processing.background(255);

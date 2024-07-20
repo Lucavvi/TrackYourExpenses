@@ -5,17 +5,21 @@ import java.util.Currency;
 import java.util.Locale;
 
 /**
- * MVC class Expense
- * @author luke & Angelo
+ * MVC class for the expense view.
+ * This class is responsible for rendering the visual representation of an expense using the Processing library.
+ *
+ * @author Angelo Ripamonti & Luca Avveduto
  * @version 1.0
  */
 public class ExpenseView implements Serializable {
 
     /**
-     * View method, shows the expense
-     * @param model - data to display
-     * @param x - position on x axis
-     * @param y - position on y axis
+     * Renders the expense details on the screen.
+     *
+     * @param parent the main instance of PApplet used for drawing
+     * @param model the ExpenseModel containing the data to display
+     * @param x the x-coordinate position where the expense will be displayed
+     * @param y the y-coordinate position where the expense will be displayed
      */
     public void view(PApplet parent,ExpenseModel model, int x, int y) {
         parent.strokeWeight(4);

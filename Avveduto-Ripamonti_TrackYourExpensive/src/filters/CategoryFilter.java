@@ -4,7 +4,24 @@ import expense.ExpenseController;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Utility class for filtering expenses by category.
+ * This class provides a static method to filter a list of expenses based on a specified category.
+ *
+ * @author Angelo Ripamonti & Luca Avveduto
+ * @version 1.0
+ */
 public class CategoryFilter {
+
+    /**
+     * Filters the given list of expenses based on the specified category.
+     * If the category is {@link Categories#ALL}, it returns the entire list of expenses.
+     * Otherwise, it returns only those expenses that match the specified category.
+     *
+     * @param expenses the list of expenses to filter
+     * @param cat the category to filter by
+     * @return a list of expenses that match the specified category
+     */
     public static ArrayList<ExpenseController> filter(List<ExpenseController> expenses, Categories cat) {
         ArrayList<ExpenseController> filteredList = new ArrayList<>();
         for(ExpenseController e : expenses) {

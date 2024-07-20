@@ -3,8 +3,10 @@ package form;
 import dao.DBManager;
 
 /**
- * MVC Class
- * @author Angelo Ripamonti, Luca Avveduto
+ * Model class for managing user authentication and registration.
+ * This class handles interactions with the database to log in or register a user.
+ *
+ * @author Angelo Ripamonti & Luca Avveduto
  * @version 1.0
  */
 class FormModel {
@@ -15,7 +17,9 @@ class FormModel {
     protected String failError;
 
     /**
-     * Constructor that initialize the connector to the DB
+     * Constructs a FormModel with a specified DBManager for database operations.
+     *
+     * @param manager the DBManager instance used for database interactions
      */
     FormModel(DBManager manager) {
         this.manager = manager;
@@ -23,10 +27,11 @@ class FormModel {
     }
 
     /**
-     * Method to log in own account
-     * @param user - username
-     * @param password - password
-     * @throws AccessException - if one or both the inputs are wrong
+     * Logs in a user with the specified username and password.
+     *
+     * @param user the username of the account
+     * @param password the password of the account
+     * @throws AccessException if the username or password is incorrect
      */
     void login(String user, String password) throws AccessException{
         try {
@@ -40,10 +45,11 @@ class FormModel {
     }
 
     /**
-     * Method to register a new account
-     * @param user - username
-     * @param password - password
-     * @throws UsernameException - if the username already exists
+     * Registers a new user with the specified username and password.
+     *
+     * @param user the username to register
+     * @param password the password for the new account
+     * @throws UsernameException if the username already exists
      */
     void register(String user, String password) throws UsernameException{
         try {
@@ -57,14 +63,18 @@ class FormModel {
     }
 
     /**
-     * @return the username written in the text field
+     * Returns the username used for login or registration.
+     *
+     * @return the username
      */
     String getUsername() {
         return username;
     }
 
     /**
-     * @return the password written in the text field
+     * Returns the password used for login or registration.
+     *
+     * @return the password
      */
     String getPsw() {
         return psw;

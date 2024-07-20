@@ -1,14 +1,20 @@
-import controlP5.ControlEvent;
-import expense.Categories;
-import expense.ExpenseController;
-import expense.LocalDate;
-import filters.CategoryFilter;
-import processing.core.PApplet;
-import java.util.ArrayList;
+import controlP5.*;
+import expense.*;
+import form.*;
+import filters.*;
+import processing.core.*;
+import java.util.*;
 
 /**
- * Main Class
- * @author Angelo Ripamonti, Luca Avveduto
+ * Main application class for tracking expenses.
+ * Extends {@link PApplet} to use the Processing framework for graphical
+ * user interface and rendering.
+ *
+ * This class initializes the application window, manages the main
+ * application logic, and handles user interactions such as form
+ * submissions and filtering expenses.
+ *
+ * @author Angelo Ripamonti & Luca Avveduto
  * @version 1.0
  */
 public class Main extends PApplet {
@@ -16,14 +22,18 @@ public class Main extends PApplet {
     ArrayList<ExpenseController> e;
 
     /**
-     * Window settings
+     * Configures the size of the application window.
      */
     public void settings(){
         size(1600,900);
     }
 
     /**
-     * method for initializing all variables
+     * Initializes the application by setting the window title, creating
+     * a new {@link Model} instance, and populating the list of expenses.
+     *
+     * This method also sets up sample expenses and initializes the list
+     * to be displayed.
      */
     public void setup(){
         windowTitle("Track Your Expenses");
@@ -36,7 +46,10 @@ public class Main extends PApplet {
     }
 
     /**
-     * loop method
+     * Main draw loop for rendering graphics.
+     *
+     * This method updates the display based on the current screen state
+     * and renders the list of expenses.
      */
     public void draw(){
         background(255);
@@ -54,15 +67,22 @@ public class Main extends PApplet {
     }
 
     /**
-     * submit button for the FormView callback
+     * Handles the login form submission.
+     *
+     * This method calls the login function from the FormView class and
+     * switches the screen state to show the main expense list.
      */
     public void login() {
         model.form.submitForm();
         model.screen[0] = false;
         model.screen[1] = true;
     }
+
     /**
-     * submit button for the FormView callback
+     * Handles the register form submission.
+     *
+     * This method calls the register function from the FormView class and
+     * switches the screen state to show the main expense list.
      */
     public void register() {
         model.form.submitForm(true);
@@ -71,8 +91,12 @@ public class Main extends PApplet {
     }
 
     /**
-     * @param theEvent - from the dropdown list
-     * select callback.
+     * Handles selection events from the dropdown list.
+     *
+     * This method updates the list of expenses to display based on the
+     * selected category from the dropdown list.
+     *
+     * @param theEvent the {@link ControlEvent} containing the selection data
      */
     public void select(ControlEvent theEvent) {
         if (theEvent.isFrom(model.v.getList())) {
@@ -82,10 +106,16 @@ public class Main extends PApplet {
     }
 
     /**
-     * Main method
-     * @param args - arguments
+     * The main method to launch the application.
+     *
+     * @param passedArgs command-line arguments
      */
-    public static void main(String[] args) {
-        PApplet.main("Main");
+    public static void main(String[] passedArgs) {
+        String[] appletArgs = new String[]{"Main"};
+        if (passedArgs != null) {
+            PApplet.main(concat(appletArgs, passedArgs));
+        } else {
+            PApplet.main(appletArgs);
+        }
     }
 }

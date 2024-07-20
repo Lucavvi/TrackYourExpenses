@@ -2,8 +2,10 @@ package expense;
 import java.io.Serializable;
 
 /**
- * Enum with all the categories
- * @author luke & Angelo
+ * Enum representing all the categories.
+ * Each category is associated with a specific color and name.
+ *
+ * @author Angelo Ripamonti
  * @version 1.0
  */
 public enum Categories implements Serializable {
@@ -17,9 +19,10 @@ public enum Categories implements Serializable {
     private String name;
 
     /**
-     * @param c - color
-     * @param n - name
-     * constructor
+     * Constructor to initialize the category with a color and name.
+     *
+     * @param c the color associated with the category
+     * @param n the name of the category
      */
     private Categories(Color c,String n) {
         color = c;
@@ -27,14 +30,18 @@ public enum Categories implements Serializable {
     }
 
     /**
-     * @return the category's color
+     * Gets the color associated with the category.
+     *
+     * @return the color of the category
      */
     public Color getColor() {
         return color;
     }
 
     /**
-     * @return the category's name
+     * Gets the name of the category.
+     *
+     * @return the name of the category
      */
     public String getName() {return name;}
 }

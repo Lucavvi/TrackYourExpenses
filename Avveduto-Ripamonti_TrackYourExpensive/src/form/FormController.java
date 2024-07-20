@@ -5,8 +5,9 @@ import dao.DBManager;
 import processing.core.PApplet;
 
 /**
- * MVC Class to control form page
- * @author Angelo Ripamonti, Luca Avveduto
+ * MVC Controller class for managing the form page.
+ * Handles interactions between the view and the model, including user input and form submission.
+ *
  * @version 1.0
  */
 public class FormController {
@@ -14,10 +15,12 @@ public class FormController {
     private FormModel model;
 
     /**
-     * Constructor
-     * @param processing - main instance
-     * @param cp5 - callback
-     * @throws NullPointerException if processing or cp5 are null
+     * Constructs a FormController with the specified PApplet and ControlP5 instances, and a DBManager.
+     *
+     * @param processing the PApplet instance used for rendering
+     * @param cp5 the ControlP5 instance used for user interface controls
+     * @param manager the DBManager instance used for database operations
+     * @throws NullPointerException if any of the parameters are null
      */
     public FormController(PApplet processing, ControlP5 cp5, DBManager manager) throws NullPointerException {
         if(processing == null || cp5 == null) throw new NullPointerException("L'implementazione di Processing o della libreria ControlP5 è fallita!");
@@ -26,7 +29,8 @@ public class FormController {
     }
 
     /**
-     * Draw the Form Page
+     * Draws the form page.
+     * If there is a failure condition, displays an error message; otherwise, renders the form.
      */
     public void draw(){
         if(model.check)
@@ -36,9 +40,10 @@ public class FormController {
     }
 
     /**
-     * When login button is pressed, the callback recall this function
-     * and the function verify the credentials to login
-     * @throws AccessException - if one or both the inputs are wrong
+     * Handles the form submission for login.
+     * Verifies the credentials and logs in the user. Displays an error message if credentials are invalid.
+     *
+     * @throws AccessException if the credentials are incorrect or missing
      */
     public void submitForm() throws AccessException{
         String username = view.usernameField.getText();
@@ -58,10 +63,12 @@ public class FormController {
     }
 
     /**
-     * When register button is pressed, the callback recall this function
-     * and the function verify the credentials to register
-     * @param register - to indicate you want to sign up and not sign in
-     * @throws UsernameException - if the username already exists
+     * Handles the form submission for registration.
+     * Verifies the credentials and registers the user if the `register` flag is true.
+     * Displays an error message if credentials are invalid or registration fails.
+     *
+     * @param register if true, registers a new user; if false, performs login
+     * @throws UsernameException if the username already exists
      */
     public void submitForm(boolean register) throws UsernameException{
         if(!register) submitForm();

@@ -5,36 +5,46 @@ import form.*;
 import java.util.ArrayList;
 
 /**
- * Interface to manage account actions
- * @author Angelo Ripamonti, Luca Avveduto
+ * Interface to manage account actions.
+ * This interface defines the essential methods for handling user account operations such as logging in,
+ * registering, and updating user-specific lists.
+ *
+ * @author Angelo Ripamonti & Luca Avveduto
  * @version 1.0
  */
 public interface Actions {
 
     /**
-     * Method for logging into an account
+     * Logs into an account.
+     *
      * @param username the account username
      * @param psw the account password
-     * @throws AccessException If the cretentials aren't correct
+     * @throws AccessException if the credentials are incorrect
      */
     public void login(String username ,String psw) throws AccessException;
 
     /**
-     * Method for registering an account
+     * Registers a new account.
+     *
      * @param username the account username
      * @param psw the account password
-     * @throws UsernameException If the username already exist
+     * @throws UsernameException if the username already exists
      */
     public void register(String username , String psw) throws UsernameException;
 
     /**
-     * Method to update the user's list
-     * @param username - username
-     * @param updatedList - updated list
+     * Updates the user's list of expenses.
+     *
+     * @param username the account username
+     * @param updatedList the updated list of expenses
      */
     public void updateList(String username, ArrayList<ExpenseController> updatedList);
 
+    /**
+     * Retrieves the account details for a given username.
+     *
+     * @param user the account username
+     * @return the list of expenses associated with the account
+     */
     public ArrayList<ExpenseController> getAccountByUsername(String user);
-
-
-    }
+}

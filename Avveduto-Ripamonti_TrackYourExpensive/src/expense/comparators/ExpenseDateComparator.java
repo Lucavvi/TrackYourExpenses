@@ -4,15 +4,21 @@ import expense.ExpenseController;
 import java.util.Comparator;
 
 /**
- * Comparator by date
- * @author luke & Angelo
+ * Comparator for comparing expenses by date.
+ * This comparator allows sorting of ExpenseController objects based on their date values.
+ *
+ * @author Angelo Ripamonti & Luca Avveduto
  * @version 1.0
  */
 public class ExpenseDateComparator implements Comparator<ExpenseController> {
+
     /**
-     * @param exp - first obj
-     * @param t1 - second obj
-     * @return - conventional values
+     * Compares two ExpenseController objects based on their date.
+     *
+     * @param exp the first ExpenseController object
+     * @param t1 the second ExpenseController object
+     * @return a negative integer, zero, or a positive integer as the first argument is earlier than,
+     * equal to, or later than the second
      */
     @Override
     public int compare(ExpenseController exp, ExpenseController t1) {
@@ -22,8 +28,9 @@ public class ExpenseDateComparator implements Comparator<ExpenseController> {
     }
 
     /**
-     * Reversed comparator
-     * @return reversed comparator
+     * Returns a comparator that imposes the reverse ordering of this comparator.
+     *
+     * @return a comparator that imposes the reverse ordering of this comparator
      */
     @Override
     public Comparator<ExpenseController> reversed() {
