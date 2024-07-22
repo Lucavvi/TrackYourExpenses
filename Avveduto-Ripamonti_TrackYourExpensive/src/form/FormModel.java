@@ -1,5 +1,6 @@
 package form;
 
+import dao.Account;
 import dao.DBManager;
 
 /**
@@ -53,7 +54,7 @@ class FormModel {
      */
     void register(String user, String password) throws UsernameException{
         try {
-            manager.register(user, password);
+            manager.register(new Account(user, password));
         }
         catch(Exception e) {
             throw new UsernameException(e.getMessage());
