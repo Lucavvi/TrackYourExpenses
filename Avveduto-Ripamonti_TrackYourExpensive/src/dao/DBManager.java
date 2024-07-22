@@ -9,19 +9,21 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 
 /**
- * Class to implement the Actions interface for database operations.
+ * Implements the Actions interface for database operations.
  * This class provides methods to interact with a database for account management,
  * including logging in, registering, and updating user expense lists.
  *
  * @author Angelo Ripamonti & Luca Avveduto
  * @version 1.0
  */
-
 public class DBManager implements Actions{
     private final String USERNAME;
     private final String PASSWORD;
     private final String URL;
 
+    /**
+     * Constructs a DBManager with default database connection parameters.
+     */
     public DBManager(){
         USERNAME = "user";
         PASSWORD = "password";
@@ -34,10 +36,11 @@ public class DBManager implements Actions{
      * @param user the account username
      * @param psw the account password
      * @throws AccessException if the credentials are incorrect
+     * @return the logged-in account
      */
     @Override
     public Account login(String user, String psw) throws AccessException {
-        final String query = "SELECT username,password FROM tracker.accounts WHERE username=? AND password=?";
+        final String query = "SELECT * FROM tracker.accounts WHERE username=? AND password=?";
         try(
                 Connection con = DriverManager.getConnection(URL,USERNAME,PASSWORD);
                 PreparedStatement st = con.prepareStatement(query);
@@ -48,8 +51,12 @@ public class DBManager implements Actions{
             Gson gson = new Gson();
             // Definisci il tipo per la conversione
             Type listType = new TypeToken<Account>() {}.getType();
+            Account res=null;
+            while(rs.next()){
+                res=gson.fromJson(rs.getString("accountObj"), listType);
+            }
             // Converte il JSON in ArrayList
-            return gson.fromJson(rs.getString("accountObj"), listType);
+            return res;
         }catch (Exception e) {
             throw new AccessException("Credentials are not correct");
         }
@@ -58,8 +65,9 @@ public class DBManager implements Actions{
     /**
      * Registers a new account in the database.
      *
-     * @param acc the account
+     * @param acc the account to register
      * @throws UsernameException if the username already exists
+     * @return true if the registration is completed successfully
      */
     @Override
     public boolean register(Account acc) throws UsernameException {
@@ -85,7 +93,7 @@ public class DBManager implements Actions{
     /**
      * Updates the user's list of expenses in the database.
      *
-     * @param acc the account
+     * @param acc the account whose expense list is to be updated
      * @throws RuntimeException if there are connection problems
      */
     @Override
@@ -107,9 +115,9 @@ public class DBManager implements Actions{
     }
 
     /**
-     * Retrieves the account details for a given username from the database.
+     * Retrieves the account details for a given account from the database.
      *
-     * @param acc the account
+     * @param acc the account whose expenses are to be retrieved
      * @return the list of expenses associated with the account
      * @throws RuntimeException if there are connection problems
      */

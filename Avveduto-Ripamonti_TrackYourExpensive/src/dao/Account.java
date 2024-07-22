@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Implements the {@link Serializable} interface to enable saving the
  * account data to a file.
  *
- * The {@code dao.Account} class contains the account's username, password,
+ * The {@code Account} class contains the account's username, password,
  * and a list of expenses associated with the account.
  *
  * @author Angelo Ripamonti & Luca Avveduto
@@ -21,7 +21,7 @@ public class Account implements Serializable {
     private ArrayList<ExpenseController> expenses;
 
     /**
-     * Constructs a new {@code dao.Account} with the specified username, password,
+     * Constructs a new {@code Account} with the specified username, password,
      * and list of expenses.
      *
      * @param username the account's username
@@ -35,7 +35,8 @@ public class Account implements Serializable {
     }
 
     /**
-     * Constructs a new {@code dao.Account} with the specified username and password.
+     * Constructs a new {@code Account} with the specified username and password.
+     * Initializes the list of expenses as an empty list.
      *
      * @param username the account's username
      * @param password the account's password

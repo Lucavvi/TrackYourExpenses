@@ -20,29 +20,30 @@ public interface Actions {
      * @param username the account username
      * @param psw the account password
      * @throws AccessException if the credentials are incorrect
+     * @return the logged-in account
      */
     public Account login(String username ,String psw) throws AccessException;
 
     /**
      * Registers a new account.
      *
-     * @param acc the account
+     * @param acc the account to register
      * @throws UsernameException if the username already exists
-     * @return true if the registration is completed
+     * @return true if the registration is completed successfully
      */
     public boolean register(Account acc) throws UsernameException;
 
     /**
      * Updates the user's list of expenses.
      *
-     * @param acc the account
+     * @param acc the account whose expense list is to be updated
      */
     public void updateList(Account acc);
 
     /**
-     * Retrieves the account details for a given username.
+     * Retrieves the account details for a given account.
      *
-     * @param acc the account
+     * @param acc the account whose expenses are to be retrieved
      * @return the list of expenses associated with the account
      */
     public ArrayList<ExpenseController> getExpensesByAccount(Account acc);
