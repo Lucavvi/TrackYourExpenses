@@ -3,6 +3,7 @@ import dao.DBManager;
 import expense.Categories;
 import expense.*;
 import filters.FilterObj;
+import filters.OrderObj;
 import form.FormController;
 import processing.core.PApplet;
 
@@ -42,6 +43,7 @@ class Model {
 
     /** Array of boolean values representing different screen states. */
     boolean[] screen;
+    OrderObj reorder;
 
     /**
      * Constructs a new Model instance.
@@ -61,5 +63,6 @@ class Model {
         screen = new boolean [10];
         Arrays.fill(screen,false);
         screen[0]=true;
+        reorder = new OrderObj(cp5,processing);
     }
 }

@@ -33,14 +33,14 @@ public class OrderObj {
         this.parent = parent;
         reorder = cp5.addDropdownList("reorder")
                 .setLabel("Filter").setBarHeight(20)
-                .setItemHeight(20).setPosition(parent.width-parent.width/3,15)
+                .setItemHeight(20).setPosition(parent.width/2,15)
                 .setSize(200,100).close()
                 .setColorBackground(0).hide();
         reorder.addItem("Date descending", 0);
         reorder.addItem("Date ascending",1);
-        reorder.addItem("Name ascending",2);
+        reorder.addItem("Name descending",2);
         reorder.addItem("Name ascending",3);
-        reorder.addItem("Amount ascending",4);
+        reorder.addItem("Amount descending",4);
         reorder.addItem("Amount ascending",5);
     }
 
@@ -55,10 +55,10 @@ public class OrderObj {
         switch (cat) {
             case 0 -> {comparator = new ExpenseDateComparator().reversed();}
             case 1 -> {comparator = new ExpenseDateComparator();}
-            case 2 -> {comparator = new ExpenseNameComparator();}
-            case 3 -> {comparator = new ExpenseNameComparator().reversed();}
-            case 4 -> {comparator = new ExpenseAmountComparator();}
-            case 5 -> {comparator = new ExpenseAmountComparator().reversed();}
+            case 2 -> {comparator = new ExpenseNameComparator().reversed();}
+            case 3 -> {comparator = new ExpenseNameComparator();}
+            case 4 -> {comparator = new ExpenseAmountComparator().reversed();}
+            case 5 -> {comparator = new ExpenseAmountComparator();}
         }
         return comparator;
     }

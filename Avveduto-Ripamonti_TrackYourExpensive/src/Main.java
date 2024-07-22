@@ -39,7 +39,7 @@ public class Main extends PApplet {
         windowTitle("Track Your Expenses");
         model = new Model(this);
         e = new ArrayList<>();
-        e.add(new ExpenseController("aaaaaaaaaa", new LocalDate(java.time.LocalDate.now()), Categories.FOOD,10.6212121f,"ciao",this));
+        e.add(new ExpenseController("aaaaaaaaaa", new LocalDate(java.time.LocalDate.of(2006,10,10)), Categories.FOOD,10.6212121f,"ciao",this));
         e.add(new ExpenseController("c", new LocalDate(java.time.LocalDate.now()), Categories.PLEASURE,10,"ciao come va ahahahahahahah",this));
         model.listToShow = e;
         //Ogni 14 caratteri si mette \n per massimo 4 volte
@@ -58,6 +58,7 @@ public class Main extends PApplet {
         }
         else if(model.screen[1]) {
             model.v.showList();
+            model.reorder.showList();
             fill(229,229,229);
             stroke(229,229,229);
             rect(0,0,width,50);
@@ -102,6 +103,20 @@ public class Main extends PApplet {
         if (theEvent.isFrom(model.v.getList())) {
             int cat = (int) theEvent.getController().getValue();
             model.listToShow = CategoryFilter.filter(e,model.v.callback(cat));
+        }
+    }
+
+    /**
+     * Handles selection events from the dropdown list.
+     *
+     * This method updates the list of expenses to display based on the
+     * selected category from the dropdown list.
+     *
+     * @param event the {@link ControlEvent} containing the selection data
+     */
+    public void reorder(ControlEvent event) {
+        if (event.isFrom(model.reorder.getList())) {
+            Collections.sort(e,model.reorder.callback((int) event.getController().getValue()));
         }
     }
 
