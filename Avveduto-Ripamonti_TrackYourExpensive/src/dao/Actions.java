@@ -21,30 +21,29 @@ public interface Actions {
      * @param psw the account password
      * @throws AccessException if the credentials are incorrect
      */
-    public void login(String username ,String psw) throws AccessException;
+    public Account login(String username ,String psw) throws AccessException;
 
     /**
      * Registers a new account.
      *
-     * @param username the account username
-     * @param psw the account password
+     * @param acc the account
      * @throws UsernameException if the username already exists
+     * @return true if the registration is completed
      */
-    public void register(String username , String psw) throws UsernameException;
+    public boolean register(Account acc) throws UsernameException;
 
     /**
      * Updates the user's list of expenses.
      *
-     * @param username the account username
-     * @param updatedList the updated list of expenses
+     * @param acc the account
      */
-    public void updateList(String username, ArrayList<ExpenseController> updatedList);
+    public void updateList(Account acc);
 
     /**
      * Retrieves the account details for a given username.
      *
-     * @param user the account username
+     * @param acc the account
      * @return the list of expenses associated with the account
      */
-    public ArrayList<ExpenseController> getAccountByUsername(String user);
+    public ArrayList<ExpenseController> getExpensesByAccount(Account acc);
 }

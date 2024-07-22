@@ -1,6 +1,5 @@
 import controlP5.*;
 import expense.*;
-import form.*;
 import filters.*;
 import processing.core.*;
 import java.util.*;
@@ -109,8 +108,8 @@ public class Main extends PApplet {
     /**
      * Handles selection events from the dropdown list.
      *
-     * This method updates the list of expenses to display based on the
-     * selected category from the dropdown list.
+     * This method reorder the list of expenses to display based on the
+     * order from the dropdown list.
      *
      * @param event the {@link ControlEvent} containing the selection data
      */
