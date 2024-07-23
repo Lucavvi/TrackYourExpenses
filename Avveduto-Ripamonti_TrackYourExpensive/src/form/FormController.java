@@ -1,6 +1,7 @@
 package form;
 
 import controlP5.ControlP5;
+import dao.Account;
 import dao.DBManager;
 import processing.core.PApplet;
 
@@ -51,7 +52,15 @@ public class FormController {
         view.usernameField.clear();
         view.passwordField.clear();
         if(password != null && username != null && !username.isEmpty()  && !password.isEmpty()){
-            model.login(username,password);
+            try {
+                Account acc = model.login(username, password);
+            }
+            catch(AccessException e){
+                model.check = true;
+                model.failError = e.getMessage();
+                view.hideField();
+                return false;
+            }
             view.hideField();
             return true;
         }
@@ -79,7 +88,15 @@ public class FormController {
             view.usernameField.clear();
             view.passwordField.clear();
             if (password != null && username != null && !username.isEmpty() && !password.isEmpty()) {
-                model.register(username,password);
+                try {
+                    model.register(username, password);
+                }
+                catch(UsernameException e){
+                    model.check = true;
+                    model.failError = "Credenziali Errate!";
+                    view.hideField();
+                    return false;
+                }
                 view.hideField();
                 return true;
             } else {

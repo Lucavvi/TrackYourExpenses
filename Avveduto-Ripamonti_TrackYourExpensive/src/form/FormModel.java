@@ -34,15 +34,12 @@ class FormModel {
      * @param password the password of the account
      * @throws AccessException if the username or password is incorrect
      */
-    void login(String user, String password) throws AccessException{
-        try {
-            manager.login(user, password);
-        }
-        catch(Exception e) {
-            throw new AccessException(e.getMessage());
-        }
+    Account login(String user, String password) throws AccessException{
+        Account acc = manager.login(user, password);
+        if (acc == null) throw new AccessException("Credenziali Errate!");
         username = user;
         psw = password;
+        return acc;
     }
 
     /**
