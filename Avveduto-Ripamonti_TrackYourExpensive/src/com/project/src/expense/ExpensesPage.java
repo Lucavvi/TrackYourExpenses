@@ -43,6 +43,7 @@ public class ExpensesPage {
      * Draws the expenses page including the filtered and ordered list of expenses.
      */
     public void draw(){
+        processing.background(255);
         listToShow = database.getExpensesByAccount(Model.getAccount());
         filter.showList();
         order.showList();
