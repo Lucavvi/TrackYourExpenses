@@ -74,8 +74,6 @@ public class Main extends PApplet {
      */
     public void login() {
         model.form.submitForm();
-        model.screen[0] = false;
-        model.screen[1] = true;
     }
 
     /**
@@ -86,8 +84,6 @@ public class Main extends PApplet {
      */
     public void register() {
         model.form.submitForm(true);
-        model.screen[0] = false;
-        model.screen[1] = true;
     }
 
     /**
