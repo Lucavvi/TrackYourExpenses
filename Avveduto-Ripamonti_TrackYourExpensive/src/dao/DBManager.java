@@ -23,7 +23,6 @@ public class DBManager implements Actions{
      * Constructs a DBManager with default database connection parameters.
      */
     public DBManager(){
-        URI = "jdbc:mysql://avnadmin:AVNS_FvXsx71KHxD3Fv3tq_k@trackyourexpenses-prova12345675364245123421421.f.aivencloud.com:24168/defaultdb?ssl-mode=REQUIRED";
     }
 
     /**
