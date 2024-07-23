@@ -1,16 +1,15 @@
-package form;
+package com.project.src.form;
 
-import dao.Account;
-import dao.DBManager;
+import com.project.src.dao.*;
 
 /**
- * Model class for managing user authentication and registration.
+ * com.project.src.Model class for managing user authentication and registration.
  * This class handles interactions with the database to log in or register a user.
  *
  * @author Angelo Ripamonti & Luca Avveduto
  * @version 1.0
  */
-class FormModel {
+public class FormModel {
     private String username;
     private String psw;
     private DBManager manager;
@@ -65,7 +64,7 @@ class FormModel {
      *
      * @return the username
      */
-    String getUsername() {
+    public String getUsername() {
         return username;
     }
 
@@ -74,7 +73,7 @@ class FormModel {
      *
      * @return the password
      */
-    String getPsw() {
+    public String getPsw() {
         return psw;
     }
 }

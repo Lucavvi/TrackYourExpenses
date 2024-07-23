@@ -1,11 +1,9 @@
-package filters;
+package com.project.src.filters;
 
 import controlP5.ControlP5;
 import controlP5.DropdownList;
-import expense.ExpenseController;
-import expense.comparators.ExpenseAmountComparator;
-import expense.comparators.ExpenseDateComparator;
-import expense.comparators.ExpenseNameComparator;
+import com.project.src.expense.ExpenseController;
+import com.project.src.expense.comparators.*;
 import processing.core.PApplet;
 import java.util.Comparator;
 

@@ -1,5 +1,6 @@
-package expense;
+package com.project.src.expense;
 import java.io.Serializable;
+import com.project.src.expense.Color;
 
 /**
  * Enum representing all the categories.

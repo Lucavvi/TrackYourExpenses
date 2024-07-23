@@ -1,16 +1,18 @@
+package com.project.src;
+
 import controlP5.*;
-import expense.*;
-import filters.*;
+import com.project.src.dao.*;
+import com.project.src.expense.*;
+import com.project.src.filters.*;
 import processing.core.*;
-import java.util.*;
 
 /**
- * Main application class for tracking expenses.
+ * com.project.src.Main application class for tracking expenses.
  * Extends {@link PApplet} to use the Processing framework for graphical
  * user interface and rendering.
  *
  * This class initializes the application window, manages the main
- * application logic, and handles user interactions such as form
+ * application logic, and handles user interactions such as com.project.src.form
  * submissions and filtering expenses.
  *
  * @author Angelo Ripamonti & Luca Avveduto
@@ -18,8 +20,6 @@ import java.util.*;
  */
 public class Main extends PApplet {
     private Model model;
-    ArrayList<ExpenseController> e;
-
     /**
      * Configures the size of the application window.
      */
@@ -37,15 +37,10 @@ public class Main extends PApplet {
     public void setup(){
         windowTitle("Track Your Expenses");
         model = new Model(this);
-        e = new ArrayList<>();
-        e.add(new ExpenseController("aaaaaaaaaa", new LocalDate(java.time.LocalDate.of(2006,10,10)), Categories.FOOD,10.6212121f,"ciao",this));
-        e.add(new ExpenseController("c", new LocalDate(java.time.LocalDate.now()), Categories.PLEASURE,10,"ciao come va ahahahahahahah",this));
-        model.listToShow = e;
-        //Ogni 14 caratteri si mette \n per massimo 4 volte
     }
 
     /**
-     * Main draw loop for rendering graphics.
+     * com.project.src.Main draw loop for rendering graphics.
      *
      * This method updates the display based on the current screen state
      * and renders the list of expenses.
@@ -56,18 +51,23 @@ public class Main extends PApplet {
             model.form.draw();
         }
         else if(model.screen[1]) {
+            model.listToShow = model.dao.getExpensesByAccount(model.acc);
             model.v.showList();
             model.reorder.showList();
             fill(229,229,229);
             stroke(229,229,229);
             rect(0,0,width,50);
             stroke(0);
-            ExpenseController.renderList(this,model.listToShow,50,80);
+            if(!model.listToShow.isEmpty()) ExpenseController.renderList(this,model.listToShow,50,80);
+            else {
+                textAlign(CENTER,CENTER);
+                text("No expense yet",width/2,height/2);
+            }
         }
     }
 
     /**
-     * Handles the login form submission.
+     * Handles the login com.project.src.form submission.
      *
      * This method calls the login function from the FormView class and
      * switches the screen state to show the main expense list.
@@ -80,7 +80,7 @@ public class Main extends PApplet {
     }
 
     /**
-     * Handles the register form submission.
+     * Handles the register com.project.src.form submission.
      *
      * This method calls the register function from the FormView class and
      * switches the screen state to show the main expense list.
@@ -89,6 +89,7 @@ public class Main extends PApplet {
         if(model.form.submitForm(true)) {
             model.screen[0] = false;
             model.screen[1] = true;
+            model.acc = new Account(model.form.model.getUsername(), model.form.model.getPsw());
         }
     }
 
@@ -103,7 +104,7 @@ public class Main extends PApplet {
     public void select(ControlEvent theEvent) {
         if (theEvent.isFrom(model.v.getList())) {
             int cat = (int) theEvent.getController().getValue();
-            model.listToShow = CategoryFilter.filter(e,model.v.callback(cat));
+            model.listToShow = CategoryFilter.filter(model.listToShow,model.v.callback(cat));
         }
     }
 
@@ -117,7 +118,7 @@ public class Main extends PApplet {
      */
     public void reorder(ControlEvent event) {
         if (event.isFrom(model.reorder.getList())) {
-            Collections.sort(e,model.reorder.callback((int) event.getController().getValue()));
+            //Collections.sort(e,model.reorder.callback((int) event.getController().getValue()));
         }
     }
 
@@ -127,7 +128,7 @@ public class Main extends PApplet {
      * @param passedArgs command-line arguments
      */
     public static void main(String[] passedArgs) {
-        String[] appletArgs = new String[]{"Main"};
+        String[] appletArgs = new String[]{"com.project.src.Main"};
         if (passedArgs != null) {
             PApplet.main(concat(appletArgs, passedArgs));
         } else {

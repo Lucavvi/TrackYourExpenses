@@ -1,6 +1,6 @@
-package dao;
+package com.project.src.dao;
 
-import expense.ExpenseController;
+import com.project.src.expense.ExpenseController;
 import java.io.Serializable;
 import java.util.ArrayList;
 

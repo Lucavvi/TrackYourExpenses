@@ -1,8 +1,8 @@
-package dao;
+package com.project.src.dao;
 import com.google.gson.Gson;
-import expense.ExpenseController;
-import form.AccessException;
-import form.UsernameException;
+import com.project.src.expense.ExpenseController;
+import com.project.src.form.AccessException;
+import com.project.src.form.UsernameException;
 import java.sql.*;
 import java.util.*;
 import com.google.gson.reflect.TypeToken;
@@ -124,6 +124,7 @@ public class DBManager implements Actions{
                 Connection conn = DriverManager.getConnection(URI);
                 PreparedStatement stmt = conn.prepareStatement(command);
         ){
+            Account res = null;
             stmt.setString(1,acc.getUsername());
             ResultSet rs = stmt.executeQuery();
 
@@ -131,7 +132,7 @@ public class DBManager implements Actions{
             // Definisci il tipo per la conversione
             Type listType = new TypeToken<Account>() {}.getType();
             // Converte il JSON in ArrayList
-            Account res = gson.fromJson(rs.getString("accountObj"), listType);
+            while (rs.next()) res = gson.fromJson(rs.getString("accountObj"), listType);
             rs.close();
             return res.getExpenses();
         }

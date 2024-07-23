@@ -1,4 +1,4 @@
-package expense;
+package com.project.src.expense;
 import processing.core.PApplet;
 import java.io.Serializable;
 import java.util.Currency;

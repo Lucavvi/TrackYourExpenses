@@ -1,6 +1,6 @@
-package expense.comparators;
+package com.project.src.expense.comparators;
 
-import expense.ExpenseController;
+import com.project.src.expense.ExpenseController;
 import java.util.Comparator;
 
 /**

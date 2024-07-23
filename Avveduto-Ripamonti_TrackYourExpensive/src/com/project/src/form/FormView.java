@@ -1,9 +1,9 @@
-package form;
+package com.project.src.form;
 import processing.core.PApplet;
 import controlP5.*;
 
 /**
- * View class for managing the form page in the MVC pattern.
+ * View class for managing the com.project.src.form page in the MVC pattern.
  * This class handles the display and layout of the user interface elements
  * for login and registration forms.
  *
@@ -38,8 +38,8 @@ class FormView {
     }
 
     /**
-     * Draws the form page on the screen, including the background, text fields, and buttons.
-     * Displays the form with the appropriate labels and positions.
+     * Draws the com.project.src.form page on the screen, including the background, text fields, and buttons.
+     * Displays the com.project.src.form with the appropriate labels and positions.
      */
     void draw(){
         processing.background(255);
@@ -49,9 +49,11 @@ class FormView {
         processing.rectMode(processing.CORNER);
         processing.textSize(30);
         processing.fill(0,0,255);
-        processing.text("Form",usernameField.getPosition()[0],usernameField.getPosition()[1]-(usernameField.getHeight()/2)-50);
+        processing.textAlign(processing.CENTER,processing.CENTER);
+        processing.text("Form",loginButton.getPosition()[0] - 20,usernameField.getPosition()[1]-(usernameField.getHeight()/2)-50);
         processing.textSize(20);
         processing.fill(0);
+        processing.textAlign(processing.BASELINE,processing.BASELINE);
         processing.text("Username:",usernameField.getPosition()[0],usernameField.getPosition()[1]-(usernameField.getHeight()/2));
         usernameField.show();
         processing.text("Password:",passwordField.getPosition()[0],passwordField.getPosition()[1]-(passwordField.getHeight()/2));
@@ -61,7 +63,7 @@ class FormView {
     }
 
     /**
-     * Hides all UI components of the form, including text fields and buttons.
+     * Hides all UI components of the com.project.src.form, including text fields and buttons.
      */
     public void hideField(){
         usernameField.hide();
@@ -76,15 +78,10 @@ class FormView {
      * @param failError the error message to display
      */
     void fail(String failError){
-        processing.background(255);
-        processing.rectMode(processing.CENTER);
-        processing.fill(255,0,0,120);
-        processing.rect(processing.width/2,processing.height/2,200,100,25);
+        draw();
+        processing.fill(255,0,0);
         processing.textAlign(processing.CENTER,processing.CENTER);
-        processing.textSize(20);
-        processing.fill(0);
-        processing.text(failError,processing.width/2,processing.height/2);
-        processing.rectMode(processing.CORNER);
+        processing.text(failError,loginButton.getPosition()[0] - 20,registerButton.getPosition()[1] + (registerButton.getHeight()*2));
         processing.textAlign(processing.BASELINE,processing.BASELINE);
     }
 }

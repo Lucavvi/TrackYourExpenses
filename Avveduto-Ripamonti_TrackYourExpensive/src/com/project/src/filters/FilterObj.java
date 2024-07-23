@@ -1,6 +1,6 @@
-package filters;
+package com.project.src.filters;
 import controlP5.*;
-import expense.Categories;
+import com.project.src.expense.Categories;
 import processing.core.PApplet;
 
 /**

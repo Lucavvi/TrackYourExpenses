@@ -1,6 +1,6 @@
-package filters;
-import expense.Categories;
-import expense.ExpenseController;
+package com.project.src.filters;
+import com.project.src.expense.*;
+import com.project.src.expense.ExpenseController;
 import java.util.ArrayList;
 import java.util.List;
 

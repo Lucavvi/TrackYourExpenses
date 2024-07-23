@@ -1,4 +1,4 @@
-package form;
+package com.project.src.form;
 
 /**
  * Exception thrown when a username-related error occurs.

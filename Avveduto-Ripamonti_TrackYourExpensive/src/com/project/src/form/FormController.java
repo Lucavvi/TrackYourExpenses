@@ -1,19 +1,19 @@
-package form;
+package com.project.src.form;
 
+import com.project.src.Model;
 import controlP5.ControlP5;
-import dao.Account;
-import dao.DBManager;
+import com.project.src.dao.*;
 import processing.core.PApplet;
 
 /**
- * MVC Controller class for managing the form page.
- * Handles interactions between the view and the model, including user input and form submission.
+ * MVC Controller class for managing the com.project.src.form page.
+ * Handles interactions between the view and the model, including user input and com.project.src.form submission.
  *
  * @version 1.0
  */
 public class FormController {
     private FormView view;
-    private FormModel model;
+    public FormModel model;
 
     /**
      * Constructs a FormController with the specified PApplet and ControlP5 instances, and a DBManager.
@@ -30,8 +30,8 @@ public class FormController {
     }
 
     /**
-     * Draws the form page.
-     * If there is a failure condition, displays an error message; otherwise, renders the form.
+     * Draws the com.project.src.form page.
+     * If there is a failure condition, displays an error message; otherwise, renders the com.project.src.form.
      */
     public void draw(){
         if(model.check)
@@ -41,7 +41,7 @@ public class FormController {
     }
 
     /**
-     * Handles the form submission for login.
+     * Handles the com.project.src.form submission for login.
      * Verifies the credentials and logs in the user. Displays an error message if credentials are invalid.
      *
      * @throws AccessException if the credentials are incorrect or missing
@@ -53,12 +53,12 @@ public class FormController {
         view.passwordField.clear();
         if(password != null && username != null && !username.isEmpty()  && !password.isEmpty()){
             try {
-                Account acc = model.login(username, password);
+                 Account acc = model.login(username, password);
+                 Model.changeAccount(acc);
             }
             catch(AccessException e){
                 model.check = true;
                 model.failError = e.getMessage();
-                view.hideField();
                 return false;
             }
             view.hideField();
@@ -67,20 +67,19 @@ public class FormController {
         else{
             model.check = true;
             model.failError = "Credenziali Errate!";
-            view.hideField();
             return false;
         }
     }
 
     /**
-     * Handles the form submission for registration.
+     * Handles the com.project.src.form submission for registration.
      * Verifies the credentials and registers the user if the `register` flag is true.
      * Displays an error message if credentials are invalid or registration fails.
      *
      * @param register if true, registers a new user; if false, performs login
      * @throws UsernameException if the username already exists
      */
-    public boolean submitForm(boolean register) throws UsernameException{
+    public boolean submitForm(boolean register) throws UsernameException {
         if(!register) return submitForm();
         else {
             String username = view.usernameField.getText();
@@ -94,7 +93,6 @@ public class FormController {
                 catch(UsernameException e){
                     model.check = true;
                     model.failError = "Credenziali Errate!";
-                    view.hideField();
                     return false;
                 }
                 view.hideField();
@@ -102,7 +100,6 @@ public class FormController {
             } else {
                 model.check = true;
                 model.failError = "Credenziali non valide!";
-                view.hideField();
                 return false;
             }
         }
