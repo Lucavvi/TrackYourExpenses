@@ -45,20 +45,22 @@ public class FormController {
      *
      * @throws AccessException if the credentials are incorrect or missing
      */
-    public void submitForm() throws AccessException{
+    public boolean submitForm() throws AccessException{
         String username = view.usernameField.getText();
         String password = view.passwordField.getText();
+        view.usernameField.clear();
+        view.passwordField.clear();
         if(password != null && username != null && !username.isEmpty()  && !password.isEmpty()){
             model.login(username,password);
             view.hideField();
+            return true;
         }
         else{
             model.check = true;
             model.failError = "Credenziali Errate!";
             view.hideField();
+            return false;
         }
-        view.usernameField.clear();
-        view.passwordField.clear();
     }
 
     /**
@@ -69,21 +71,23 @@ public class FormController {
      * @param register if true, registers a new user; if false, performs login
      * @throws UsernameException if the username already exists
      */
-    public void submitForm(boolean register) throws UsernameException{
-        if(!register) submitForm();
+    public boolean submitForm(boolean register) throws UsernameException{
+        if(!register) return submitForm();
         else {
             String username = view.usernameField.getText();
             String password = view.passwordField.getText();
+            view.usernameField.clear();
+            view.passwordField.clear();
             if (password != null && username != null && !username.isEmpty() && !password.isEmpty()) {
                 model.register(username,password);
                 view.hideField();
+                return true;
             } else {
                 model.check = true;
                 model.failError = "Credenziali non valide!";
                 view.hideField();
+                return false;
             }
-            view.usernameField.clear();
-            view.passwordField.clear();
         }
     }
 }
