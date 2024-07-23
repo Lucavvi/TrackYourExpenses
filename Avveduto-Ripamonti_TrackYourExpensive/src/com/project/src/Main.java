@@ -12,7 +12,7 @@ import processing.core.*;
  * user interface and rendering.
  *
  * This class initializes the application window, manages the main
- * application logic, and handles user interactions such as com.project.src.form
+ * application logic, and handles user interactions such as form
  * submissions and filtering expenses.
  *
  * @author Angelo Ripamonti & Luca Avveduto
@@ -20,6 +20,7 @@ import processing.core.*;
  */
 public class Main extends PApplet {
     private Model model;
+
     /**
      * Configures the size of the application window.
      */
@@ -46,28 +47,17 @@ public class Main extends PApplet {
      * and renders the list of expenses.
      */
     public void draw(){
-        background(255);
+        //background(255); dentro i draw
         if(model.screen[0]) {
             model.form.draw();
         }
         else if(model.screen[1]) {
-            model.listToShow = model.dao.getExpensesByAccount(model.acc);
-            model.v.showList();
-            model.reorder.showList();
-            fill(229,229,229);
-            stroke(229,229,229);
-            rect(0,0,width,50);
-            stroke(0);
-            if(!model.listToShow.isEmpty()) ExpenseController.renderList(this,model.listToShow,50,80);
-            else {
-                textAlign(CENTER,CENTER);
-                text("No expense yet",width/2,height/2);
-            }
+            model.expense.draw();
         }
     }
 
     /**
-     * Handles the login com.project.src.form submission.
+     * Handles the login form submission.
      *
      * This method calls the login function from the FormView class and
      * switches the screen state to show the main expense list.
@@ -80,7 +70,7 @@ public class Main extends PApplet {
     }
 
     /**
-     * Handles the register com.project.src.form submission.
+     * Handles the register form submission.
      *
      * This method calls the register function from the FormView class and
      * switches the screen state to show the main expense list.
@@ -102,9 +92,9 @@ public class Main extends PApplet {
      * @param theEvent the {@link ControlEvent} containing the selection data
      */
     public void select(ControlEvent theEvent) {
-        if (theEvent.isFrom(model.v.getList())) {
+        if (theEvent.isFrom(model.expense.filter.getList())) {
             int cat = (int) theEvent.getController().getValue();
-            model.listToShow = CategoryFilter.filter(model.listToShow,model.v.callback(cat));
+            model.expense.changeListToShow(CategoryFilter.filter(model.expense.getListToShow(),model.expense.filter.callback(cat)));
         }
     }
 
@@ -117,8 +107,8 @@ public class Main extends PApplet {
      * @param event the {@link ControlEvent} containing the selection data
      */
     public void reorder(ControlEvent event) {
-        if (event.isFrom(model.reorder.getList())) {
-            //Collections.sort(e,model.reorder.callback((int) event.getController().getValue()));
+        if (event.isFrom(model.expense.order.getList())) {
+            //Collections.sort(e,model.expense.order.callback((int) event.getController().getValue())); e -> lista ExpenseController
         }
     }
 
