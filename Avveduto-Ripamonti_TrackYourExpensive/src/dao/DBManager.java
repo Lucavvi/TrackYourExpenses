@@ -17,17 +17,13 @@ import java.lang.reflect.Type;
  * @version 1.0
  */
 public class DBManager implements Actions{
-    private final String USERNAME;
-    private final String PASSWORD;
-    private final String URL;
+    private final String URI;
 
     /**
      * Constructs a DBManager with default database connection parameters.
      */
     public DBManager(){
-        USERNAME = "user";
-        PASSWORD = "password";
-        URL = "jdbc:mysql://localhost/tracker";
+        URI = "jdbc:mysql://avnadmin:AVNS_FvXsx71KHxD3Fv3tq_k@trackyourexpenses-prova12345675364245123421421.f.aivencloud.com:24168/defaultdb?ssl-mode=REQUIRED";
     }
 
     /**
@@ -40,9 +36,9 @@ public class DBManager implements Actions{
      */
     @Override
     public Account login(String user, String psw) throws AccessException {
-        final String query = "SELECT * FROM tracker.accounts WHERE username=? AND password=?";
+        final String query = "SELECT * FROM defaultdb.accounts WHERE username=? AND password=?";
         try(
-                Connection con = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+                Connection con = DriverManager.getConnection(URI);
                 PreparedStatement st = con.prepareStatement(query);
         ) {
             st.setString(1,user);
@@ -71,9 +67,9 @@ public class DBManager implements Actions{
      */
     @Override
     public boolean register(Account acc) throws UsernameException {
-        final String query = "INSERT INTO tracker.accounts (username, password, accountObj) VALUES (?, ?, ?)";
+        final String query = "INSERT INTO defaultdb.accounts (username, password, accountObj) VALUES (?, ?, ?)";
         try(
-                Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+                Connection conn = DriverManager.getConnection(URI);
                 PreparedStatement stmt = conn.prepareStatement(query);
         ){
             Gson gson = new Gson();
@@ -98,9 +94,9 @@ public class DBManager implements Actions{
      */
     @Override
     public void updateList(Account acc) throws RuntimeException{
-        final String command = "UPDATE accounts SET accountObj=? WHERE username=?";
+        final String command = "UPDATE defaultdb.accounts SET accountObj=? WHERE username=?";
         try(
-                Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+                Connection conn = DriverManager.getConnection(URI);
                 PreparedStatement stmt = conn.prepareStatement(command);
         ){
             Gson gson = new Gson();
@@ -123,9 +119,9 @@ public class DBManager implements Actions{
      */
     @Override
     public ArrayList<ExpenseController> getExpensesByAccount(Account acc) {
-        final String command = "SELECT * FROM accounts WHERE  username=?";
+        final String command = "SELECT * FROM defaultdb.accounts WHERE  username=?";
         try(
-                Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+                Connection conn = DriverManager.getConnection(URI);
                 PreparedStatement stmt = conn.prepareStatement(command);
         ){
             stmt.setString(1,acc.getUsername());
