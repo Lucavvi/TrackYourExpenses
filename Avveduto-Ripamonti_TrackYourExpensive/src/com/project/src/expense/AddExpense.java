@@ -1,10 +1,10 @@
 package com.project.src.expense;
 
-import controlP5.Button;
-import controlP5.ControlP5;
-import controlP5.DropdownList;
-import controlP5.Textfield;
+import com.project.src.Model;
+import controlP5.*;
 import processing.core.PApplet;
+
+import java.util.ArrayList;
 
 public class AddExpense {
     private ControlP5 cp5;
@@ -14,10 +14,13 @@ public class AddExpense {
     private DropdownList select;
     private Button done;
     private float selectPos;
+    private int selectStatus;
+    private Button exit;
 
     public AddExpense(ControlP5 cp5, PApplet parent) {
         this.cp5 = cp5;
         this.parent = parent;
+        exit = cp5.addButton("exit").setLabel("Exit").setPosition(parent.width/3, parent.height/2+200).setSize(80, 30).hide();
         done = cp5.addButton("done").setLabel("Done").setPosition(parent.width-parent.width/3, parent.height/2+200).setSize(80, 30).hide();
         nameField = cp5.addTextfield("name").setColorForeground(parent.color(255)).setFont(parent.createFont("arial",25)).setPosition(parent.width/3,parent.height/2-40).setSize(200,40).setFocus(true).setColor(parent.color(255)).setColorActive(parent.color(255)).setColorBackground(0).setCaptionLabel("").hide();
         descField = cp5.addTextfield("desc").setColorForeground(parent.color(255)).setFont(parent.createFont("arial",25)).setPosition(parent.width/3,parent.height/2+40).setSize(200,40).setFocus(true).setColor(parent.color(255)).setColorActive(parent.color(255)).setColorBackground(0).setCaptionLabel("").hide();
@@ -33,6 +36,7 @@ public class AddExpense {
     }
 
     public void showMenu() {
+        exit.show();
         parent.background(255);
         parent.rectMode(3);
         parent.fill(255);
@@ -54,10 +58,29 @@ public class AddExpense {
     }
 
     public void hideMenu() {
+        parent.background(255);
         nameField.hide();
         descField.hide();
         select.hide();
+        done.hide();
+        exit.hide();
     }
+
+    public void doneCallback(Model m, ArrayList<ExpenseController> list) {
+        done.show();
+        hideMenu();
+        nameField.clear();
+        descField.clear();
+        String name = nameField.getText();
+        String desc = descField.getText();
+        select.setLabel("Category");
+        System.out.println(name + desc + selectStatus);
+    }
+
+    public void categoryCallback(ControlEvent event) {
+        selectStatus = (int) event.getController().getValue();
+    }
+
     public Textfield getNameField() {
         return nameField;
     }
@@ -68,5 +91,13 @@ public class AddExpense {
 
     public DropdownList getSelect() {
         return select;
+    }
+
+    public Button getDone() {
+        return done;
+    }
+
+    public Button getExit() {
+        return exit;
     }
 }

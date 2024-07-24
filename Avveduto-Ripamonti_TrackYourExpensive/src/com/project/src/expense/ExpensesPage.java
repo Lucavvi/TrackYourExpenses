@@ -23,6 +23,8 @@ public class ExpensesPage {
     public FilterObj filter;
     public OrderObj order;
     private Button add;
+    private AddExpense adx;
+    private Button settings;
 
     /**
      * Constructs an ExpensesPage with the specified processing, ControlP5 instance, and database manager.
@@ -38,7 +40,9 @@ public class ExpensesPage {
         this.listToShow = null;
         filter = new FilterObj(cp5,processing);
         order = new OrderObj(cp5,processing);
-        add = cp5.addButton("add").setLabel("Add").setPosition(processing.width/3, processing.height-processing.height/3).setSize(80, 30).hide();
+        adx = new AddExpense(cp5,processing);
+        settings = cp5.addButton("account").setLabel("Account").setPosition(processing.width-0.5f*processing.width/3, 0.3f*processing.height/3).setSize(80, 30).hide();
+        add = cp5.addButton("add").setLabel("Add").setPosition(processing.width-0.5f*processing.width/3, processing.height-0.5f*processing.height/3).setSize(80, 30).hide();
     }
 
     /**
@@ -49,6 +53,8 @@ public class ExpensesPage {
         listToShow = database.getExpensesByAccount(Model.getAccount());
         filter.showList();
         order.showList();
+        settings.show();
+        add.show();
         processing.fill(229,229,229);
         processing.stroke(229,229,229);
         processing.rect(0,0,processing.width,50);
@@ -57,6 +63,7 @@ public class ExpensesPage {
         else {
             processing.textAlign(processing.CENTER,processing.CENTER);
             processing.text("No expense yet",processing.width/2,processing.height/2);
+            processing.textAlign(0,0);
         }
     }
 
@@ -76,5 +83,17 @@ public class ExpensesPage {
      */
     public void changeListToShow(ArrayList<ExpenseController> listToShow){
         this.listToShow = listToShow;
+    }
+
+    public Button getAddButton() {
+        return add;
+    }
+
+    public AddExpense getAdx() {
+        return adx;
+    }
+
+    public Button getSettings() {
+        return settings;
     }
 }

@@ -1,4 +1,5 @@
 package com.project.src;
+import com.project.src.expense.ExpensesPage;
 import controlP5.*;
 import com.project.src.accountManager.*;
 import com.project.src.filters.*;
@@ -99,6 +100,46 @@ public class Main extends PApplet {
         if (theEvent.isFrom(model.expense.filter.getList())) {
             int cat = (int) theEvent.getController().getValue();
             model.expense.changeListToShow(CategoryFilter.filter(model.expense.getListToShow(),model.expense.filter.callback(cat)));
+        }
+    }
+
+    public void add(ControlEvent event) {
+        if(event.isFrom(model.expense.getAddButton())) {
+            model.expense.getAddButton().hide();
+            model.screen[1] = false;
+            model.expense.filter.hideList();
+            model.expense.order.hideList();
+            model.expense.getAdx().showMenu();
+        }
+    }
+
+    public void account(ControlEvent event) {
+        if(event.isFrom(model.expense.getSettings())) {
+            Arrays.fill(model.screen,false);
+            model.expense.getSettings().hide();
+            model.expense.getAddButton().hide();
+            model.expense.filter.hideList();
+            model.expense.order.hideList();
+        }
+    }
+
+    public void category(ControlEvent event) {
+        if(event.isFrom(model.expense.getAdx().getSelect())) model.expense.getAdx().categoryCallback(event);
+    }
+
+    public void exit(ControlEvent event) {
+        if(event.isFrom(model.expense.getAdx().getExit())) {
+            model.screen[1] = true;
+            model.expense.getAdx().hideMenu();
+        }
+    }
+
+    public void done(ControlEvent event) {
+        if(event.isFrom(model.expense.getAdx().getDone())) {
+            model.expense.filter.showList();
+            model.expense.order.showList();
+            model.screen[1] = true;
+            model.expense.getAdx().doneCallback(model,model.expense.getListToShow());
         }
     }
 
