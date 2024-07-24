@@ -25,8 +25,8 @@ public class FormController {
      */
     public FormController(PApplet processing, ControlP5 cp5, DBManager manager) throws NullPointerException {
         if(processing == null || cp5 == null) throw new NullPointerException("L'implementazione di Processing o della libreria ControlP5 è fallita!");
-        view = new FormView(processing, cp5);
-        model = new FormModel(manager);
+            view = new FormView(processing, cp5);
+            model = new FormModel(manager);
     }
 
     /**
