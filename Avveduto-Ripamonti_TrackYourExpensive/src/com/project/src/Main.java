@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 /**
- * com.project.src.Main application class for tracking expenses.
+ * Main application class for tracking expenses.
  * Extends {@link PApplet} to use the Processing framework for graphical
  * user interface and rendering.
  *
@@ -43,19 +43,21 @@ public class Main extends PApplet {
     }
 
     /**
-     * com.project.src.Main draw loop for rendering graphics.
+     * Main draw loop for rendering graphics.
      *
      * This method updates the display based on the current screen state
      * and renders the list of expenses.
      */
     public void draw(){
-        //background(255); dentro i draw
         if(model.screen[0]) {
-            model.account.draw(model.dao.login("Angelo","qwerty"));
-            //model.form.draw();
+            model.form.draw();
         }
         else if(model.screen[1]) {
             model.expense.draw();
+        }
+        else{
+            //Model.acc = model.dao.login("Angelo","qwerty");
+            model.account.draw(Model.acc);
         }
     }
 
@@ -82,7 +84,7 @@ public class Main extends PApplet {
         if(model.form.submitForm(true)) {
             model.screen[0] = false;
             model.screen[1] = true;
-            model.acc = new Account(model.form.model.getUsername(), model.form.model.getPsw());
+            Model.acc = new Account(model.form.model.getUsername(), model.form.model.getPsw());
         }
     }
 
@@ -115,13 +117,44 @@ public class Main extends PApplet {
         }
     }
 
+    /**
+     * Handles account deletion.
+     *
+     * This method deletes the user account and resets the screen state to
+     * show the login form.
+     */
     public void deleteAccount() {
         model.account.deleteAccount();
         Arrays.fill(model.screen,false);
         model.screen[0] = true;
     }
+
+    /**
+     * Handles deletion of the expense list.
+     *
+     * This method deletes all expenses associated with the current account.
+     */
+    public void deleteList() {
+        model.account.deleteList();
+    }
+
+    /**
+     * Toggles the visibility of the account password.
+     *
+     * This method shows or hides the account password in the user interface.
+     */
     public void accountShowPassword(){
         model.account.showPassword();
+    }
+
+    /**
+     * Switches the screen to display the list of expenses.
+     *
+     * This method hides account management fields and shows the expense list.
+     */
+    public void backExpenses(){
+        model.account.hideFields();
+        model.screen[1]=true;
     }
 
     /**

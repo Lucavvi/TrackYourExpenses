@@ -73,4 +73,14 @@ public class Account implements Serializable {
     public ArrayList<ExpenseController> getExpenses() {
         return new ArrayList<ExpenseController>(expenses);
     }
+
+    /**
+     * Resets the list of expenses associated with the account.
+     *
+     * @return {@code true} if the list of expenses was cleared successfully
+     */
+    boolean resetExpenses() {
+        this.expenses.clear();
+        return true;
+    }
 }
