@@ -2,9 +2,9 @@ package com.project.src;
 
 import controlP5.*;
 import com.project.src.dao.*;
-import com.project.src.expense.*;
 import com.project.src.filters.*;
 import processing.core.*;
+import java.util.Collections;
 
 /**
  * com.project.src.Main application class for tracking expenses.
@@ -108,7 +108,7 @@ public class Main extends PApplet {
      */
     public void reorder(ControlEvent event) {
         if (event.isFrom(model.expense.order.getList())) {
-            //Collections.sort(e,model.expense.order.callback((int) event.getController().getValue())); e -> lista ExpenseController
+            Collections.sort(model.expense.getListToShow(), model.expense.order.callback((int) event.getController().getValue()));
         }
     }
 

@@ -30,7 +30,7 @@ public class OrderObj {
         this.cp5 = cp5;
         this.parent = parent;
         reorder = cp5.addDropdownList("reorder")
-                .setLabel("Filter").setBarHeight(20)
+                .setLabel("reorder").setBarHeight(20)
                 .setItemHeight(20).setPosition(parent.width/2,15)
                 .setSize(200,100).close()
                 .setColorBackground(0).hide();
