@@ -1,6 +1,6 @@
 package com.project.src.form;
 
-import com.project.src.dao.*;
+import com.project.src.accountManager.*;
 
 /**
  * com.project.src.Model class for managing user authentication and registration.
