@@ -4,6 +4,8 @@ import controlP5.*;
 import com.project.src.accountManager.*;
 import com.project.src.filters.*;
 import processing.core.*;
+
+import java.util.Arrays;
 import java.util.Collections;
 
 /**
@@ -49,7 +51,8 @@ public class Main extends PApplet {
     public void draw(){
         //background(255); dentro i draw
         if(model.screen[0]) {
-            model.form.draw();
+            model.account.draw(model.dao.login("Angelo","qwerty"));
+            //model.form.draw();
         }
         else if(model.screen[1]) {
             model.expense.draw();
@@ -110,6 +113,15 @@ public class Main extends PApplet {
         if (event.isFrom(model.expense.order.getList())) {
             Collections.sort(model.expense.getListToShow(), model.expense.order.callback((int) event.getController().getValue()));
         }
+    }
+
+    public void deleteAccount() {
+        model.account.deleteAccount();
+        Arrays.fill(model.screen,false);
+        model.screen[0] = true;
+    }
+    public void accountShowPassword(){
+        model.account.showPassword();
     }
 
     /**

@@ -42,6 +42,8 @@ public class Model {
     /** The current Account instance representing the logged-in user. */
     static Account acc;
 
+    AccountPage account;
+
 
     /**
      * Constructs a new Model instance.
@@ -61,6 +63,7 @@ public class Model {
         screen = new boolean [10];
         Arrays.fill(screen,false);
         screen[0]=true;
+        account = new AccountPage(processing, cp5, dao);
     }
 
     /**

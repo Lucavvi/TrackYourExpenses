@@ -47,4 +47,11 @@ public interface Actions {
      * @return the list of expenses associated with the account
      */
     public ArrayList<ExpenseController> getExpensesByAccount(Account acc);
+
+    /**
+     * Deletes an account.
+     *
+     * @param acc the account to be deleted
+     */
+    public void deleteAccount(Account acc);
 }

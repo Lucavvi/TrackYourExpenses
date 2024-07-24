@@ -140,4 +140,25 @@ public class DBManager implements Actions{
             throw new RuntimeException(e.getMessage());
         }
     }
+
+    /**
+     * Deletes an account from the database.
+     *
+     * @param acc the account to be deleted
+     * @throws RuntimeException if there are connection problems
+     */
+    @Override
+    public void deleteAccount(Account acc) {
+        final String command = "DELETE FROM defaultdb.accounts WHERE  username=?";
+        try(
+                Connection conn = DriverManager.getConnection(URI);
+                PreparedStatement stmt = conn.prepareStatement(command);
+        ){
+            stmt.setString(1,acc.getUsername());
+            stmt.executeUpdate();
+        }
+        catch(Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
 }

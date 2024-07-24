@@ -61,7 +61,7 @@ public class Account implements Serializable {
      *
      * @return the account's password
      */
-    public String getPassword() {
+    String getPassword() {
         return password;
     }
 
