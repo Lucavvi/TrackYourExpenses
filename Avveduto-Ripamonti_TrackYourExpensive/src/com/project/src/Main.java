@@ -1,5 +1,4 @@
 package com.project.src;
-
 import controlP5.*;
 import com.project.src.accountManager.*;
 import com.project.src.filters.*;
@@ -49,10 +48,8 @@ public class Main extends PApplet {
      * and renders the list of expenses.
      */
     public void draw(){
-        //background(255); dentro i draw
         if(model.screen[0]) {
-            model.account.draw(model.dao.login("Angelo","qwerty"));
-            //model.form.draw();
+            model.form.draw();
         }
         else if(model.screen[1]) {
             model.expense.draw();

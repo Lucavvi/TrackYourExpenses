@@ -4,9 +4,9 @@ import com.project.src.Model;
 import com.project.src.accountManager.DBManager;
 import com.project.src.filters.FilterObj;
 import com.project.src.filters.OrderObj;
+import controlP5.Button;
 import controlP5.ControlP5;
 import processing.core.PApplet;
-
 import java.util.ArrayList;
 
 /**
@@ -22,6 +22,7 @@ public class ExpensesPage {
     private ArrayList<ExpenseController> listToShow;
     public FilterObj filter;
     public OrderObj order;
+    private Button add;
 
     /**
      * Constructs an ExpensesPage with the specified processing, ControlP5 instance, and database manager.
@@ -37,6 +38,7 @@ public class ExpensesPage {
         this.listToShow = null;
         filter = new FilterObj(cp5,processing);
         order = new OrderObj(cp5,processing);
+        add = cp5.addButton("add").setLabel("Add").setPosition(processing.width/3, processing.height-processing.height/3).setSize(80, 30).hide();
     }
 
     /**
