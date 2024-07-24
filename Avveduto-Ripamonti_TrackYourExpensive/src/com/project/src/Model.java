@@ -1,9 +1,8 @@
 package com.project.src;
 
 import controlP5.ControlP5;
-import com.project.src.dao.*;
+import com.project.src.accountManager.*;
 import com.project.src.expense.*;
-import com.project.src.filters.*;
 import com.project.src.form.*;
 import processing.core.*;
 

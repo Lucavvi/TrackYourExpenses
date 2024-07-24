@@ -1,7 +1,7 @@
 package com.project.src.expense;
 
 import com.project.src.Model;
-import com.project.src.dao.DBManager;
+import com.project.src.accountManager.DBManager;
 import com.project.src.filters.FilterObj;
 import com.project.src.filters.OrderObj;
 import controlP5.ControlP5;
