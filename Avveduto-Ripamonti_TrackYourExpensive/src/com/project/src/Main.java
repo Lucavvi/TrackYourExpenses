@@ -198,6 +198,18 @@ public class Main extends PApplet {
     }
 
     /**
+     * Handles the user logout process.
+     *
+     * This method hides account management fields, resets the screen state to
+     * show the login form, and sets the current account to null.
+     */
+    public void logout(){
+        model.account.hideFields();
+        model.screen[0]=true;
+        Model.acc = null;
+    }
+
+    /**
      * The main method to launch the application.
      *
      * @param passedArgs command-line arguments

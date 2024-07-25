@@ -26,6 +26,7 @@ public class AccountPage {
     private Button deleteAccount;
     private Button deleteList;
     private Button backExpenses;
+    private Button logout;
     private int passwordButtonController;
 
     /**
@@ -47,6 +48,7 @@ public class AccountPage {
         deleteAccount = cp5.addButton("deleteAccount").setLabel("Delete Account").setPosition(password.getPosition()[0], password.getPosition()[1] + password.getHeight()+10).setSize(90, 40).setColorBackground(processing.color(255,0,0)).hide();
         deleteList = cp5.addButton("deleteList").setLabel("Delete List").setPosition(deleteAccount.getPosition()[0]+deleteAccount.getWidth()+20, deleteAccount.getPosition()[1]).setSize(90, 40).setColorBackground(processing.color(255,0,0)).hide();
         backExpenses = cp5.addButton("backExpenses").setLabel("Turn Back").setPosition(deleteAccount.getPosition()[0], deleteAccount.getPosition()[1]+deleteAccount.getHeight()+10).setSize(200, 40).setColorBackground(processing.color(0,255,0)).hide();
+        logout = cp5.addButton("logout").setLabel("Log Out").setPosition(backExpenses.getPosition()[0], backExpenses.getPosition()[1]+backExpenses.getHeight()+10).setSize(200, 40).setColorBackground(processing.color(0,255,0)).hide();
     }
 
     /**
@@ -72,6 +74,7 @@ public class AccountPage {
         deleteAccount.show();
         deleteList.show();
         backExpenses.show();
+        logout.show();
     }
 
     /**
@@ -84,6 +87,7 @@ public class AccountPage {
         deleteAccount.hide();
         deleteList.hide();
         backExpenses.hide();
+        logout.hide();
     }
 
     /**
