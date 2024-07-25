@@ -42,7 +42,7 @@ public class ExpensesPage {
         on = true;
         filter = new FilterObj(cp5,processing);
         order = new OrderObj(cp5,processing);
-        adx = new AddExpense(cp5,processing);
+        adx = new AddExpense(cp5,processing,database);
         settings = cp5.addButton("account").setLabel("Account").setPosition(processing.width-0.5f*processing.width/3, 0.4f*processing.height/3).setSize(80, 30).hide();
         add = cp5.addButton("add").setLabel("Add").setPosition(processing.width-0.5f*processing.width/3, processing.height-0.5f*processing.height/3).setSize(80, 30).hide();
     }

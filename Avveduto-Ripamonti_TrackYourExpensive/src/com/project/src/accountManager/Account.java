@@ -1,6 +1,9 @@
 package com.project.src.accountManager;
 
+import com.project.src.expense.Categories;
 import com.project.src.expense.ExpenseController;
+import com.project.src.expense.LocalDate;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -44,7 +47,8 @@ public class Account implements Serializable {
     public Account(String username, String password) {
         this.username = username;
         this.password = password;
-        this.expenses = new ArrayList<>();
+        this.expenses = new ArrayList<ExpenseController>();
+        this.expenses.add(new ExpenseController("a", new LocalDate(java.time.LocalDate.now()), Categories.FOOD,12.0f,"a",null));
     }
 
     /**
@@ -73,6 +77,7 @@ public class Account implements Serializable {
     public ArrayList<ExpenseController> getExpenses() {
         return new ArrayList<ExpenseController>(expenses);
     }
+    public void addExpense(ExpenseController exp) {expenses.add(exp);}
 
     /**
      * Resets the list of expenses associated with the account.

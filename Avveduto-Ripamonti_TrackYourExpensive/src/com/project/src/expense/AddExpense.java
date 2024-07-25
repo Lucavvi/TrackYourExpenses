@@ -1,6 +1,7 @@
 package com.project.src.expense;
 
 import com.project.src.Model;
+import com.project.src.accountManager.Actions;
 import controlP5.*;
 import processing.core.PApplet;
 
@@ -18,10 +19,12 @@ public class AddExpense {
     private float selectPos;
     private int selectStatus;
     private Button exit;
+    private Actions dbManager;
 
-    public AddExpense(ControlP5 cp5, PApplet parent) {
+    public AddExpense(ControlP5 cp5, PApplet parent, Actions db) {
         this.cp5 = cp5;
         this.parent = parent;
+        dbManager = db;
         exit = cp5.addButton("exit").setLabel("Exit").setPosition(parent.width/3, parent.height/2+250).setSize(80, 30).hide();
         done = cp5.addButton("done").setLabel("Done").setPosition(parent.width-parent.width/3, parent.height/2+250).setSize(80, 30).hide();
         nameField = cp5.addTextfield("name").setColorForeground(parent.color(255)).setFont(parent.createFont("arial",25)).setPosition(parent.width/3,parent.height/2-80).setSize(200,40).setFocus(true).setColor(parent.color(255)).setColorActive(parent.color(255)).setColorBackground(0).setCaptionLabel("").hide();
@@ -74,21 +77,33 @@ public class AddExpense {
     public void doneCallback(Model m, ArrayList<ExpenseController> list) {
         done.show();
         hideMenu();
-        nameField.clear();
-        descField.clear();
+        boolean check = true;
         String name = nameField.getText();
         String desc = descField.getText();
-        float amount = Float.parseFloat(amountField.getText());
-        select.setLabel("Category");
-        System.out.println(name + desc + selectStatus);
-        ExpenseController item = new ExpenseController(name,new LocalDate(java.time.LocalDate.now()),Categories.values()[selectStatus],amount,desc,parent);
-        list.add(item);
-        list.add(item);
+        float amount = 0;
+        if(!name.isEmpty() && name.length() < 20) {
+            if(!desc.isEmpty() && desc.length() < (14*4)) {
+                try {
+                     amount = Float.parseFloat(amountField.getText());
+                }catch (Exception e) {
+                    check = false;
+                }
+            }
+        }
+        if(check) {
+            select.setLabel("Category");
+            System.out.println(name + desc + selectStatus);
+            ExpenseController item = new ExpenseController(name, new LocalDate(java.time.LocalDate.now()), Categories.values()[selectStatus], amount, desc, parent);
+            Model.getAccount().addExpense(item);
+            dbManager.updateList(Model.getAccount());
+        }else System.out.println("sbagliato");
+        nameField.clear();
+        descField.clear();
+        amountField.clear();
     }
 
     public void categoryCallback(ControlEvent event) {
         selectStatus = (int) event.getController().getValue();
-        System.out.println("ciao");
     }
 
     public Textfield getNameField() {

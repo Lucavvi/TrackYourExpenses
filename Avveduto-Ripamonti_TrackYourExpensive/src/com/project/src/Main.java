@@ -144,8 +144,11 @@ public class Main extends PApplet {
         if(event.isFrom(model.expense.getAdx().getDone())) {
             model.expense.filter.showList();
             model.expense.order.showList();
+            model.expense.filter.getList().unlock();
+            model.expense.order.getList().unlock();
             model.screen[1] = true;
             model.expense.getAdx().doneCallback(model,model.expense.getListToShow());
+            model.expense.setOn(true);
         }
     }
 
