@@ -11,6 +11,8 @@ public class AddExpense {
     private PApplet parent;
     private Textfield nameField;
     private Textfield descField;
+    private Textfield amountField;
+
     private DropdownList select;
     private Button done;
     private float selectPos;
@@ -20,13 +22,14 @@ public class AddExpense {
     public AddExpense(ControlP5 cp5, PApplet parent) {
         this.cp5 = cp5;
         this.parent = parent;
-        exit = cp5.addButton("exit").setLabel("Exit").setPosition(parent.width/3, parent.height/2+200).setSize(80, 30).hide();
-        done = cp5.addButton("done").setLabel("Done").setPosition(parent.width-parent.width/3, parent.height/2+200).setSize(80, 30).hide();
-        nameField = cp5.addTextfield("name").setColorForeground(parent.color(255)).setFont(parent.createFont("arial",25)).setPosition(parent.width/3,parent.height/2-40).setSize(200,40).setFocus(true).setColor(parent.color(255)).setColorActive(parent.color(255)).setColorBackground(0).setCaptionLabel("").hide();
-        descField = cp5.addTextfield("desc").setColorForeground(parent.color(255)).setFont(parent.createFont("arial",25)).setPosition(parent.width/3,parent.height/2+40).setSize(200,40).setFocus(true).setColor(parent.color(255)).setColorActive(parent.color(255)).setColorBackground(0).setCaptionLabel("").hide();
+        exit = cp5.addButton("exit").setLabel("Exit").setPosition(parent.width/3, parent.height/2+250).setSize(80, 30).hide();
+        done = cp5.addButton("done").setLabel("Done").setPosition(parent.width-parent.width/3, parent.height/2+250).setSize(80, 30).hide();
+        nameField = cp5.addTextfield("name").setColorForeground(parent.color(255)).setFont(parent.createFont("arial",25)).setPosition(parent.width/3,parent.height/2-80).setSize(200,40).setFocus(true).setColor(parent.color(255)).setColorActive(parent.color(255)).setColorBackground(0).setCaptionLabel("").hide();
+        descField = cp5.addTextfield("desc").setColorForeground(parent.color(255)).setFont(parent.createFont("arial",25)).setPosition(parent.width/3,parent.height/2).setSize(200,40).setFocus(true).setColor(parent.color(255)).setColorActive(parent.color(255)).setColorBackground(0).setCaptionLabel("").hide();
+        amountField = cp5.addTextfield("amount").setColorForeground(parent.color(255)).setFont(parent.createFont("arial",25)).setPosition(parent.width/3,parent.height/2+80).setSize(200,40).setFocus(true).setColor(parent.color(255)).setColorActive(parent.color(255)).setColorBackground(0).setCaptionLabel("").hide();
         select = this.cp5.addDropdownList("category")
                 .setLabel("Category").setBarHeight(20)
-                .setItemHeight(20).setPosition(parent.width/3,parent.height/2+120)
+                .setItemHeight(20).setPosition(parent.width/3,parent.height/2+160)
                 .setSize(200,100).close()
                 .setColorBackground(0).hide();
         select.addItem("FOOD", Categories.FOOD);
@@ -37,20 +40,21 @@ public class AddExpense {
 
     public void showMenu() {
         exit.show();
-        parent.background(255);
         parent.rectMode(3);
         parent.fill(255);
         parent.rect(parent.width/2,parent.height/2,parent.width/3*2,parent.height/3*2);
         parent.textAlign(3,3);
         parent.fill(0);
         parent.textSize(70);
-        parent.text("Insert your expense",parent.width/2,parent.height/3);
+        parent.text("Insert your expense",parent.width/2,parent.height/4);
         parent.textAlign(0,0);
         parent.textSize(20);
         parent.text("Name",nameField.getPosition()[0],nameField.getPosition()[1]-(nameField.getHeight()/2));
         nameField.show();
         parent.text("Description (Max 50 characters):",descField.getPosition()[0],descField.getPosition()[1]-(descField.getHeight()/2));
         descField.show();
+        parent.text("Amount:",amountField.getPosition()[0],amountField.getPosition()[1]-(descField.getHeight()/2));
+        amountField.show();
         done.show();
         parent.text("Expense category",select.getPosition()[0],select.getPosition()[1]-(selectPos/2));
         select.show();
@@ -64,6 +68,7 @@ public class AddExpense {
         select.hide();
         done.hide();
         exit.hide();
+        amountField.hide();
     }
 
     public void doneCallback(Model m, ArrayList<ExpenseController> list) {
@@ -73,12 +78,17 @@ public class AddExpense {
         descField.clear();
         String name = nameField.getText();
         String desc = descField.getText();
+        float amount = Float.parseFloat(amountField.getText());
         select.setLabel("Category");
         System.out.println(name + desc + selectStatus);
+        ExpenseController item = new ExpenseController(name,new LocalDate(java.time.LocalDate.now()),Categories.values()[selectStatus],amount,desc,parent);
+        list.add(item);
+        list.add(item);
     }
 
     public void categoryCallback(ControlEvent event) {
         selectStatus = (int) event.getController().getValue();
+        System.out.println("ciao");
     }
 
     public Textfield getNameField() {

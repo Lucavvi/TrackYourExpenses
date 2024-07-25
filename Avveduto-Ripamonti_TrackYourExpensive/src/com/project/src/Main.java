@@ -106,10 +106,12 @@ public class Main extends PApplet {
     public void add(ControlEvent event) {
         if(event.isFrom(model.expense.getAddButton())) {
             model.expense.getAddButton().hide();
-            model.screen[1] = false;
-            model.expense.filter.hideList();
-            model.expense.order.hideList();
+            model.screen[1] = true;
+            model.expense.filter.getList().lock();
+            model.expense.order.getList().lock();
             model.expense.getAdx().showMenu();
+            model.expense.getSettings().hide();
+            model.expense.addCallback();
         }
     }
 
@@ -129,8 +131,12 @@ public class Main extends PApplet {
 
     public void exit(ControlEvent event) {
         if(event.isFrom(model.expense.getAdx().getExit())) {
+            background(255);
             model.screen[1] = true;
             model.expense.getAdx().hideMenu();
+            model.expense.filter.getList().unlock();
+            model.expense.order.getList().unlock();
+            model.expense.setOn(true);
         }
     }
 
