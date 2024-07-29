@@ -1,15 +1,16 @@
 package com.project.src.graphic;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.format.TextStyle;
-import java.util.Locale;
+import java.util.*;
 
+import com.project.src.expense.Categories;
+import com.project.src.expense.ExpenseController;
 import controlP5.ControlEvent;
 import controlP5.ControlP5;
 import controlP5.DropdownList;
 import processing.core.PApplet;
-
-import javax.swing.text.Style;
 
 public class graphicPage {
     private DropdownList select;
@@ -18,16 +19,18 @@ public class graphicPage {
     private int range;
     private LocalDate target[];
     private String names[];
+    private float averages[];
+    private float points[];
 
     public graphicPage(PApplet parent, ControlP5 cp5) {
         this.cp5 = cp5;
         this.parent = parent;
         select = this.cp5.addDropdownList("range")
                 .setBarHeight(20)
-                .setItemHeight(20).setPosition(parent.width-parent.width/3,15)
-                .setSize(200,100).close()
+                .setItemHeight(20).setPosition(parent.width - parent.width / 3, 15)
+                .setSize(200, 100).close()
                 .setColorBackground(0).hide();
-        select.addItem("3 months",0);
+        select.addItem("3 months", 0);
         select.addItem("6 months", 1);
         select.addItem("12 months", 2);
         target = new LocalDate[2];
@@ -37,14 +40,20 @@ public class graphicPage {
 
     public void selectCallBack(ControlEvent event) {
         switch ((int) event.getController().getValue()) {
-            case 0 -> {range = 3;}
-            case 1 -> {range = 6;}
-            case 2 -> {range = 12;}
+            case 0 -> {
+                range = 3;
+            }
+            case 1 -> {
+                range = 6;
+            }
+            case 2 -> {
+                range = 12;
+            }
         }
         target[1] = target[0].minusMonths(range);
     }
 
-    public void showInterface() {
+    public void showInterface(ArrayList<ExpenseController> list) {
         parent.background(255);
         float height = parent.height;
         float width = parent.width;
@@ -54,25 +63,70 @@ public class graphicPage {
         select.show();
         parent.strokeWeight(2);
         parent.stroke(0);
-        parent.line(width/3,height-height/3,width/3,height/3);
-        parent.line(width/3,height-height/3,width-width/3,height-height/3);
-        float distance = parent.dist(width/3,height-height/3,width-width/3 - 20,height-height/3);
+        parent.line(width / 3, height - height / 3, width / 3, height / 3);
+        parent.line(width / 3, height - height / 3, width - width / 3, height - height / 3);
+        float distance = parent.dist(width / 3, height - height / 3, width - width / 3 - 20, height - height / 3);
         parent.strokeWeight(2);
         parent.stroke(0);
-        if(range != 1) {
+        if (range != 1) {
             names = new String[range];
-            for(int i = range - 1; i >= 0; i--) {
+            for (int i = range - 1; i >= 0; i--) {
                 names[i] = LocalDate.now().minusMonths(i).getMonth().getDisplayName(TextStyle.SHORT, Locale.ITALIAN);
             }
             float dividedDistance = distance / range;
-            parent.textAlign(3,3);
+            parent.textAlign(3, 3);
             parent.textSize(16);
             parent.fill(0);
             for (float i = 1, x = width / 3 + dividedDistance, index = names.length - 1; i <= range; i++, x += dividedDistance, index--) {
                 parent.line(x, height - height / 3 - 50, x, height - height / 3 + 50);
-                parent.text(names[(int)index],x,height - height / 3 + 70);
+                parent.text(names[(int) index], x, height - height / 3 + 70);
+            }
+            averages = new float[range];
+            for (int i = 0; i < range; i++) {
+                averages[i] = calculateAverage(list, LocalDate.now().minusMonths(i).getMonth());
+                if (Float.isNaN(averages[i])) averages[i] = 0;
+            }
+            points = new float[range];
+            for (int i = 0; i < points.length; i++) points[i] = calculateY(averages[i]);
+            for (int i = 0; i < points.length; i++) System.out.println(points[i]);
+            parent.strokeWeight(20);
+            parent.stroke(0);
+            for (float i = 0, x = width / 3 + dividedDistance; i < points.length; i++, x += dividedDistance) {
+                parent.point(x, points[(int) i]);
             }
         }
+    }
+
+    private float calculateAverage(ArrayList<ExpenseController> list, Month m) {
+        ArrayList<Float> filteredList = new ArrayList<>();
+        for (ExpenseController e : list) {
+            if (Month.values()[e.getModel().getDate().getMonth() - 1] == m) {
+                filteredList.add(e.getModel().getAmount());
+            }
+        }
+        float sum = 0;
+        for (float e : filteredList) sum += e;
+        return sum / filteredList.size();
+    }
+
+    private float calculateY(float value) {
+        if (value != 0) return value * 2.5f;
+        else return parent.height - parent.height / 3;
+    }
+
+    private float[] scale(float values[]) {
+        float max = 0;
+        float result[] = new float[values.length];
+        for (float x : values) {
+            if (x > max) {
+                max = x;
+            }
+        }
+        float unit = max/values.length;
+        for(int i = 0; i < values.length; i++) {
+            result[i] = max/values[i];
+        }
+        return result;
     }
 
     public void hideInterface() {

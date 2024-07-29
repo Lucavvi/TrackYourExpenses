@@ -57,7 +57,7 @@ public class Main extends PApplet {
             model.expense.draw();
         }
         else if(model.screen[2]) {
-           model.graphicPage.showInterface();
+           model.graphicPage.showInterface(model.expense.getListToShow());
         }
         else{
             //Model.acc = model.dao.login("Angelo","qwerty");
