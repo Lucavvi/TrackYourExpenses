@@ -5,6 +5,7 @@ import com.project.src.accountManager.*;
 import com.project.src.filters.*;
 import processing.core.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -163,7 +164,7 @@ public class Main extends PApplet {
      */
     public void reorder(ControlEvent event) {
         if (event.isFrom(model.expense.order.getList())) {
-            Collections.sort(model.dao.getExpensesByAccount(Model.getAccount()), model.expense.order.callback((int) event.getController().getValue()));
+           model.expense.reorderCallback(model.expense.order.callback((int) event.getController().getValue()));
         }
     }
 

@@ -50,7 +50,6 @@ public class FilterObj {
             case 2 -> {target = Categories.PLEASURE;}
             case 3 -> {target = Categories.ALL;}
         }
-        System.out.println(target);
         return target;
     }
 

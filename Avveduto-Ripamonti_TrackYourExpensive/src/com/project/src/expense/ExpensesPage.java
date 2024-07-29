@@ -8,6 +8,8 @@ import controlP5.Button;
 import controlP5.ControlP5;
 import processing.core.PApplet;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * Represents the page for displaying and managing expenses.
@@ -82,6 +84,11 @@ public class ExpensesPage {
      */
     public ArrayList<ExpenseController> getListToShow(){
         return new ArrayList<ExpenseController>(listToShow);
+    }
+
+    public void reorderCallback(Comparator c) {
+        listToShow = database.getExpensesByAccount(Model.getAccount());
+        Collections.sort(listToShow,c);
     }
 
     /**
