@@ -86,7 +86,7 @@ public class AddExpense {
     public boolean doneCallback(Model m, ArrayList<ExpenseController> list) {
         done.show();
         hideMenu();
-        boolean check = true;
+        boolean check = false;
         String name = nameField.getText() == null ? "" : nameField.getText();
         String desc = descField.getText() == null ? "" : descField.getText();
         float amount = 0;
@@ -95,15 +95,13 @@ public class AddExpense {
                 if (selectStatus != 0) {
                     try {
                         amount = Float.parseFloat(amountField.getText());
+                        check = true;
                     } catch (Exception e) {
-                        check = false;
+                        e.printStackTrace();
                     }
                 }
-                else check = false;
             }
-            else check = false;
         }
-        else check = false;
         nameField.clear();
         descField.clear();
         amountField.clear();

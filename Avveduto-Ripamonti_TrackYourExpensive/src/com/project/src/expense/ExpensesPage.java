@@ -57,7 +57,6 @@ public class ExpensesPage {
         processing.rect(0, 0, processing.width, 50);
         processing.stroke(0);
         if(on) {
-            listToShow = database.getExpensesByAccount(Model.getAccount());
             filter.showList();
             order.showList();
             settings.show();

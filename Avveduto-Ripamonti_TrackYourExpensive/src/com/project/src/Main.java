@@ -71,6 +71,7 @@ public class Main extends PApplet {
         if (model.form.submitForm()) {
             model.screen[0] = false;
             model.screen[1] = true;
+            model.expense.changeListToShow(model.dao.getExpensesByAccount(Model.getAccount()));
         }
     }
 
@@ -99,7 +100,7 @@ public class Main extends PApplet {
     public void select(ControlEvent theEvent) {
         if (theEvent.isFrom(model.expense.filter.getList())) {
             int cat = (int) theEvent.getController().getValue();
-            model.expense.changeListToShow(CategoryFilter.filter(model.expense.getListToShow(),model.expense.filter.callback(cat)));
+            model.expense.changeListToShow(CategoryFilter.filter(model.dao.getExpensesByAccount(Model.getAccount()),model.expense.filter.callback(cat)));
         }
     }
 
@@ -148,6 +149,7 @@ public class Main extends PApplet {
             model.expense.order.getList().unlock();
             model.screen[1] = true;
             model.expense.setOn(true);
+            model.expense.changeListToShow(model.dao.getExpensesByAccount(Model.getAccount()));
         }
     }
 
@@ -161,7 +163,7 @@ public class Main extends PApplet {
      */
     public void reorder(ControlEvent event) {
         if (event.isFrom(model.expense.order.getList())) {
-            Collections.sort(model.expense.getListToShow(), model.expense.order.callback((int) event.getController().getValue()));
+            Collections.sort(model.dao.getExpensesByAccount(Model.getAccount()), model.expense.order.callback((int) event.getController().getValue()));
         }
     }
 
