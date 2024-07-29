@@ -57,7 +57,7 @@ public class Main extends PApplet {
             model.expense.draw();
         }
         else if(model.screen[2]) {
-           background(0);
+           model.graphicPage.showInterface();
         }
         else{
             //Model.acc = model.dao.login("Angelo","qwerty");
@@ -127,6 +127,12 @@ public class Main extends PApplet {
             model.expense.getAdx().showMenu();
             model.expense.getSettings().hide();
             model.expense.addCallback();
+        }
+    }
+
+    public void range(ControlEvent event) {
+        if(event.isFrom(model.graphicPage.getSelect())) {
+            model.graphicPage.selectCallBack(event);
         }
     }
 

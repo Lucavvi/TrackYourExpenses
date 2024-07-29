@@ -1,5 +1,6 @@
 package com.project.src;
 
+import com.project.src.graphic.graphicPage;
 import controlP5.ControlP5;
 import com.project.src.accountManager.*;
 import com.project.src.expense.*;
@@ -44,6 +45,7 @@ public class Model {
 
     /** The AccountPage instance for managing account-related interactions. */
     AccountPage account;
+    graphicPage graphicPage;
 
 
     /**
@@ -65,6 +67,7 @@ public class Model {
         Arrays.fill(screen,false);
         screen[0]=true;
         account = new AccountPage(processing, cp5, dao);
+        graphicPage = new graphicPage(processing,cp5);
     }
 
     /**
