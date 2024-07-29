@@ -234,6 +234,14 @@ public class Main extends PApplet {
         Model.acc = null;
     }
 
+    /**
+     * Exports the current account data to a JSON file.
+     *
+     * This method calls the {@link AccountPage#exportData()} method to create
+     * a directory if it does not exist and writes the account data to a JSON file.
+     * It handles any potential errors during the directory creation or file writing
+     * process and updates the user interface with appropriate success or failure messages.
+     */
     public void exportData(){
         model.account.exportData();
     }
