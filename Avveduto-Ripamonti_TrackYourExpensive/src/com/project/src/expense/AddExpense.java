@@ -20,6 +20,7 @@ public class AddExpense {
     private int selectStatus;
     private Button exit;
     private Actions dbManager;
+    private boolean check;
 
     public AddExpense(ControlP5 cp5, PApplet parent, Actions db) {
         this.cp5 = cp5;
@@ -31,14 +32,16 @@ public class AddExpense {
         descField = cp5.addTextfield("desc").setColorForeground(parent.color(255)).setFont(parent.createFont("arial",25)).setPosition(parent.width/3,parent.height/2).setSize(200,40).setFocus(true).setColor(parent.color(255)).setColorActive(parent.color(255)).setColorBackground(0).setCaptionLabel("").hide();
         amountField = cp5.addTextfield("amount").setColorForeground(parent.color(255)).setFont(parent.createFont("arial",25)).setPosition(parent.width/3,parent.height/2+80).setSize(200,40).setFocus(true).setColor(parent.color(255)).setColorActive(parent.color(255)).setColorBackground(0).setCaptionLabel("").hide();
         select = this.cp5.addDropdownList("category")
-                .setLabel("Category").setBarHeight(20)
+                .setBarHeight(20)
                 .setItemHeight(20).setPosition(parent.width/3,parent.height/2+160)
                 .setSize(200,100).close()
                 .setColorBackground(0).hide();
-        select.addItem("FOOD", Categories.FOOD);
-        select.addItem("SHOPPING", Categories.SHOPPING);
-        select.addItem("PLEASURE", Categories.PLEASURE);
+        select.addItem("CATEGORY",-1);
+        select.addItem("FOOD",0);
+        select.addItem("SHOPPING", 1);
+        select.addItem("PLEASURE", 2);
         selectPos = select.getHeight();
+        check = false;
     }
 
     public void showMenu() {
@@ -62,6 +65,12 @@ public class AddExpense {
         parent.text("Expense category",select.getPosition()[0],select.getPosition()[1]-(selectPos/2));
         select.show();
         parent.rectMode(0);
+        if(check) {
+            parent.fill(255,0,0);
+            parent.textAlign(parent.CENTER,parent.CENTER);
+            parent.text("Error check text fields values",parent.width/2,exit.getPosition()[1] + exit.getHeight()/2);
+            parent.textAlign(parent.BASELINE,parent.BASELINE);
+        }
     }
 
     public void hideMenu() {
@@ -74,32 +83,42 @@ public class AddExpense {
         amountField.hide();
     }
 
-    public void doneCallback(Model m, ArrayList<ExpenseController> list) {
+    public boolean doneCallback(Model m, ArrayList<ExpenseController> list) {
         done.show();
         hideMenu();
         boolean check = true;
-        String name = nameField.getText();
-        String desc = descField.getText();
+        String name = nameField.getText() == null ? "" : nameField.getText();
+        String desc = descField.getText() == null ? "" : descField.getText();
         float amount = 0;
         if(!name.isEmpty() && name.length() < 20) {
             if(!desc.isEmpty() && desc.length() < (14*4)) {
-                try {
-                     amount = Float.parseFloat(amountField.getText());
-                }catch (Exception e) {
-                    check = false;
+                if (selectStatus != 0) {
+                    try {
+                        amount = Float.parseFloat(amountField.getText());
+                    } catch (Exception e) {
+                        check = false;
+                    }
                 }
+                else check = false;
             }
+            else check = false;
         }
-        if(check) {
-            select.setLabel("Category");
-            System.out.println(name + desc + selectStatus);
-            ExpenseController item = new ExpenseController(name, new LocalDate(java.time.LocalDate.now()), Categories.values()[selectStatus], amount, desc, parent);
-            Model.getAccount().addExpense(item);
-            dbManager.updateList(Model.getAccount());
-        }else System.out.println("sbagliato");
+        else check = false;
         nameField.clear();
         descField.clear();
         amountField.clear();
+        if(check) {
+            select.setLabel("Category");
+            ExpenseController item = new ExpenseController(name, new LocalDate(java.time.LocalDate.now()), Categories.values()[selectStatus - 1], amount, desc, parent);
+            Model.getAccount().addExpense(item);
+            dbManager.updateList(Model.getAccount());
+            this.check = false;
+            return true;
+        }
+        else {
+            this.check = true;
+            return false;
+        }
     }
 
     public void categoryCallback(ControlEvent event) {
