@@ -27,6 +27,7 @@ public class ExpensesPage {
     private Button add;
     private AddExpense adx;
     private Button settings;
+    private Button graphic;
     private boolean on;
 
     /**
@@ -46,6 +47,7 @@ public class ExpensesPage {
         order = new OrderObj(cp5,processing);
         adx = new AddExpense(cp5,processing,database);
         settings = cp5.addButton("account").setLabel("Account").setPosition(processing.width-0.5f*processing.width/3, 0.4f*processing.height/3).setSize(80, 30).hide();
+        graphic = cp5.addButton("graphic").setLabel("Graphic").setPosition(processing.width/3, 10).setSize(80, 30).setColorBackground(0).hide();
         add = cp5.addButton("add").setLabel("Add").setPosition(processing.width-0.5f*processing.width/3, processing.height-0.5f*processing.height/3).setSize(80, 30).hide();
     }
 
@@ -63,6 +65,7 @@ public class ExpensesPage {
             order.showList();
             settings.show();
             add.show();
+            graphic.show();
             if (!listToShow.isEmpty()) ExpenseController.renderList(processing, listToShow, 50, 80);
             else {
                 processing.textAlign(processing.CENTER, processing.CENTER);
@@ -110,6 +113,10 @@ public class ExpensesPage {
 
     public void setOn(boolean v) {
         on = v;
+    }
+
+    public Button getGraphic() {
+        return graphic;
     }
 
     public Button getSettings() {

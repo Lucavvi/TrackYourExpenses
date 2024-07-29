@@ -61,7 +61,7 @@ public class Model {
         dao = new DBManager();
         form=new FormController(processing,cp5,dao);
         expense = new ExpensesPage(processing,cp5,dao);
-        screen = new boolean [2];
+        screen = new boolean[3];
         Arrays.fill(screen,false);
         screen[0]=true;
         account = new AccountPage(processing, cp5, dao);

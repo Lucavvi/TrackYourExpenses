@@ -56,6 +56,9 @@ public class Main extends PApplet {
         else if(model.screen[1]) {
             model.expense.draw();
         }
+        else if(model.screen[2]) {
+           background(0);
+        }
         else{
             //Model.acc = model.dao.login("Angelo","qwerty");
             model.account.draw(Model.acc);
@@ -105,6 +108,16 @@ public class Main extends PApplet {
         }
     }
 
+    public void graphic() {
+        Arrays.fill(model.screen,false);
+        model.expense.getSettings().hide();
+        model.expense.getAddButton().hide();
+        model.expense.filter.hideList();
+        model.expense.order.hideList();
+        model.expense.getGraphic().hide();
+        model.screen[2] = true;
+    }
+
     public void add(ControlEvent event) {
         if(event.isFrom(model.expense.getAddButton())) {
             model.expense.getAddButton().hide();
@@ -124,6 +137,7 @@ public class Main extends PApplet {
             model.expense.getAddButton().hide();
             model.expense.filter.hideList();
             model.expense.order.hideList();
+            model.expense.getGraphic().hide();
         }
     }
 
