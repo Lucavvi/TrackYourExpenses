@@ -234,6 +234,10 @@ public class Main extends PApplet {
         Model.acc = null;
     }
 
+    public void exportData(){
+        model.account.exportData();
+    }
+
     /**
      * The main method to launch the application.
      *
