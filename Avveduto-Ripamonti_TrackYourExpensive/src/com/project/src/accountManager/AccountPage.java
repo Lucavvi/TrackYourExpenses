@@ -13,7 +13,7 @@ import java.nio.file.*;
 
 /**
  * Manages the account page for the application.
- * <p>
+ *
  * This class is responsible for displaying and handling interactions
  * on the account management page, including showing/hiding the password,
  * deleting the account, and deleting the list of expenses.
@@ -113,7 +113,7 @@ public class AccountPage {
 
     /**
      * Toggles the visibility of the password field.
-     * <p>
+     *
      * This method alternates between showing and hiding the password.
      */
     public void showPassword() {
@@ -129,7 +129,7 @@ public class AccountPage {
 
     /**
      * Deletes the account from the database.
-     * <p>
+     *
      * This method deletes the current account from the database.
      */
     public void deleteAccount() {
@@ -138,7 +138,7 @@ public class AccountPage {
 
     /**
      * Deletes the list of expenses for the current account.
-     * <p>
+     *
      * This method resets the expenses for the current account and updates the database.
      */
     public void deleteList() {
@@ -147,6 +147,11 @@ public class AccountPage {
         database.updateList(acc);
     }
 
+    /**
+     * Exports the current account data to a JSON file.
+     *
+     * This method creates a directory if it does not exist and writes the account data to a JSON file.
+     */
     public void exportData() {
         dirCheck = false;
         writerCheck = false;
@@ -177,6 +182,12 @@ public class AccountPage {
         successCheck = true;
     }
 
+    /**
+     * Displays a message on the screen.
+     *
+     * @param msg the message to display
+     * @param c   the color of the message
+     */
     private void showMessage(String msg, Color c) {
         processing.fill(c.getRGB());
         processing.textSize(30);
