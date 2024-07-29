@@ -86,13 +86,12 @@ public class graphicPage {
                 averages[i] = calculateAverage(list, LocalDate.now().minusMonths(i).getMonth());
                 if (Float.isNaN(averages[i])) averages[i] = 0;
             }
-            points = new float[range];
-            for (int i = 0; i < points.length; i++) points[i] = calculateY(averages[i]);
-            for (int i = 0; i < points.length; i++) System.out.println(points[i]);
+            points = scale(averages);
             parent.strokeWeight(20);
             parent.stroke(0);
             for (float i = 0, x = width / 3 + dividedDistance; i < points.length; i++, x += dividedDistance) {
                 parent.point(x, points[(int) i]);
+                System.out.println(points[(int) i]);
             }
         }
     }
@@ -109,22 +108,25 @@ public class graphicPage {
         return sum / filteredList.size();
     }
 
-    private float calculateY(float value) {
-        if (value != 0) return value * 2.5f;
-        else return parent.height - parent.height / 3;
-    }
 
     private float[] scale(float values[]) {
         float max = 0;
         float result[] = new float[values.length];
+        float longness = parent.dist(parent.width/3, parent.height-parent.height/3, parent.width/3, parent.height/3);
         for (float x : values) {
             if (x > max) {
                 max = x;
             }
         }
-        float unit = max/values.length;
+        float unit = longness/values.length;
         for(int i = 0; i < values.length; i++) {
-            result[i] = max/values[i];
+            if(values[i] == 0) {
+                values[i] = parent.height-parent.height/3;
+            }
+            else if(values[i] == max) result[i] = parent.height/3;
+            else {
+                result[i] = max/result[i]*unit;
+            }
         }
         return result;
     }
