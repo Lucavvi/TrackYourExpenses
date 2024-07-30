@@ -46,7 +46,7 @@ public class OrderObj {
      * Returns the appropriate comparator based on the selected ordering criteria.
      *
      * @param cat the index of the selected ordering option
-     * @return a Comparator for ordering {@link ExpenseController} objects based on the selected criteria
+     * @return a Comparator for ordering ExpenseController objects based on the selected criteria
      */
     public Comparator<ExpenseController> callback(int cat) {
         Comparator<ExpenseController> comparator = null;

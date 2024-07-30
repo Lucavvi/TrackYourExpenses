@@ -30,7 +30,7 @@ public class Main extends PApplet {
 
     /**
      * Initializes the application by setting the window title, creating
-     * a new {@link Model} instance, and populating the list of expenses.
+     * a new Model instance, and populating the list of expenses.
      *
      * This method also sets up sample expenses and initializes the list
      * to be displayed.
@@ -57,7 +57,6 @@ public class Main extends PApplet {
            model.graphicPage.showInterface(model.expense.getListToShow());
         }
         else{
-            //Model.acc = model.dao.login("Angelo","qwerty");
             model.account.draw(Model.acc);
         }
     }
@@ -102,7 +101,7 @@ public class Main extends PApplet {
      * This method updates the list of expenses to display based on the
      * selected category from the dropdown list.
      *
-     * @param theEvent the {@link ControlEvent} containing the selection data
+     * @param theEvent the ControlEvent containing the select data
      */
     public void select(ControlEvent theEvent) {
         if (theEvent.isFrom(model.expense.filter.getList())) {
@@ -133,7 +132,7 @@ public class Main extends PApplet {
      * This method hides the add button, locks filters, shows the add expense
      * menu, and triggers the add expense callback.
      *
-     * @param event the {@link ControlEvent} containing the event data
+     * @param event the ControlEvent containing the event data
      */
     public void add(ControlEvent event) {
         if(event.isFrom(model.expense.getAddButton())) {
@@ -152,7 +151,7 @@ public class Main extends PApplet {
      *
      * This method calls the select callback for the graphic page.
      *
-     * @param event the {@link ControlEvent} containing the event data
+     * @param event the ControlEvent containing the event data
      */
     public void range(ControlEvent event) {
         if(event.isFrom(model.graphicPage.getSelect())) {
@@ -166,7 +165,7 @@ public class Main extends PApplet {
      * This method hides various UI elements and sets the screen state to
      * show the account settings.
      *
-     * @param event the {@link ControlEvent} containing the event data
+     * @param event the ControlEvent containing the event data
      */
     public void account(ControlEvent event) {
         if(event.isFrom(model.expense.getSettings())) {
@@ -184,7 +183,7 @@ public class Main extends PApplet {
      *
      * This method calls the category callback for the add expense menu.
      *
-     * @param event the {@link ControlEvent} containing the event data
+     * @param event the ControlEvent containing the event data
      */
     public void category(ControlEvent event) {
         if(event.isFrom(model.expense.getAdx().getSelect())) model.expense.getAdx().categoryCallback(event);
@@ -196,7 +195,7 @@ public class Main extends PApplet {
      * This method hides the add expense menu and resets the screen state to
      * show the main expense list.
      *
-     * @param event the {@link ControlEvent} containing the event data
+     * @param event the ControlEvent containing the event data
      */
     public void exit(ControlEvent event) {
         if(event.isFrom(model.expense.getAdx().getExit())) {
@@ -215,7 +214,7 @@ public class Main extends PApplet {
      * This method triggers the done callback for the add expense menu, updates
      * the list of expenses, and resets the screen state to show the main expense list.
      *
-     * @param event the {@link ControlEvent} containing the event data
+     * @param event the ControlEvent containing the event data
      */
     public void done(ControlEvent event) {
         if(event.isFrom(model.expense.getAdx().getDone()) &&  model.expense.getAdx().doneCallback(model,model.expense.getListToShow())) {
@@ -235,7 +234,7 @@ public class Main extends PApplet {
      * This method reorder the list of expenses to display based on the
      * order from the dropdown list.
      *
-     * @param event the {@link ControlEvent} containing the selection data
+     * @param event the ControlEvent containing the selection data
      */
     public void reorder(ControlEvent event) {
         if (event.isFrom(model.expense.order.getList())) {
@@ -298,7 +297,7 @@ public class Main extends PApplet {
     /**
      * Exports the current account data to a JSON file.
      *
-     * This method calls the {@link AccountPage#exportData()} method to create
+     * This method calls the "AccountPage.exportData()" method to create
      * a directory if it does not exist and writes the account data to a JSON file.
      * It handles any potential errors during the directory creation or file writing
      * process and updates the user interface with appropriate success or failure messages.

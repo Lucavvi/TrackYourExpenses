@@ -37,10 +37,10 @@ public class FilterObj {
     }
 
     /**
-     * Converts the index of the selected item to a {@link Categories} enum value.
+     * Converts the index of the selected item to a Categories enum value.
      *
      * @param cat the index of the selected item
-     * @return the corresponding {@link Categories} value
+     * @return the corresponding Categories value
      */
     public Categories callback(int cat) {
         Categories target = null;

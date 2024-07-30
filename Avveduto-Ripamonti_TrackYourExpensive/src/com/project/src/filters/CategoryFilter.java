@@ -15,7 +15,7 @@ public class CategoryFilter {
 
     /**
      * Filters the given list of expenses based on the specified category.
-     * If the category is {@link Categories#ALL}, it returns the entire list of expenses.
+     * If the category is "Categories.ALL", it returns the entire list of expenses.
      * Otherwise, it returns only those expenses that match the specified category.
      *
      * @param expenses the list of expenses to filter
