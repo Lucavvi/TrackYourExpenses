@@ -148,11 +148,9 @@ public class graphicPage {
      */
     private float[] scale(float[] values) {
         float max = 0;
-        for (float x : values) {
-            if (x > max) {
-                max = x;
-            }
-        }
+        float result[] = new float[values.length];
+        float longness = parent.dist(parent.width / 3, parent.height - parent.height / 3, parent.width / 3, parent.height / 3);
+
         float[] result = new float[values.length];
         float graphHeight = parent.height - (parent.height / 3) * 2;
         for (int i = 0; i < values.length; i++) {
@@ -160,14 +158,17 @@ public class graphicPage {
                 result[i] = parent.height - (parent.height / 3);
             } else {
                 result[i] = parent.height - ((values[i] / max) * graphHeight + (parent.height / 3));
+
             }
         }
         return result;
     }
 
+
     /**
      * Hides the graphical interface.
      */
+
     public void hideInterface() {
         select.hide();
     }
