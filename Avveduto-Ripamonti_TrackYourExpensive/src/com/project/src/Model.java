@@ -21,29 +21,13 @@ import java.util.*;
  * @version 1.0
  */
 public class Model {
-
-    /** The ControlP5 instance for UI control management. */
     ControlP5 cp5;
-
-    /** The FormController instance for managing com.project.src.form interactions. */
     FormController form;
-
-    /** The ExpensesPage instance for managing expense-related interactions. */
     ExpensesPage expense;
-
-    /** The DBManager instance for database interactions. */
     DBManager dao;
-
-    /** The current category filter applied to the expenses. */
     Categories target;
-
-    /** Array of boolean values representing different screen states. */
     boolean[] screen;
-
-    /** The current Account instance representing the logged-in user. */
     static Account acc;
-
-    /** The AccountPage instance for managing account-related interactions. */
     AccountPage account;
     graphicPage graphicPage;
 
@@ -55,8 +39,8 @@ public class Model {
      * FormController for handling form actions, and ExpensesPage for managing expense interactions.
      * Sets up the initial screen state, with the first screen activated.
      *
-     * @param processing the {@link PApplet} instance used for creating and managing
-     *                   the UI controls and other visual elements.
+     * @param processing the PApplet instance used for creating and managing
+     * the UI controls and other visual elements.
      */
     public Model(PApplet processing) {
         cp5 = new ControlP5(processing);
@@ -73,7 +57,7 @@ public class Model {
     /**
      * Changes the current account to the specified account.
      *
-     * @param a the new {@link Account} to be set as the current account
+     * @param a the new Account to be set as the current account
      */
     public static void changeAccount(Account a) {
         acc = a;
@@ -82,7 +66,7 @@ public class Model {
     /**
      * Retrieves the current account.
      *
-     * @return the current {@link Account}
+     * @return the current Account
      */
     public static Account getAccount() { return acc; }
 }
