@@ -112,24 +112,25 @@ public class graphicPage {
     private float[] scale(float values[]) {
         float max = 0;
         float result[] = new float[values.length];
-        float longness = parent.dist(parent.width/3, parent.height-parent.height/3, parent.width/3, parent.height/3);
+        float longness = parent.dist(parent.width / 3, parent.height - parent.height / 3, parent.width / 3, parent.height / 3);
         for (float x : values) {
             if (x > max) {
                 max = x;
             }
         }
-        float unit = longness/values.length;
-        for(int i = 0; i < values.length; i++) {
-            if(values[i] == 0) {
-                values[i] = parent.height-parent.height/3;
-            }
-            else if(values[i] == max) result[i] = parent.height/3;
-            else {
-                result[i] = max/result[i]*unit;
+        float unit = longness / values.length;
+        for (int i = 0; i < values.length; i++) {
+            if (values[i] == 0) {
+                result[i] = parent.height - parent.height / 3;
+            } else if (values[i] == max) {
+                result[i] = parent.height / 3;
+            } else {
+                result[i] = values[i] / max * unit;
             }
         }
         return result;
     }
+
 
     public void hideInterface() {
         select.hide();
