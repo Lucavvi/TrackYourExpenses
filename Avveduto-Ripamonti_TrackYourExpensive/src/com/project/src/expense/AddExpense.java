@@ -7,13 +7,18 @@ import processing.core.PApplet;
 
 import java.util.ArrayList;
 
+/**
+ * The AddExpense class handles the UI and logic for adding a new expense in the application.
+ *
+ * @author Angelo Ripamonti & Luca Avveduto
+ * @version 1.0
+ */
 public class AddExpense {
     private ControlP5 cp5;
     private PApplet parent;
     private Textfield nameField;
     private Textfield descField;
     private Textfield amountField;
-
     private DropdownList select;
     private Button done;
     private float selectPos;
@@ -22,6 +27,13 @@ public class AddExpense {
     private Actions dbManager;
     private boolean check;
 
+    /**
+     * Constructor for AddExpense.
+     *
+     * @param cp5   The ControlP5 instance used for creating UI elements.
+     * @param parent The PApplet instance used as the parent.
+     * @param db    The Actions instance used for database operations.
+     */
     public AddExpense(ControlP5 cp5, PApplet parent, Actions db) {
         this.cp5 = cp5;
         this.parent = parent;
@@ -44,6 +56,9 @@ public class AddExpense {
         check = false;
     }
 
+    /**
+     * Displays the expense input menu on the screen.
+     */
     public void showMenu() {
         exit.show();
         parent.rectMode(3);
@@ -73,6 +88,9 @@ public class AddExpense {
         }
     }
 
+    /**
+     * Hides the expense input menu from the screen.
+     */
     public void hideMenu() {
         parent.background(255);
         nameField.hide();
@@ -83,6 +101,13 @@ public class AddExpense {
         amountField.hide();
     }
 
+    /**
+     * Handles the logic for the done button callback, including validation and adding the expense to the model.
+     *
+     * @param m    The Model instance.
+     * @param list The list of ExpenseController instances.
+     * @return True if the expense was successfully added, false otherwise.
+     */
     public boolean doneCallback(Model m, ArrayList<ExpenseController> list) {
         done.show();
         hideMenu();
@@ -119,26 +144,38 @@ public class AddExpense {
         }
     }
 
+    /**
+     * Callback for handling category selection.
+     *
+     * @param event The ControlEvent instance.
+     */
     public void categoryCallback(ControlEvent event) {
         selectStatus = (int) event.getController().getValue();
     }
 
-    public Textfield getNameField() {
-        return nameField;
-    }
-
-    public Textfield getDescField() {
-        return descField;
-    }
-
+    /**
+     * Gets the category dropdown list.
+     *
+     * @return The category DropdownList instance.
+     */
     public DropdownList getSelect() {
         return select;
     }
 
+    /**
+     * Gets the done button.
+     *
+     * @return The done Button instance.
+     */
     public Button getDone() {
         return done;
     }
 
+    /**
+     * Gets the exit button.
+     *
+     * @return The exit Button instance.
+     */
     public Button getExit() {
         return exit;
     }

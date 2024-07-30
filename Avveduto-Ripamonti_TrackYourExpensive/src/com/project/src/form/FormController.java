@@ -6,7 +6,7 @@ import com.project.src.accountManager.*;
 import processing.core.PApplet;
 
 /**
- * MVC Controller class for managing the com.project.src.form page.
+ * MVC Controller class for managing the form page.
  * Handles interactions between the view and the model, including user input and com.project.src.form submission.
  *
  * @version 1.0
@@ -30,8 +30,8 @@ public class FormController {
     }
 
     /**
-     * Draws the com.project.src.form page.
-     * If there is a failure condition, displays an error message; otherwise, renders the com.project.src.form.
+     * Draws the form page.
+     * If there is a failure condition, displays an error message; otherwise, renders the form.
      */
     public void draw(){
         if(model.check)
@@ -41,7 +41,7 @@ public class FormController {
     }
 
     /**
-     * Handles the com.project.src.form submission for login.
+     * Handles the form submission for login.
      * Verifies the credentials and logs in the user. Displays an error message if credentials are invalid.
      *
      * @throws AccessException if the credentials are incorrect or missing
@@ -72,7 +72,7 @@ public class FormController {
     }
 
     /**
-     * Handles the com.project.src.form submission for registration.
+     * Handles the form submission for registration.
      * Verifies the credentials and registers the user if the `register` flag is true.
      * Displays an error message if credentials are invalid or registration fails.
      *

@@ -13,9 +13,9 @@ public class Color implements Serializable {
     private int value;
 
     /**
-     * Constructs a Color object from a {@link java.awt.Color} object.
+     * Constructs a Color object from a java.awt.Color object.
      *
-     * @param color the {@link java.awt.Color} object
+     * @param color the java.awt.Color object
      */
     public Color(java.awt.Color color){
         this.value = (color.getAlpha() << 24) | (color.getRed() << 16) | (color.getGreen() << 8) | color.getBlue();
