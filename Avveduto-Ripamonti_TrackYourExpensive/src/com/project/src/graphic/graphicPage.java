@@ -14,6 +14,9 @@ import processing.core.PApplet;
 
 /**
  * Represents the graphical interface for displaying expense data over a selected range of months.
+ *
+ * @author Angelo Ripamonti & Luca Avveduto
+ * @version 1.0
  */
 public class graphicPage {
     private DropdownList select;
