@@ -3,7 +3,7 @@ package com.project.src.form;
 import com.project.src.accountManager.*;
 
 /**
- * com.project.src.Model class for managing user authentication and registration.
+ * Model class for managing user authentication and registration.
  * This class handles interactions with the database to log in or register a user.
  *
  * @author Angelo Ripamonti & Luca Avveduto

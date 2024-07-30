@@ -3,7 +3,7 @@ import processing.core.PApplet;
 import controlP5.*;
 
 /**
- * View class for managing the com.project.src.form page in the MVC pattern.
+ * View class for managing the form page in the MVC pattern.
  * This class handles the display and layout of the user interface elements
  * for login and registration forms.
  *
@@ -38,8 +38,8 @@ class FormView {
     }
 
     /**
-     * Draws the com.project.src.form page on the screen, including the background, text fields, and buttons.
-     * Displays the com.project.src.form with the appropriate labels and positions.
+     * Draws the form page on the screen, including the background, text fields, and buttons.
+     * Displays the form with the appropriate labels and positions.
      */
     void draw(){
         processing.background(255);
@@ -63,7 +63,7 @@ class FormView {
     }
 
     /**
-     * Hides all UI components of the com.project.src.form, including text fields and buttons.
+     * Hides all UI components of the form, including text fields and buttons.
      */
     public void hideField(){
         usernameField.hide();
