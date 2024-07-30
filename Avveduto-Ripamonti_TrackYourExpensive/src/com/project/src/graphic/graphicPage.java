@@ -12,24 +12,36 @@ import controlP5.ControlP5;
 import controlP5.DropdownList;
 import processing.core.PApplet;
 
+/**
+ * Represents the graphical interface for displaying expense data over a selected range of months.
+ */
 public class graphicPage {
     private DropdownList select;
     private PApplet parent;
     private ControlP5 cp5;
     private int range;
-    private LocalDate target[];
-    private String names[];
-    private float averages[];
-    private float points[];
+    private LocalDate[] target;
+    private String[] names;
+    private float[] averages;
+    private float[] points;
 
+    /**
+     * Initializes a new instance of the graphicPage class.
+     *
+     * @param parent The PApplet instance.
+     * @param cp5 The ControlP5 instance.
+     */
     public graphicPage(PApplet parent, ControlP5 cp5) {
         this.cp5 = cp5;
         this.parent = parent;
         select = this.cp5.addDropdownList("range")
                 .setBarHeight(20)
-                .setItemHeight(20).setPosition(parent.width - parent.width / 3, 15)
-                .setSize(200, 100).close()
-                .setColorBackground(0).hide();
+                .setItemHeight(20)
+                .setPosition(parent.width - parent.width / 3, 15)
+                .setSize(200, 100)
+                .close()
+                .setColorBackground(0)
+                .hide();
         select.addItem("3 months", 0);
         select.addItem("6 months", 1);
         select.addItem("12 months", 2);
@@ -38,21 +50,25 @@ public class graphicPage {
         range = 1;
     }
 
+    /**
+     * Callback function for handling selection events from the dropdown list.
+     *
+     * @param event The ControlEvent instance.
+     */
     public void selectCallBack(ControlEvent event) {
         switch ((int) event.getController().getValue()) {
-            case 0 -> {
-                range = 3;
-            }
-            case 1 -> {
-                range = 6;
-            }
-            case 2 -> {
-                range = 12;
-            }
+            case 0 -> range = 3;
+            case 1 -> range = 6;
+            case 2 -> range = 12;
         }
         target[1] = target[0].minusMonths(range);
     }
 
+    /**
+     * Displays the graphical interface for the expense data.
+     *
+     * @param list The list of ExpenseController instances.
+     */
     public void showInterface(ArrayList<ExpenseController> list) {
         parent.background(255);
         float height = parent.height;
@@ -68,77 +84,108 @@ public class graphicPage {
         float distance = parent.dist(width / 3, height - height / 3, width - width / 3 - 20, height - height / 3);
         parent.strokeWeight(2);
         parent.stroke(0);
+
         if (range != 1) {
             names = new String[range];
             for (int i = range - 1; i >= 0; i--) {
                 names[i] = LocalDate.now().minusMonths(i).getMonth().getDisplayName(TextStyle.SHORT, Locale.ITALIAN);
             }
             float dividedDistance = distance / range;
-            parent.textAlign(3, 3);
+            parent.textAlign(PApplet.CENTER, PApplet.CENTER);
             parent.textSize(16);
             parent.fill(0);
-            for (float i = 1, x = width / 3 + dividedDistance, index = names.length - 1; i <= range; i++, x += dividedDistance, index--) {
-                parent.line(x, height - height / 3 - 50, x, height - height / 3 + 50);
-                parent.text(names[(int) index], x, height - height / 3 + 70);
+            for (float i = 1, x = width / 3 + dividedDistance; i <= range; i++, x += dividedDistance) {
+                parent.line(x, height - height / 3 - 10, x, height - height / 3 + 10);
+                parent.text(names[Math.round(range - i)], x, height - height / 3 + 20);
             }
+
             averages = new float[range];
+            ArrayList<ExpenseController> ar = new ArrayList<>();
+            ar.add(new ExpenseController("",new com.project.src.expense.LocalDate(LocalDate.of(2024,1,30)),Categories.FOOD,10,"",parent));
+            ar.add(new ExpenseController("",new com.project.src.expense.LocalDate(LocalDate.of(2024,2,20)),Categories.FOOD,1200,"",parent));
+            ar.add(new ExpenseController("",new com.project.src.expense.LocalDate(LocalDate.of(2024,3,30)),Categories.FOOD,120,"",parent));
+            ar.add(new ExpenseController("",new com.project.src.expense.LocalDate(LocalDate.of(2024,4,30)),Categories.FOOD,1500,"",parent));
+            ar.add(new ExpenseController("",new com.project.src.expense.LocalDate(LocalDate.of(2024,5,30)),Categories.FOOD,10,"",parent));
+            ar.add(new ExpenseController("",new com.project.src.expense.LocalDate(LocalDate.of(2024,6,30)),Categories.FOOD,10000,"",parent));
+            ar.add(new ExpenseController("",new com.project.src.expense.LocalDate(LocalDate.of(2024,7,30)),Categories.FOOD,1250,"",parent));
             for (int i = 0; i < range; i++) {
-                averages[i] = calculateAverage(list, LocalDate.now().minusMonths(i).getMonth());
+                averages[i] = calculateAverage(ar, LocalDate.now().minusMonths(i).getMonth());
                 if (Float.isNaN(averages[i])) averages[i] = 0;
             }
             points = scale(averages);
-            parent.strokeWeight(20);
+            parent.strokeWeight(10);
             parent.stroke(0);
-            for (float i = 0, x = width / 3 + dividedDistance; i < points.length; i++, x += dividedDistance) {
-                parent.point(x, points[(int) i]);
-                System.out.println(points[(int) i]);
+            for (float i = 0, x = (width / 3 + dividedDistance); i < points.length; i++, x += dividedDistance) {
+                parent.point(x, points[Math.round(i)]);
             }
         }
     }
 
-    private float calculateAverage(ArrayList<ExpenseController> list, Month m) {
+    /**
+     * Calculates the average expense for a given month.
+     *
+     * @param list The list of ExpenseController instances.
+     * @param month The month to calculate the average for.
+     * @return The average expense for the month.
+     */
+    private float calculateAverage(ArrayList<ExpenseController> list, Month month) {
         ArrayList<Float> filteredList = new ArrayList<>();
         for (ExpenseController e : list) {
-            if (Month.values()[e.getModel().getDate().getMonth() - 1] == m) {
+            if (e.getModel().getDate().getMonth() == month.getValue()) {
                 filteredList.add(e.getModel().getAmount());
             }
         }
         float sum = 0;
         for (float e : filteredList) sum += e;
-        return sum / filteredList.size();
+        return filteredList.isEmpty() ? 0 : sum / filteredList.size();
     }
 
-
-    private float[] scale(float values[]) {
+    /**
+     * Scales the values to fit within the graphical interface.
+     *
+     * @param values The values to scale.
+     * @return The scaled values.
+     */
+    private float[] scale(float[] values) {
         float max = 0;
-        float result[] = new float[values.length];
-        float longness = parent.dist(parent.width/3, parent.height-parent.height/3, parent.width/3, parent.height/3);
         for (float x : values) {
             if (x > max) {
                 max = x;
             }
         }
-        float unit = longness/values.length;
-        for(int i = 0; i < values.length; i++) {
-            if(values[i] == 0) {
-                values[i] = parent.height-parent.height/3;
-            }
-            else if(values[i] == max) result[i] = parent.height/3;
-            else {
-                result[i] = max/result[i]*unit;
+        float[] result = new float[values.length];
+        float graphHeight = parent.height - (parent.height / 3) * 2;
+        for (int i = 0; i < values.length; i++) {
+            if (values[i] == 0) {
+                result[i] = parent.height - (parent.height / 3);
+            } else {
+                result[i] = parent.height - ((values[i] / max) * graphHeight + (parent.height / 3));
             }
         }
         return result;
     }
 
+    /**
+     * Hides the graphical interface.
+     */
     public void hideInterface() {
         select.hide();
     }
 
+    /**
+     * Gets the dropdown list for selecting the range.
+     *
+     * @return The dropdown list.
+     */
     public DropdownList getSelect() {
         return select;
     }
 
+    /**
+     * Gets the target date range.
+     *
+     * @return The target date range.
+     */
     public LocalDate[] getTarget() {
         return target;
     }
