@@ -1,17 +1,14 @@
 package com.project.src;
-import com.project.src.expense.ExpensesPage;
 import controlP5.*;
 import com.project.src.accountManager.*;
 import com.project.src.filters.*;
 import processing.core.*;
-
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
+
 
 /**
  * Main application class for tracking expenses.
- * Extends {@link PApplet} to use the Processing framework for graphical
+ * Extends PApplet to use the Processing framework for graphical
  * user interface and rendering.
  *
  * This class initializes the application window, manages the main
@@ -114,6 +111,12 @@ public class Main extends PApplet {
         }
     }
 
+    /**
+     * Switches the screen to display the graphic interface.
+     *
+     * This method hides various UI elements and sets the screen state to
+     * show the graphical representation of expenses.
+     */
     public void graphic() {
         Arrays.fill(model.screen,false);
         model.expense.getSettings().hide();
@@ -124,6 +127,14 @@ public class Main extends PApplet {
         model.screen[2] = true;
     }
 
+    /**
+     * Handles the event when the add expense button is pressed.
+     *
+     * This method hides the add button, locks filters, shows the add expense
+     * menu, and triggers the add expense callback.
+     *
+     * @param event the {@link ControlEvent} containing the event data
+     */
     public void add(ControlEvent event) {
         if(event.isFrom(model.expense.getAddButton())) {
             model.expense.getAddButton().hide();
@@ -136,12 +147,27 @@ public class Main extends PApplet {
         }
     }
 
+    /**
+     * Handles the event when a range selection is made in the graphic interface.
+     *
+     * This method calls the select callback for the graphic page.
+     *
+     * @param event the {@link ControlEvent} containing the event data
+     */
     public void range(ControlEvent event) {
         if(event.isFrom(model.graphicPage.getSelect())) {
             model.graphicPage.selectCallBack(event);
         }
     }
 
+    /**
+     * Handles the event when the account settings button is pressed.
+     *
+     * This method hides various UI elements and sets the screen state to
+     * show the account settings.
+     *
+     * @param event the {@link ControlEvent} containing the event data
+     */
     public void account(ControlEvent event) {
         if(event.isFrom(model.expense.getSettings())) {
             Arrays.fill(model.screen,false);
@@ -153,10 +179,25 @@ public class Main extends PApplet {
         }
     }
 
+    /**
+     * Handles the event when a category is selected in the add expense menu.
+     *
+     * This method calls the category callback for the add expense menu.
+     *
+     * @param event the {@link ControlEvent} containing the event data
+     */
     public void category(ControlEvent event) {
         if(event.isFrom(model.expense.getAdx().getSelect())) model.expense.getAdx().categoryCallback(event);
     }
 
+    /**
+     * Handles the event when the exit button is pressed in the add expense menu.
+     *
+     * This method hides the add expense menu and resets the screen state to
+     * show the main expense list.
+     *
+     * @param event the {@link ControlEvent} containing the event data
+     */
     public void exit(ControlEvent event) {
         if(event.isFrom(model.expense.getAdx().getExit())) {
             background(255);
@@ -168,6 +209,14 @@ public class Main extends PApplet {
         }
     }
 
+    /**
+     * Handles the event when the done button is pressed in the add expense menu.
+     *
+     * This method triggers the done callback for the add expense menu, updates
+     * the list of expenses, and resets the screen state to show the main expense list.
+     *
+     * @param event the {@link ControlEvent} containing the event data
+     */
     public void done(ControlEvent event) {
         if(event.isFrom(model.expense.getAdx().getDone()) &&  model.expense.getAdx().doneCallback(model,model.expense.getListToShow())) {
             model.expense.filter.showList();

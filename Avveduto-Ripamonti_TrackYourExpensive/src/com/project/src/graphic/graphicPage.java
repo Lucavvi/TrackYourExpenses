@@ -4,8 +4,6 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.TextStyle;
 import java.util.*;
-
-import com.project.src.expense.Categories;
 import com.project.src.expense.ExpenseController;
 import controlP5.Button;
 import controlP5.ControlEvent;
@@ -35,7 +33,7 @@ public class graphicPage {
      * Initializes a new instance of the graphicPage class.
      *
      * @param parent The PApplet instance.
-     * @param cp5    The ControlP5 instance.
+     * @param cp5 The ControlP5 instance.
      */
     public graphicPage(PApplet parent, ControlP5 cp5) {
         this.cp5 = cp5;
