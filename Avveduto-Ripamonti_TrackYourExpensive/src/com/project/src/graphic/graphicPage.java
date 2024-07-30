@@ -7,6 +7,7 @@ import java.util.*;
 
 import com.project.src.expense.Categories;
 import com.project.src.expense.ExpenseController;
+import controlP5.Button;
 import controlP5.ControlEvent;
 import controlP5.ControlP5;
 import controlP5.DropdownList;
@@ -28,6 +29,7 @@ public class graphicPage {
     private float[] averages;
     private float[] points;
     private float[] xAxis;
+    private Button comeBack;
 
     /**
      * Initializes a new instance of the graphicPage class.
@@ -52,6 +54,7 @@ public class graphicPage {
         target = new LocalDate[2];
         target[0] = LocalDate.now();
         range = 3;
+        comeBack = cp5.addButton("home").setLabel("Home").setPosition(parent.width-0.5f*parent.width/3, 10).setSize(80, 30).hide();
     }
 
     /**
@@ -74,6 +77,7 @@ public class graphicPage {
      * @param list The list of ExpenseController instances.
      */
     public void showInterface(ArrayList<ExpenseController> list) {
+        comeBack.show();
         parent.background(255);
         float height = parent.height;
         float width = parent.width;
@@ -109,7 +113,6 @@ public class graphicPage {
         for (float i = 1, x = width / 3 + dividedDistance; i <= range; i++, x += dividedDistance) {
             parent.line(x, height - height / 3 - 10, x, height - height / 3 + 10);
             parent.text(names[Math.round(range - i)], x, height - height / 3 + 20);
-            xAxis[(int) i - 1] = x;
         }
         averages = new float[range];
         for (int i = 0; i < range; i++) {
@@ -119,10 +122,12 @@ public class graphicPage {
         points = scale(averages);
         parent.strokeWeight(10);
         parent.stroke(0);
-        for (int i = 0, x = (int) (width / 3 + dividedDistance); i < points.length; i++, x += dividedDistance) {
+        for (int i = points.length - 1, x = (int) (width / 3 + dividedDistance); i >= 0 ; i--, x += dividedDistance) {
             parent.point(x, points[i]);
+            xAxis[i] = x;
         }
         drawLines(xAxis, points);
+        parent.textAlign(0,0);
     }
 
     /**
@@ -182,6 +187,7 @@ public class graphicPage {
      */
     public void hideInterface() {
         select.hide();
+        comeBack.hide();
     }
 
     /**

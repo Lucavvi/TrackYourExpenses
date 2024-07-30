@@ -93,6 +93,12 @@ public class Main extends PApplet {
         }
     }
 
+    public void home() {
+        model.graphicPage.hideInterface();
+        Arrays.fill(model.screen,false);
+        model.screen[1] = true;
+    }
+
     /**
      * Handles selection events from the dropdown list.
      *
