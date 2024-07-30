@@ -14,6 +14,9 @@ import processing.core.PApplet;
 
 /**
  * Represents the graphical interface for displaying expense data over a selected range of months.
+ *
+ * @author Angelo Ripamonti & Luca Avveduto
+ * @version 1.0
  */
 public class graphicPage {
     private DropdownList select;
@@ -100,16 +103,8 @@ public class graphicPage {
             }
 
             averages = new float[range];
-            ArrayList<ExpenseController> ar = new ArrayList<>();
-            ar.add(new ExpenseController("",new com.project.src.expense.LocalDate(LocalDate.of(2024,1,30)),Categories.FOOD,10,"",parent));
-            ar.add(new ExpenseController("",new com.project.src.expense.LocalDate(LocalDate.of(2024,2,20)),Categories.FOOD,1200,"",parent));
-            ar.add(new ExpenseController("",new com.project.src.expense.LocalDate(LocalDate.of(2024,3,30)),Categories.FOOD,120,"",parent));
-            ar.add(new ExpenseController("",new com.project.src.expense.LocalDate(LocalDate.of(2024,4,30)),Categories.FOOD,1500,"",parent));
-            ar.add(new ExpenseController("",new com.project.src.expense.LocalDate(LocalDate.of(2024,5,30)),Categories.FOOD,10,"",parent));
-            ar.add(new ExpenseController("",new com.project.src.expense.LocalDate(LocalDate.of(2024,6,30)),Categories.FOOD,10000,"",parent));
-            ar.add(new ExpenseController("",new com.project.src.expense.LocalDate(LocalDate.of(2024,7,30)),Categories.FOOD,1250,"",parent));
             for (int i = 0; i < range; i++) {
-                averages[i] = calculateAverage(ar, LocalDate.now().minusMonths(i).getMonth());
+                averages[i] = calculateAverage(list, LocalDate.now().minusMonths(i).getMonth());
                 if (Float.isNaN(averages[i])) averages[i] = 0;
             }
             points = scale(averages);
