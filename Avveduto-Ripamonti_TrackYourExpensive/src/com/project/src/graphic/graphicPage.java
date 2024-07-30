@@ -24,12 +24,13 @@ public class graphicPage {
     private String[] names;
     private float[] averages;
     private float[] points;
+    private float[] xAxis;
 
     /**
      * Initializes a new instance of the graphicPage class.
      *
      * @param parent The PApplet instance.
-     * @param cp5 The ControlP5 instance.
+     * @param cp5    The ControlP5 instance.
      */
     public graphicPage(PApplet parent, ControlP5 cp5) {
         this.cp5 = cp5;
@@ -47,7 +48,7 @@ public class graphicPage {
         select.addItem("12 months", 2);
         target = new LocalDate[2];
         target[0] = LocalDate.now();
-        range = 1;
+        range = 3;
     }
 
     /**
@@ -81,50 +82,50 @@ public class graphicPage {
         parent.stroke(0);
         parent.line(width / 3, height - height / 3, width / 3, height / 3);
         parent.line(width / 3, height - height / 3, width - width / 3, height - height / 3);
+        parent.textAlign(3,3);
+        parent.textSize(20);
+        parent.fill(0);
+        parent.text("Amount",width / 3, height / 3 - 20);
+        parent.text("Month",width - width / 3 + 50, height - height / 3);
+        parent.textSize(60);
+        parent.fill(parent.color(173,0,10));
+        parent.text("Graphic traker",parent.width/2,parent.height/3-parent.height/4);
+        parent.textAlign(0,0);
         float distance = parent.dist(width / 3, height - height / 3, width - width / 3 - 20, height - height / 3);
         parent.strokeWeight(2);
         parent.stroke(0);
-
-        if (range != 1) {
-            names = new String[range];
-            for (int i = range - 1; i >= 0; i--) {
-                names[i] = LocalDate.now().minusMonths(i).getMonth().getDisplayName(TextStyle.SHORT, Locale.ITALIAN);
-            }
-            float dividedDistance = distance / range;
-            parent.textAlign(PApplet.CENTER, PApplet.CENTER);
-            parent.textSize(16);
-            parent.fill(0);
-            for (float i = 1, x = width / 3 + dividedDistance; i <= range; i++, x += dividedDistance) {
-                parent.line(x, height - height / 3 - 10, x, height - height / 3 + 10);
-                parent.text(names[Math.round(range - i)], x, height - height / 3 + 20);
-            }
-
-            averages = new float[range];
-            ArrayList<ExpenseController> ar = new ArrayList<>();
-            ar.add(new ExpenseController("",new com.project.src.expense.LocalDate(LocalDate.of(2024,1,30)),Categories.FOOD,10,"",parent));
-            ar.add(new ExpenseController("",new com.project.src.expense.LocalDate(LocalDate.of(2024,2,20)),Categories.FOOD,1200,"",parent));
-            ar.add(new ExpenseController("",new com.project.src.expense.LocalDate(LocalDate.of(2024,3,30)),Categories.FOOD,120,"",parent));
-            ar.add(new ExpenseController("",new com.project.src.expense.LocalDate(LocalDate.of(2024,4,30)),Categories.FOOD,1500,"",parent));
-            ar.add(new ExpenseController("",new com.project.src.expense.LocalDate(LocalDate.of(2024,5,30)),Categories.FOOD,10,"",parent));
-            ar.add(new ExpenseController("",new com.project.src.expense.LocalDate(LocalDate.of(2024,6,30)),Categories.FOOD,10000,"",parent));
-            ar.add(new ExpenseController("",new com.project.src.expense.LocalDate(LocalDate.of(2024,7,30)),Categories.FOOD,1250,"",parent));
-            for (int i = 0; i < range; i++) {
-                averages[i] = calculateAverage(ar, LocalDate.now().minusMonths(i).getMonth());
-                if (Float.isNaN(averages[i])) averages[i] = 0;
-            }
-            points = scale(averages);
-            parent.strokeWeight(10);
-            parent.stroke(0);
-            for (int i = 0, x = (int) (width / 3 + dividedDistance); i < points.length; i++, x += dividedDistance) {
-                parent.point(x, points[i]);
-            }
+        names = new String[range];
+        for (int i = range - 1; i >= 0; i--) {
+            names[i] = LocalDate.now().minusMonths(i).getMonth().getDisplayName(TextStyle.SHORT, Locale.ITALIAN);
         }
+        float dividedDistance = distance / range;
+        parent.textAlign(PApplet.CENTER, PApplet.CENTER);
+        parent.textSize(16);
+        parent.fill(0);
+        xAxis = new float[range];
+        for (float i = 1, x = width / 3 + dividedDistance; i <= range; i++, x += dividedDistance) {
+            parent.line(x, height - height / 3 - 10, x, height - height / 3 + 10);
+            parent.text(names[Math.round(range - i)], x, height - height / 3 + 20);
+            xAxis[(int) i - 1] = x;
+        }
+        averages = new float[range];
+        for (int i = 0; i < range; i++) {
+            averages[i] = calculateAverage(list, LocalDate.now().minusMonths(i).getMonth());
+            if (Float.isNaN(averages[i])) averages[i] = 0;
+        }
+        points = scale(averages);
+        parent.strokeWeight(10);
+        parent.stroke(0);
+        for (int i = 0, x = (int) (width / 3 + dividedDistance); i < points.length; i++, x += dividedDistance) {
+            parent.point(x, points[i]);
+        }
+        drawLines(xAxis, points);
     }
 
     /**
      * Calculates the average expense for a given month.
      *
-     * @param list The list of ExpenseController instances.
+     * @param list  The list of ExpenseController instances.
      * @param month The month to calculate the average for.
      * @return The average expense for the month.
      */
@@ -163,6 +164,14 @@ public class graphicPage {
             }
         }
         return result;
+    }
+
+    private void drawLines(float x[], float y[]) {
+        parent.strokeWeight(2);
+        parent.stroke(parent.color(0,0,255));
+        for (int i = 0; i < x.length - 1; i++) {
+            parent.line(x[i], y[i], x[i + 1], y[i + 1]);
+        }
     }
 
     /**
