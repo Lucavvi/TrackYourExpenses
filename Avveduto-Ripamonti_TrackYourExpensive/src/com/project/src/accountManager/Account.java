@@ -1,8 +1,6 @@
 package com.project.src.accountManager;
 
-import com.project.src.expense.Categories;
 import com.project.src.expense.ExpenseController;
-import com.project.src.expense.LocalDate;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -27,11 +25,15 @@ public class Account implements Serializable {
      * Constructs a new Account with the specified username, password,
      * and list of expenses.
      *
-     * @param username the account's username
-     * @param password the account's password
-     * @param expenses the list of expenses associated with the account
+     * @param username the account's username. Must not be null or blank.
+     * @param password the account's password. Must not be null or blank.
+     * @param expenses the list of expenses associated with the account. Must not be null.
+     * @throws NullPointerException if any of the parameters are null.
+     * @throws IllegalArgumentException if the username or password is blank.
      */
-    public Account(String username, String password, ArrayList<ExpenseController> expenses) {
+    public Account(String username, String password, ArrayList<ExpenseController> expenses) throws NullPointerException, IllegalArgumentException {
+        if(username == null || password == null || expenses == null) throw new NullPointerException("Almost one parameter passed is null");
+        if(username.isBlank() || password.isBlank()) throw new IllegalArgumentException("Almost one parameter passed is blank");
         this.username = username;
         this.password = password;
         this.expenses = expenses;
@@ -41,14 +43,17 @@ public class Account implements Serializable {
      * Constructs a new Account with the specified username and password.
      * Initializes the list of expenses as an empty list.
      *
-     * @param username the account's username
-     * @param password the account's password
+     * @param username the account's username. Must not be null or blank.
+     * @param password the account's password. Must not be null or blank.
+     * @throws NullPointerException if any of the parameters are null.
+     * @throws IllegalArgumentException if the username or password is blank.
      */
-    public Account(String username, String password) {
+    public Account(String username, String password) throws NullPointerException, IllegalArgumentException{
+        if(username == null || password == null) throw new NullPointerException("Almost one parameter passed is null");
+        if(username.isBlank() || password.isBlank()) throw new IllegalArgumentException("Almost one parameter passed is blank");
         this.username = username;
         this.password = password;
         this.expenses = new ArrayList<ExpenseController>();
-        this.expenses.add(new ExpenseController("a", new LocalDate(java.time.LocalDate.now()), Categories.FOOD,12.0f,"a",null));
     }
 
     /**
@@ -77,12 +82,22 @@ public class Account implements Serializable {
     public ArrayList<ExpenseController> getExpenses() {
         return new ArrayList<ExpenseController>(expenses);
     }
-    public void addExpense(ExpenseController exp) {expenses.add(exp);}
+
+    /**
+     * Adds a new expense to the account.
+     *
+     * @param exp the expense to be added. Must not be null.
+     * @throws NullPointerException if the provided expense is null.
+     */
+    public void addExpense(ExpenseController exp) throws NullPointerException{
+        if(exp == null) throw new NullPointerException("The parameter passed is null");
+        expenses.add(exp);
+    }
 
     /**
      * Resets the list of expenses associated with the account.
      *
-     * @return {@code true} if the list of expenses was cleared successfully
+     * @return true if the list of expenses was cleared successfully
      */
     boolean resetExpenses() {
         this.expenses.clear();

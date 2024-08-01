@@ -3,6 +3,8 @@ import controlP5.*;
 import com.project.src.accountManager.*;
 import com.project.src.filters.*;
 import processing.core.*;
+import processing.event.MouseEvent;
+
 import java.util.Arrays;
 
 
@@ -304,6 +306,18 @@ public class Main extends PApplet {
      */
     public void exportData(){
         model.account.exportData();
+    }
+
+    /**
+     * Handles mouse wheel events to scroll through the list of expenses.
+     *
+     * This method is called whenever the user scrolls the mouse wheel. It updates the
+     * scrolling position of the expense list based on the scroll direction and speed.
+     *
+     * @param event the MouseEvent instance containing the scroll data
+     */
+    public void mouseWheel(MouseEvent event){
+        model.expense.mouseWheel(event);
     }
 
     /**

@@ -23,10 +23,12 @@ public class OrderObj {
      * Constructs an OrderObj with the specified ControlP5 instance and PApplet parent.
      * Initializes the dropdown list with predefined ordering options.
      *
-     * @param cp5 the ControlP5 instance used for UI controls
-     * @param parent the PApplet instance used for drawing
+     * @param cp5 the ControlP5 instance used for UI controls. Must not be null.
+     * @param parent the PApplet instance used for drawing. Must not be null.
+     * @throws NullPointerException if any of the parameters are null.
      */
-    public OrderObj(ControlP5 cp5, PApplet parent) {
+    public OrderObj(ControlP5 cp5, PApplet parent) throws NullPointerException{
+        if(cp5 == null || parent == null) throw new NullPointerException("Almost one parameter passed is null");
         this.cp5 = cp5;
         this.parent = parent;
         reorder = cp5.addDropdownList("reorder")
@@ -45,10 +47,11 @@ public class OrderObj {
     /**
      * Returns the appropriate comparator based on the selected ordering criteria.
      *
-     * @param cat the index of the selected ordering option
+     * @param cat the index of the selected ordering option. Must not be less than 0 or more than 5.
      * @return a Comparator for ordering ExpenseController objects based on the selected criteria
+     * @throws IllegalArgumentException if cat is less than 0 or more than 5.
      */
-    public Comparator<ExpenseController> callback(int cat) {
+    public Comparator<ExpenseController> callback(int cat) throws IllegalArgumentException{
         Comparator<ExpenseController> comparator = null;
         switch (cat) {
             case 0 -> {comparator = new ExpenseDateComparator().reversed();}
@@ -57,6 +60,7 @@ public class OrderObj {
             case 3 -> {comparator = new ExpenseNameComparator();}
             case 4 -> {comparator = new ExpenseAmountComparator().reversed();}
             case 5 -> {comparator = new ExpenseAmountComparator();}
+            default -> {throw new IllegalArgumentException("cat is less than 0 or more than 5");}
         }
         return comparator;
     }

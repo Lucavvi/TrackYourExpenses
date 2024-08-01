@@ -16,12 +16,16 @@ public class ExpenseView implements Serializable {
     /**
      * Renders the expense details on the screen.
      *
-     * @param parent the main instance of PApplet used for drawing
-     * @param model the ExpenseModel containing the data to display
-     * @param x the x-coordinate position where the expense will be displayed
-     * @param y the y-coordinate position where the expense will be displayed
+     * @param parent the main instance of PApplet used for drawing. Must not be null.
+     * @param model the ExpenseModel containing the data to display. Must not be null.
+     * @param x the x-coordinate position where the expense will be displayed. Must not be less than 0 or more than parent.width.
+     * @param y the y-coordinate position where the expense will be displayed. Must not be less than 0 or more than parent.height.
+     * @throws NullPointerException if any of the parameters are null.
+     * @throws IllegalArgumentException If x or y are less than 0. Otherwise, if x are more than parent.width or y are more than parent.height.
      */
-    public void view(PApplet parent,ExpenseModel model, int x, int y) {
+    public void view(PApplet parent,ExpenseModel model, int x, int y) throws NullPointerException, IllegalArgumentException{
+        if(parent == null || model == null) throw new NullPointerException("Almost one parameter passed is null");
+        if(x < 0 || y < 0 || x > parent.width || y > parent.height) throw new IllegalArgumentException("x or y are less than 0. Otherwise, x are more than parent.width or y are more than parent.height");
         parent.strokeWeight(4);
         parent.fill(model.getCategory().getColor().getRGB(),180);
         parent.rect(x,y,300, 100);
@@ -40,7 +44,5 @@ public class ExpenseView implements Serializable {
         parent.strokeWeight(2);
         parent.line(x+ 160,y,x + 160,y+100);
         parent.text(model.getDesc(),x + 170,y + 20);
-        parent.textSize(8);
-        parent.text(String.format("%03d",model.getCont()),x+280,y+90);
     }
 }

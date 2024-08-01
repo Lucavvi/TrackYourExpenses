@@ -18,15 +18,15 @@ public class FormController {
     /**
      * Constructs a FormController with the specified PApplet and ControlP5 instances, and a DBManager.
      *
-     * @param processing the PApplet instance used for rendering
-     * @param cp5 the ControlP5 instance used for user interface controls
-     * @param manager the DBManager instance used for database operations
+     * @param processing the PApplet instance used for rendering. Must not be null.
+     * @param cp5 the ControlP5 instance used for user interface controls. Must not be null.
+     * @param manager the DBManager instance used for database operations. Must not be null.
      * @throws NullPointerException if any of the parameters are null
      */
     public FormController(PApplet processing, ControlP5 cp5, DBManager manager) throws NullPointerException {
-        if(processing == null || cp5 == null) throw new NullPointerException("L'implementazione di Processing o della libreria ControlP5 è fallita!");
-            view = new FormView(processing, cp5);
-            model = new FormModel(manager);
+        if(processing == null || cp5 == null || manager == null) throw new NullPointerException("Almost one parameter passed is null");
+        view = new FormView(processing, cp5);
+        model = new FormModel(manager);
     }
 
     /**
@@ -43,10 +43,8 @@ public class FormController {
     /**
      * Handles the form submission for login.
      * Verifies the credentials and logs in the user. Displays an error message if credentials are invalid.
-     *
-     * @throws AccessException if the credentials are incorrect or missing
      */
-    public boolean submitForm() throws AccessException{
+    public boolean submitForm(){
         String username = view.usernameField.getText();
         String password = view.passwordField.getText();
         view.usernameField.clear();
@@ -66,7 +64,7 @@ public class FormController {
         }
         else{
             model.check = true;
-            model.failError = "Credenziali Errate!";
+            model.failError = "Wrong Credentials!";
             return false;
         }
     }
@@ -77,9 +75,8 @@ public class FormController {
      * Displays an error message if credentials are invalid or registration fails.
      *
      * @param register if true, registers a new user; if false, performs login
-     * @throws UsernameException if the username already exists
      */
-    public boolean submitForm(boolean register) throws UsernameException {
+    public boolean submitForm(boolean register) {
         if(!register) return submitForm();
         else {
             String username = view.usernameField.getText();
@@ -92,14 +89,14 @@ public class FormController {
                 }
                 catch(UsernameException e){
                     model.check = true;
-                    model.failError = "Credenziali Errate!";
+                    model.failError = "Wrong Credentials!";
                     return false;
                 }
                 view.hideField();
                 return true;
             } else {
                 model.check = true;
-                model.failError = "Credenziali non valide!";
+                model.failError = "Not valid credentials!";
                 return false;
             }
         }

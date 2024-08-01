@@ -19,10 +19,12 @@ public class FilterObj {
      * Constructs a FilterObj with the specified ControlP5 instance and PApplet parent.
      * Initializes the dropdown list with predefined categories.
      *
-     * @param cp5 the ControlP5 instance used for UI controls
-     * @param parent the PApplet instance used for drawing
+     * @param cp5 the ControlP5 instance used for UI controls. Must not be null.
+     * @param parent the PApplet instance used for drawing. Must not be null.
+     * @throws NullPointerException if any of the parameters are null.
      */
-    public FilterObj(ControlP5 cp5, PApplet parent) {
+    public FilterObj(ControlP5 cp5, PApplet parent) throws NullPointerException{
+        if(cp5 == null || parent == null) throw new NullPointerException("Almost one parameter passed is null");
         this.cp5 = cp5;
         this.parent = parent;
         select = cp5.addDropdownList("select")
@@ -39,16 +41,18 @@ public class FilterObj {
     /**
      * Converts the index of the selected item to a Categories enum value.
      *
-     * @param cat the index of the selected item
+     * @param cat the index of the selected item. Must not be less than 0 or more than 3.
      * @return the corresponding Categories value
+     * @throws IllegalArgumentException if cat is less than 0 or more than 3
      */
-    public Categories callback(int cat) {
+    public Categories callback(int cat) throws IllegalArgumentException{
         Categories target = null;
         switch (cat) {
             case 0 -> {target = Categories.FOOD;}
             case 1 -> {target = Categories.SHOPPING;}
             case 2 -> {target = Categories.PLEASURE;}
             case 3 -> {target = Categories.ALL;}
+            default -> {throw new IllegalArgumentException("cat is less than 0 or more than 3");}
         }
         return target;
     }

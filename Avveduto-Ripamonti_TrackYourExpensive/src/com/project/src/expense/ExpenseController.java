@@ -20,14 +20,14 @@ public class ExpenseController implements Serializable {
     /**
      * Constructs an ExpenseController with the specified details.
      *
-     * @param name the name of the expense
-     * @param date the date of the expense
-     * @param category the category of the expense
-     * @param amount the cost of the expense
-     * @param desc the description of the expense
-     * @param parent the main instance
+     * @param name the name of the expense. Must not be null or blank. The character must not be more than 10.
+     * @param date the date of the expense. Must not be null. Must not be in the future.
+     * @param category the category of the expense. Must not be null.
+     * @param amount the cost of the expense. Must not be NaN or Infinite.
+     * @param desc the description of the expense. Must not be null or blank. The character must not be more than 56.
+     * @throws RuntimeException if the ExcpenseModel throw any exception.
      */
-    public ExpenseController(String name, LocalDate date, Categories category, float amount, String desc,PApplet parent) {
+    public ExpenseController(String name, LocalDate date, Categories category, float amount, String desc) throws RuntimeException {
         model = new ExpenseModel(name,date,category,amount,desc);
         view = new ExpenseView();
     }
@@ -35,23 +35,31 @@ public class ExpenseController implements Serializable {
     /**
      * Shows the expense at the specified position.
      *
-     * @param parent the main instance
-     * @param x the x-coordinate position
-     * @param y the y-coordinate position
+     * @param parent the main instance. Must not be null
+     * @param x the x-coordinate position. Must not be less than 0 or more than parent.width
+     * @param y the y-coordinate position. Must not be less than 0 or more than parent.height
+     * @throws NullPointerException if parent is null
+     * @throws IllegalArgumentException If x or y are less than 0. Otherwise, if x are more than parent.width or y are more than parent.height.
      */
-    public void showExpense(PApplet parent,int x, int y) {
+    public void showExpense(PApplet parent,int x, int y) throws NullPointerException, IllegalArgumentException {
+        if(parent == null) throw new NullPointerException("parent parameter is null");
+        if(x < 0 || y < 0 || x > parent.width || y > parent.height) throw new IllegalArgumentException("x or y are less than 0. Otherwise, x are more than parent.width or y are more than parent.height");
         view.view(parent,model,x,y);
     }
 
     /**
      * Renders a list of expenses starting at the specified position.
      *
-     * @param parent the main instance
-     * @param list the list of expenses to render
-     * @param startX the starting x-coordinate
-     * @param startY the starting y-coordinate
+     * @param parent the main instance. Must not be null
+     * @param list the list of expenses to render. Must not be null
+     * @param startX the starting x-coordinate. Must not be less than 0 or more than parent.width
+     * @param startY the starting y-coordinate. Must not be less than 0 or more than parent.height
+     * @throws NullPointerException if parent or list are null
+     * @throws IllegalArgumentException If x or y are less than 0. Otherwise, if x are more than parent.width or y are more than parent.height.
      */
-    public static void renderList(PApplet parent, ArrayList<ExpenseController> list, int startX, int startY) {
+    public static void renderList(PApplet parent, ArrayList<ExpenseController> list, int startX, int startY)throws NullPointerException, IllegalArgumentException{
+        if(parent == null || list == null) throw new NullPointerException("parent or list parameter are null");
+        if(startX < 0 || startY < 0 || startX > parent.width || startY > parent.height) throw new IllegalArgumentException("x or y are less than 0. Otherwise, x are more than parent.width or y are more than parent.height");
         int cont = 0;
         int x = startX;
         int y = startY;

@@ -32,10 +32,12 @@ public class graphicPage {
     /**
      * Initializes a new instance of the graphicPage class.
      *
-     * @param parent The PApplet instance.
-     * @param cp5 The ControlP5 instance.
+     * @param parent The PApplet instance. Must not be null
+     * @param cp5 The ControlP5 instance. Must not be null
+     * @throws NullPointerException if any of the parameters are null
      */
-    public graphicPage(PApplet parent, ControlP5 cp5) {
+    public graphicPage(PApplet parent, ControlP5 cp5) throws NullPointerException{
+        if(parent == null || cp5 == null)throw new NullPointerException("Almost one parameter passed is null");
         this.cp5 = cp5;
         this.parent = parent;
         select = this.cp5.addDropdownList("range")
@@ -72,9 +74,11 @@ public class graphicPage {
     /**
      * Displays the graphical interface for the expense data.
      *
-     * @param list The list of ExpenseController instances.
+     * @param list The list of ExpenseController instances. Must not be null.
+     * @throws NullPointerException if any of the parameters are null
      */
-    public void showInterface(ArrayList<ExpenseController> list) {
+    public void showInterface(ArrayList<ExpenseController> list) throws NullPointerException {
+        if(list == null) throw new NullPointerException("Almost one parameter passed is null");
         comeBack.show();
         parent.background(255);
         float height = parent.height;
@@ -131,11 +135,13 @@ public class graphicPage {
     /**
      * Calculates the average expense for a given month.
      *
-     * @param list  The list of ExpenseController instances.
-     * @param month The month to calculate the average for.
+     * @param list  The list of ExpenseController instances. Must not be null.
+     * @param month The month to calculate the average for. Must not be null.
      * @return The average expense for the month.
+     * @throws NullPointerException if any of the parameters are null
      */
-    private float calculateAverage(ArrayList<ExpenseController> list, Month month) {
+    private float calculateAverage(ArrayList<ExpenseController> list, Month month) throws NullPointerException {
+        if(list == null || month == null) throw new NullPointerException("Almost one parameter passed is null");
         ArrayList<Float> filteredList = new ArrayList<>();
         for (ExpenseController e : list) {
             if (e.getModel().getDate().getMonth() == month.getValue()) {
@@ -150,10 +156,12 @@ public class graphicPage {
     /**
      * Scales the values to fit within the graphical interface.
      *
-     * @param values The values to scale.
+     * @param values The values to scale. Must not be null.
      * @return The scaled values.
+     * @throws NullPointerException if any of the parameters are null
      */
-    private float[] scale(float[] values) {
+    private float[] scale(float[] values) throws NullPointerException{
+        if(values == null) throw new NullPointerException("Almost one parameter passed is null");
         float max = 0;
         for (float x : values) {
             if (x > max) {
@@ -172,7 +180,18 @@ public class graphicPage {
         return result;
     }
 
-    private void drawLines(float x[], float y[]) {
+    /**
+     * Draws lines connecting the given data points on the graphical interface.
+     *
+     * This method iterates through the provided x and y coordinates and draws lines between consecutive points
+     * to represent the data graphically.
+     *
+     * @param x an array of x coordinates for the data points. Must not be null.
+     * @param y an array of y coordinates for the data points. Must not be null.
+     * @throws NullPointerException if either x or y is null.
+     */
+    private void drawLines(float[] x, float[] y) throws NullPointerException{
+        if(x == null || y == null) throw new NullPointerException("Almost one parameter passed is null");
         parent.strokeWeight(2);
         parent.stroke(parent.color(0,0,255));
         for (int i = 0; i < x.length - 1; i++) {

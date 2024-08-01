@@ -2,6 +2,7 @@ package com.project.src.expense;
 
 import com.project.src.Model;
 import com.project.src.accountManager.Actions;
+import com.project.src.accountManager.DBManager;
 import controlP5.*;
 import processing.core.PApplet;
 
@@ -24,17 +25,19 @@ public class AddExpense {
     private float selectPos;
     private int selectStatus;
     private Button exit;
-    private Actions dbManager;
+    private DBManager dbManager;
     private boolean check;
 
     /**
      * Constructor for AddExpense.
      *
-     * @param cp5   The ControlP5 instance used for creating UI elements.
-     * @param parent The PApplet instance used as the parent.
-     * @param db    The Actions instance used for database operations.
+     * @param cp5   The ControlP5 instance used for creating UI elements. Must not be null.
+     * @param parent The PApplet instance used as the parent. Must not be null.
+     * @param db    The DBManager instance used for database operations. Must not be null.
+     * @throws NullPointerException if any of the parameters are null.
      */
-    public AddExpense(ControlP5 cp5, PApplet parent, Actions db) {
+    public AddExpense(ControlP5 cp5, PApplet parent, DBManager db) throws NullPointerException {
+        if(cp5 == null || parent == null || db == null) throw new NullPointerException("Almost one parameter passed is null");
         this.cp5 = cp5;
         this.parent = parent;
         dbManager = db;
@@ -104,11 +107,13 @@ public class AddExpense {
     /**
      * Handles the logic for the done button callback, including validation and adding the expense to the model.
      *
-     * @param m    The Model instance.
-     * @param list The list of ExpenseController instances.
+     * @param m    The Model instance. Must not be null
+     * @param list The list of ExpenseController instances. Must not be null.
      * @return True if the expense was successfully added, false otherwise.
+     * @throws NullPointerException if any of the parameters are null.
      */
-    public boolean doneCallback(Model m, ArrayList<ExpenseController> list) {
+    public boolean doneCallback(Model m, ArrayList<ExpenseController> list) throws NullPointerException{
+        if(m == null || list == null) throw new NullPointerException("Almost one parameter passed are null");
         done.show();
         hideMenu();
         boolean check = false;
@@ -132,7 +137,7 @@ public class AddExpense {
         amountField.clear();
         if(check) {
             select.setLabel("Category");
-            ExpenseController item = new ExpenseController(name, new LocalDate(java.time.LocalDate.now()), Categories.values()[selectStatus - 1], amount, desc, parent);
+            ExpenseController item = new ExpenseController(name, new LocalDate(java.time.LocalDate.now()), Categories.values()[selectStatus - 1], amount, desc);
             Model.getAccount().addExpense(item);
             dbManager.updateList(Model.getAccount());
             this.check = false;

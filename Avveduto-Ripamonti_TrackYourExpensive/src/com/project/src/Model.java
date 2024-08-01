@@ -40,9 +40,11 @@ public class Model {
      * Sets up the initial screen state, with the first screen activated.
      *
      * @param processing the PApplet instance used for creating and managing
-     * the UI controls and other visual elements.
+     * the UI controls and other visual elements. Must not be null.
+     * @throws NullPointerException if processing is null.
      */
-    public Model(PApplet processing) {
+    public Model(PApplet processing) throws NullPointerException{
+        if(processing == null) throw new NullPointerException("processing parameter is null");
         cp5 = new ControlP5(processing);
         dao = new DBManager();
         form=new FormController(processing,cp5,dao);

@@ -42,11 +42,13 @@ public class AccountPage {
      * Initializes the account page with the given Processing, ControlP5,
      * and database manager instances.
      *
-     * @param processing the Processing applet instance
-     * @param cp5        the ControlP5 instance for handling GUI controls
-     * @param database   the database manager instance for interacting with the database
+     * @param processing the Processing applet instance. Must not be null.
+     * @param cp5        the ControlP5 instance for handling GUI controls. Must not be null.
+     * @param database   the database manager instance for interacting with the database. Must not be null.
+     * @throws NullPointerException if any of the parameters are null.
      */
-    public AccountPage(PApplet processing, ControlP5 cp5, DBManager database) {
+    public AccountPage(PApplet processing, ControlP5 cp5, DBManager database) throws NullPointerException{
+        if(processing == null || cp5 == null || database == null) throw new NullPointerException("Almost one parameter passed is null");
         this.processing = processing;
         this.cp5 = cp5;
         this.database = database;
@@ -67,9 +69,11 @@ public class AccountPage {
     /**
      * Renders the account page with the given account details.
      *
-     * @param account the account whose details are to be displayed
+     * @param account the account whose details are to be displayed. Must not be null.
+     * @throws NullPointerException if account is null
      */
-    public void draw(Account account) {
+    public void draw(Account account)throws NullPointerException {
+        if(account == null) throw new NullPointerException("account is null");
         processing.background(processing.color(255));
         processing.fill(229, 229, 229);
         processing.rectMode(processing.CENTER);
@@ -185,10 +189,14 @@ public class AccountPage {
     /**
      * Displays a message on the screen.
      *
-     * @param msg the message to display
-     * @param c   the color of the message
+     * @param msg the message to display. Must not be null or blank.
+     * @param c   the color of the message. Must not be null.
+     * @throws NullPointerException if any of the parameters are null
+     * @throws IllegalArgumentException if msg is blank
      */
-    private void showMessage(String msg, Color c) {
+    private void showMessage(String msg, Color c) throws NullPointerException, IllegalArgumentException{
+        if(msg == null || c == null) throw new NullPointerException("Almost one parameter passed is null");
+        if(msg.isBlank()) throw new IllegalArgumentException("msg parameter is blank");
         processing.fill(c.getRGB());
         processing.textSize(30);
         processing.textAlign(processing.CENTER,processing.CENTER);

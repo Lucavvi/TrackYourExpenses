@@ -16,27 +16,30 @@ public class ExpenseModel implements Serializable {
     private Categories category;
     private float amount;
     private String desc;
-    private static int cont = 0;
 
     /**
      * Constructs an ExpenseModel with the specified details.
      *
-     * @param name the name of the expense
-     * @param date the date of the expense
-     * @param category the category of the expense
-     * @param amount the cost of the expense
-     * @param desc the description of the expense
-     * @throws RuntimeException if the name or description is too long
+     * @param name the name of the expense. Must not be null or blank. The character must not be more than 10.
+     * @param date the date of the expense. Must not be null. Must not be in the future.
+     * @param category the category of the expense. Must not be null.
+     * @param amount the cost of the expense. Must not be NaN or Infinite.
+     * @param desc the description of the expense. Must not be null or blank. The character must not be more than 56.
+     * @throws NullPointerException if any of the parameters are null.
+     * @throws IllegalArgumentException if the name or description is too long or blank. If the amount is NaN or Infinite. If the date is in the future.
      */
-    public ExpenseModel(String name, LocalDate date, Categories category, float amount, String desc) throws RuntimeException{
+    public ExpenseModel(String name, LocalDate date, Categories category, float amount, String desc) throws NullPointerException, IllegalArgumentException{
+        if(name == null || date == null || category == null || desc == null) throw new NullPointerException("Almost one parameter passed is null");
+        if(name.isBlank() || desc.isBlank()) throw new IllegalArgumentException("Almost one parameter passed is blank");
+        if(date.isAfter(new LocalDate(java.time.LocalDate.now()))) throw new IllegalArgumentException("Date passed is in the future");
+        if(Float.isNaN(amount) || Float.isInfinite(amount)) throw new IllegalArgumentException("Amount passed is Not a Number or Infinite number.");
         if(name.length() <= 10) this.name = name;
-        else throw new RuntimeException("Name too long");
+        else throw new IllegalArgumentException("Name passed too long.");
         this.date = date;
         this.category = category;
         this.amount = amount;
-        cont++;
         this.desc = "";
-        if(desc.length() > (14 * 4)) throw new RuntimeException("Description is too long");
+        if(desc.length() > (14 * 4)) throw new IllegalArgumentException("Description passed is too long");
         for(int i = 0; i < desc.length(); i++) {
             this.desc += desc.charAt(i);
             if(i % 14 == 0 && i != 0) {
@@ -90,12 +93,4 @@ public class ExpenseModel implements Serializable {
         return desc;
     }
 
-    /**
-     * Gets the total number of expense instances.
-     *
-     * @return the total number of expense instances
-     */
-    public int getCont() {
-        return cont;
-    }
 }
