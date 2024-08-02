@@ -63,14 +63,11 @@ public class ExpenseController implements Serializable {
         int cont = 0;
         int x = startX;
         int y = startY;
-        boolean firstRow = false;
         for(ExpenseController e : list) {
             e.getView().view(parent,e.getModel(),x,y);
-            boolean ex = firstRow ? ++cont<=3 : ++cont < 3;
-            if(ex) {
+            if(++cont<=3) {
                 x += 350;
             }else {
-                firstRow = true;
                 x = startX;
                 y += 200;
                 cont = 0;
