@@ -25,7 +25,6 @@ public class Model {
     FormController form;
     ExpensesPage expense;
     DBManager dao;
-    Categories target;
     boolean[] screen;
     static Account acc;
     AccountPage account;
