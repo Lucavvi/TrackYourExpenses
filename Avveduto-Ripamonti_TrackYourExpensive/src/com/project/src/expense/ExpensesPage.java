@@ -73,7 +73,7 @@ public class ExpensesPage {
             settings.show();
             add.show();
             graphic.show();
-            if (!listToShow.isEmpty()) ExpenseController.renderList(processing, listToShow, 50, 80);
+            if (listToShow != null && !listToShow.isEmpty()) ExpenseController.renderList(processing, listToShow, 50, 80);
             else {
                 processing.textAlign(processing.CENTER, processing.CENTER);
                 processing.text("No expense yet", processing.width / 2, processing.height / 2);

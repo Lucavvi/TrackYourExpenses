@@ -254,6 +254,7 @@ public class Main extends PApplet {
         model.account.deleteAccount();
         Arrays.fill(model.screen,false);
         model.screen[0] = true;
+        model.account.hideFields();
     }
 
     /**
