@@ -282,6 +282,7 @@ public class Main extends PApplet {
      */
     public void backExpenses(){
         model.account.hideFields();
+        model.expense.changeListToShow(model.dao.getExpensesByAccount(Model.getAccount()));
         model.screen[1]=true;
     }
 
