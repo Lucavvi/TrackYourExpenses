@@ -1,7 +1,9 @@
 package com.project.src.accountManager;
 
 import com.google.gson.Gson;
+import com.project.src.Model;
 import com.project.src.expense.Color;
+import com.project.src.expense.ExpensesPage;
 import controlP5.Button;
 import controlP5.ControlP5;
 import controlP5.Textfield;
@@ -146,7 +148,7 @@ public class AccountPage {
      * This method resets the expenses for the current account and updates the database.
      */
     public void deleteList() {
-        Account acc = database.login(username.getText(), password.getText());
+        Account acc = Model.getAccount();
         acc.resetExpenses();
         database.updateList(acc);
     }
